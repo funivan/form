@@ -1,0 +1,22 @@
+{
+  "name": "fiv/form",
+  "description": "Form bundle",
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-0": {
+      "Fiv\\Form\\": "src/"
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ivan Shcherbak",
+      "email": "dev@funivan.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+
+  }
+}

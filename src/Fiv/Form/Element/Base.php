@@ -19,6 +19,9 @@
    */
   abstract class Base extends \Fiv\Form\Element\Html {
 
+    /**
+     * @var null|string
+     */
     protected $value = null;
 
     /**
@@ -26,6 +29,9 @@
      */
     protected $validators = [];
 
+    /**
+     * @var null|boolean
+     */
     protected $validationResult = null;
 
     /**
@@ -33,6 +39,9 @@
      */
     protected $filters = [];
 
+    /**
+     * @var string
+     */
     protected $text = '';
 
     /**

@@ -2,6 +2,7 @@
 
   namespace FormTests\Form;
 
+  use Fiv\Form\Filter\Trim;
   use Fiv\Form\Form;
 
   /**
@@ -30,6 +31,19 @@
       $element = $this->getElement();
       $element->setAttributes([]);
       $this->assertEquals('', $element->renderAttributes());
+    }
+
+    public function testFilter() {
+      $element = $this->getElement();
+      $element->addFilter(new Trim());
+
+      $this->assertEmpty($element->getValue());
+
+      $element->setValue("test_value");
+      $this->assertEquals("test_value", $element->getValue());
+
+      $element->setValue("  other value");
+      $this->assertEquals("other value", $element->getValue());
     }
 
   }

@@ -5,11 +5,12 @@
   class Subscribe extends \Fiv\Form\Form {
 
     public function init() {
+
       $this->setMethod('post');
 
       $this->checkbox('latest', 'Subscribe to news');
 
-      $this->submit('send');
+      $this->submit('send', 'test it');
 
       if ($this->isValid()) {
         $data = $this->getData();

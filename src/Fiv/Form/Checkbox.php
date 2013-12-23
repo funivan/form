@@ -1,14 +1,11 @@
 <?php
 
-  /**
-   * @author Ivan Shcherbak <dev@funivan.com>
-   */
   namespace Fiv\Form;
 
   /**
-   * Class Submit
    * Generate <input type="submit" /> element
    *
+   * @author Ivan Shcherbak <dev@funivan.com>
    * @package Fiv\Form
    */
   class Checkbox extends Element\InlineInput {
@@ -24,11 +21,12 @@
      * @return $this
      */
     public function setValue($value) {
-      $value = !empty($value) ? 1 : 0;
-      if ($value) {
-        $this->check();
+      if (!empty($value)) {
+        return $this->check();
+      } else {
+        return $this->unCheck();
       }
-      return parent::setValue($value);
+
     }
 
     /**
@@ -36,14 +34,17 @@
      */
     public function check() {
       $this->setAttribute('checked', 'checked');
+      parent::setValue(1);
       return $this;
     }
 
     /**
+     * Set value to 0
      * @return $this
      */
     public function unCheck() {
       $this->removeAttribute('checked');
+      parent::setValue(0);
       return $this;
     }
 

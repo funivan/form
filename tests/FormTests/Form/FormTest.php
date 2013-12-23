@@ -19,8 +19,24 @@
     }
 
     public function testGetElements() {
-
       $form = new Form();
       $this->assertEmpty($form->getElements());
     }
+
+    public function testFormMethods() {
+      $form = new Form();
+      $this->assertEquals('get', $form->getMethod());
+
+      $form->setMethod('post');
+      $this->assertEquals('post', $form->getMethod());
+
+      $form->setMethod('t');
+      $this->assertEquals('get', $form->getMethod());
+    }
+
+    public function testIsSubmitted() {
+      $form = new Form();
+      $this->assertEquals(false, $form->isSubmitted());
+    }
+
   }

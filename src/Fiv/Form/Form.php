@@ -99,7 +99,7 @@
     /**
      * @return string
      */
-    protected function getMethod() {
+    public function getMethod() {
       if (!empty($this->attributes['method']) and strtolower($this->attributes['method']) == 'post') {
         return 'post';
       } else {

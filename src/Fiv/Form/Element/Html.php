@@ -9,10 +9,19 @@
    */
   class Html {
 
+    /**
+     * @var string
+     */
     protected $tag = '';
 
-    protected $content = false;
+    /**
+     * @var null|string
+     */
+    protected $content = null;
 
+    /**
+     * @var array
+     */
     protected $attributes = [];
 
     /**
@@ -62,7 +71,7 @@
     public static function tag($tag, $attributes, $content = false) {
       $html = '<' . $tag . ' ' . static::renderAttributes($attributes);
 
-      if ($content !== false) {
+      if ($content !== null) {
         $html .= '>' . $content . '</' . $tag . '>';
       } else {
         $html .= ' />';
@@ -123,7 +132,7 @@
     }
 
     /**
-     * @return boolean|string
+     * @return null|string
      */
     public function getContent() {
       return $this->content;

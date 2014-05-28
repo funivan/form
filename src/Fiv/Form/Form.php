@@ -72,26 +72,26 @@
           $data = $_GET;
         }
 
-        if (!empty($data)) {
-          # data is key value storage
-          $this->flushCacheFlags();
+        # data is key value storage
+        $this->flushCacheFlags();
 
-          foreach ($this->elements as $element) {
-            $name = $element->getName();
+        foreach ($this->elements as $element) {
+          $name = $element->getName();
 
-            if ($element instanceof Checkbox) {
-              $data[$name] = isset($data[$name]) ? 1 : 0;
-            } elseif ($element instanceof CheckboxList) {
-              $data[$name] = isset($data[$name]) ? $data[$name] : array();
-            }
-
-            if (array_key_exists($name, $data)) {
-              $element->setValue($data[$name]);
-              $this->data[$name] = $element->getValue();
-            }
-
+          if ($element instanceof Checkbox) {
+            $data[$name] = isset($data[$name]) ? 1 : 0;
+          } elseif ($element instanceof CheckboxList) {
+            $data[$name] = isset($data[$name]) ? $data[$name] : array();
           }
+
+          if (array_key_exists($name, $data)) {
+            $element->setValue($data[$name]);
+          }
+          
+          $this->data[$name] = $element->getValue();
+
         }
+        
         $this->prepareDone = true;
       }
     }
@@ -273,7 +273,7 @@
      * ```
      * $form->checkbox('subscribe', 'Підписка на новини');
      * ```
-     * @param string      $name
+     * @param string $name
      * @param string|null $label
      * @return Checkbox
      */
@@ -287,7 +287,7 @@
 
     /**
      * @param string $name
-     * @param null   $text
+     * @param null $text
      * @return CheckboxList
      */
     public function checkboxList($name, $text = null) {

@@ -143,7 +143,6 @@
      * @return bool
      */
     public function isSubmitted() {
-      $this->prepare();
       $uid = $this->getUid();
 
       if ($this->getMethod() == 'get' and isset($_GET[$uid])) {

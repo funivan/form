@@ -4,6 +4,7 @@
   namespace Fiv\Form;
 
   use Fiv\Form\Element;
+  use Fiv\Form\Element\Submit;
 
   /**
    * @method Form setAction($action);
@@ -175,12 +176,13 @@
     /**
      * @param string $name
      * @param        $text
-     * @return Text
+     * @return \Fiv\Form\Element\Input
      */
     public function input($name, $text = null) {
-      $input = new Text();
+      $input = new Element\Input();
       $input->setName($name);
       $input->setText($text);
+      $input->setType('text');
       $this->setElement($input);
       return $input;
     }
@@ -242,10 +244,11 @@
      * ```
      * @param      $name
      * @param null $value
-     * @return Hidden
+     * @return \Fiv\Form\Element\Input
      */
     public function hidden($name, $value = null) {
-      $hidden = new Hidden();
+      $hidden = new  \Fiv\Form\Element\Input();
+      $hidden->setType('hidden');
       $hidden->setName($name);
       $hidden->setValue($value);
       $this->setElement($hidden);
@@ -328,7 +331,7 @@
      * @return string
      */
     public function renderStart() {
-      $hidden = new Hidden();
+      $hidden = new Input();
       $hidden->setAttributes(array(
         'name' => $this->getUid(),
       ));

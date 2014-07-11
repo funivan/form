@@ -8,7 +8,7 @@
    * @author Ivan Shcherbak <dev@funivan.com>
    * @package Fiv\Form
    */
-  class Checkbox extends Element\InlineInput {
+  class Checkbox extends Element\Input {
 
     protected $value = 1;
 
@@ -61,14 +61,8 @@
      * @return string
      */
     public function render() {
+      $this->setType('checkbox');
       return '<label>' . parent::render() . $this->label . '</label>';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getType() {
-      return 'checkbox';
     }
 
   }

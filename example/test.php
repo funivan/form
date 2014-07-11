@@ -1,9 +1,6 @@
 <?php
 
-  use Fiv\Form\Form;
-
-  include __DIR__ . '/../../Autoloader.php';
-  spl_autoload_register(array(\Fiv\Autoloader::N, 'autoload'));
+  include __DIR__ . '/../vendor/autoload.php';
 
   $form = new \Fiv\Form\Form();
   $form->setMethod('post');

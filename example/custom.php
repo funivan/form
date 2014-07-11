@@ -6,17 +6,17 @@
   class Form extends \Fiv\Form\Form {
 
     /**
-     * @var \Fiv\Form\Text
+     * @var \Fiv\Form\Element\Input
      */
     public $text;
 
     /**
-     * @var \Fiv\Form\Submit
+     * @var \Fiv\Form\Element\Submit
      */
     public $submit;
 
     /**
-     * @var \Fiv\Form\Hidden
+     * @var \Fiv\Form\Element\Input
      */
     public $hiddenUid;
 

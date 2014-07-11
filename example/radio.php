@@ -1,8 +1,6 @@
 <?php
 
-
-  include __DIR__ . '/../../Autoloader.php';
-  spl_autoload_register(array(\Fiv\Autoloader::N, 'autoload'));
+  include __DIR__ . '/../vendor/autoload.php';
 
   class ChangeStatus extends \Fiv\Form\Form {
 
@@ -12,7 +10,7 @@
     public $radio;
 
     /**
-     * @var \Fiv\Form\Submit
+     * @var \Fiv\Form\Element\Submit
      */
     public $submit;
 

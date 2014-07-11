@@ -2,7 +2,6 @@
 
   namespace Fiv\Form\Filter;
 
-  use Fiv\Form\Text;
 
   /**
    * Class Form
@@ -18,7 +17,7 @@
     /**
      * Modify value and return it
      *
-     * @param $value Text value
+     * @param $value value
      * @return string
      */
     public abstract function apply($value);

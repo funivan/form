@@ -10,7 +10,7 @@
   class HiddenTest extends \FormTests\Main {
 
     /**
-     * @return \Fiv\Form\Hidden
+     * @return \Fiv\Form\Element\Input
      */
     protected function getElement() {
       $form = new Form();

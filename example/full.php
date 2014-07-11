@@ -1,7 +1,6 @@
 <?php
 
-  include __DIR__ . '/../../Autoloader.php';
-  spl_autoload_register(array(\Fiv\Autoloader::N, 'autoload'));
+  include __DIR__ . '/../vendor/autoload.php';
 
   use \Fiv\Form\Validator;
   use \Fiv\Form\Filter;
@@ -39,20 +38,6 @@
 
     public function init() {
       $this->setMethod('post');
-
-      /*
-       * Інпут    - опис - імя - значення .1
-       * Текст    - опис - імя - значення .1
-       *
-       * Чекбокс  - опис - імя - значення .1
-       *
-       * Радіо    - опис - імя : [значення - текст] [значення - текст] .1
-       * Селект   - опис - імя : [значення - текст] [значення - текст] .1
-       *
-       * Чекбокси - опис - імя : [значення - текст] [значення - текст] .2
-       *
-       */
-
 
 
       # login

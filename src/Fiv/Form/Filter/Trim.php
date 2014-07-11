@@ -9,7 +9,7 @@
   class Trim extends \Fiv\Form\Filter\Base {
 
     /**
-     * @param \Fiv\Form\Text $value
+     * @param string $value
      * @return string
      */
     public function apply($value) {

@@ -3,7 +3,7 @@
   /**
    * @author Ivan Shcherbak <dev@funivan.com>
    */
-  namespace Fiv\Form;
+  namespace Fiv\Form\Element;
 
   /**
    * Class Submit
@@ -11,14 +11,7 @@
    *
    * @package Fiv\Form
    */
-  class Submit extends Element\InlineInput {
-
-    /**
-     * @return string
-     */
-    protected function getType() {
-      return 'submit';
-    }
+  class Submit extends \Fiv\Form\Element\Input {
 
     /**
      * Check if submit button is clicked
@@ -29,6 +22,11 @@
      */
     public function isClicked(Submit $submitButton) {
       throw new \Exception('@todo');
+    }
+
+    public function render() {
+      $this->setType('submit');
+      return parent::render();
     }
 
   }

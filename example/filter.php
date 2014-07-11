@@ -8,12 +8,12 @@
   class FormWithFilter extends \Fiv\Form\Form {
 
     /**
-     * @var \Fiv\Form\Text
+     * @var \Fiv\Form\Element\Input
      */
     public $text;
 
     /**
-     * @var \Fiv\Form\Submit
+     * @var \Fiv\Form\Element\Submit
      */
     public $submit;
 

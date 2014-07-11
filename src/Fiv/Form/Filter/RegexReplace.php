@@ -27,7 +27,7 @@
     }
 
     /**
-     * @param \Fiv\Form\Text $value
+     * @param sting $value
      * @return mixed|string
      */
     public function apply($value) {

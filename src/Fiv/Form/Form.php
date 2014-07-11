@@ -188,6 +188,19 @@
     }
 
     /**
+     * @param string $name
+     * @param        $text
+     * @return \Fiv\Form\Element\Input
+     */
+    public function password($name, $text = null) {
+      $input = new Element\Password();
+      $input->setName($name);
+      $input->setText($text);
+      $this->setElement($input);
+      return $input;
+    }
+
+    /**
      * Connect element to block and to form
      *
      * @param Element\Base $element

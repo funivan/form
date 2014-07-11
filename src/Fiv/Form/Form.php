@@ -331,8 +331,9 @@
      * @return string
      */
     public function renderStart() {
-      $hidden = new Input();
-      $hidden->setAttributes(array(
+      $hidden = new Element\Input();
+      $hidden->setType('hidden');
+      $hidden->addAttributes(array(
         'name' => $this->getUid(),
       ));
       $hidden->setValue(1);

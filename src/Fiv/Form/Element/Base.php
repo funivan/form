@@ -12,8 +12,6 @@
    * @method $this setId($id);
    * @method string getId();
    *
-   * @method $this setValue()
-   *
    * @author  Ivan Shcherbak <dev@funivan.com>
    * @package Fiv\Form
    */

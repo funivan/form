@@ -90,6 +90,19 @@
     }
 
     /**
+     * Add multiple attributes
+     *
+     * @param array $attributes
+     * @return $this
+     */
+    public function addAttributes(array $attributes) {
+      foreach ($attributes as $name => $value) {
+        $this->attributes[$name] = $value;
+      }
+      return $this;
+    }
+
+    /**
      * @param string $name
      * @param string $value
      * @return $this

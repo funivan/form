@@ -63,7 +63,7 @@
       return $result;
     }
 
-    protected function prepare() {
+    public function prepare() {
       if ($this->prepareDone !== true) {
         $method = $this->getMethod();
         if ($method == 'post') {
@@ -87,11 +87,11 @@
           if (array_key_exists($name, $data)) {
             $element->setValue($data[$name]);
           }
-          
+
           $this->data[$name] = $element->getValue();
 
         }
-        
+
         $this->prepareDone = true;
       }
     }

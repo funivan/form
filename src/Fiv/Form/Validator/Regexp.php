@@ -24,7 +24,7 @@
      * @param string $error
      * @return $this
      */
-    protected function setError($error) {
+    public function setError($error) {
       $this->error = $error;
       return $this;
     }

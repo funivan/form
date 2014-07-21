@@ -28,7 +28,7 @@
       return $this;
     }
 
-    protected function hasErrors() {
+    public function hasErrors() {
       return !empty($this->errors);
     }
 
@@ -42,6 +42,10 @@
     public function flushErrors() {
       $this->errors = [];
       return $this;
+    }
+
+    public function getFirstError() {
+      return !empty($this->errors[0]) ? $this->errors[0] : null;
     }
 
     /**

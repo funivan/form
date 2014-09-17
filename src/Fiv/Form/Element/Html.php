@@ -50,6 +50,20 @@
     }
 
     /**
+     * @param string $className
+     * @return $this
+     */
+    public function addClass($className) {
+      if (empty($this->attributes['class'])) {
+        $this->attributes['class'] = $className;
+      } else {
+        $this->attributes['class'] = $this->attributes['class'] . ' ' . $className;
+      }
+
+      return $this;
+    }
+
+    /**
      * @param array $attributes
      * @return string
      */
@@ -68,7 +82,7 @@
      * @param bool $content
      * @return string
      */
-    public static function tag($tag, $attributes, $content = false) {
+    public static function tag($tag, $attributes, $content = null) {
       $html = '<' . $tag . ' ' . static::renderAttributes($attributes);
 
       if ($content !== null) {

@@ -69,7 +69,7 @@
       $form = new Form();
       $form->submit('test-submit', 'test-value');
       $form->setData([
-        'test-submit' => 1
+        $form->getUid() => 1
       ]);
       $this->assertEquals(true, $form->isSubmitted());
     }

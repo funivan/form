@@ -12,6 +12,25 @@
     /**
      *
      */
+    public function testIsValidFlush() {
+      $form = new Form();
+      $form->input('email');
+
+      $form->setData([
+        $form->getUid() => 1,
+        'email' => 'test@test'
+      ]);
+
+      $this->assertTrue($form->isValid());
+
+      $form->setData([]);
+
+      $this->assertFalse($form->isValid());
+    }
+    
+    /**
+     *
+     */
     public function testUid() {
       $form = new Form();
 

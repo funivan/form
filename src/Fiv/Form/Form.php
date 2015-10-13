@@ -141,7 +141,7 @@
         return false;
       }
 
-      $this->validResultCache = 1;
+      $this->validResultCache = true;
       foreach ($this->elements as $element) {
         if (!$element->validate()) {
           $this->validResultCache = false;

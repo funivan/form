@@ -1,9 +1,7 @@
 <?php
 
   namespace Fiv\Form\Validator;
-
-  use Fiv\Form\Validator\Base;
-
+  
   /**
    * Check if value not empty
    * Algorithm based on value length
@@ -12,11 +10,14 @@
    */
   class Required extends Base {
 
+    /**
+     * @var string
+     */
     protected $error = 'Field is required ';
 
 
     /**
-     * @param $error
+     * @param string $error
      * @return $this
      */
     public function setError($error) {

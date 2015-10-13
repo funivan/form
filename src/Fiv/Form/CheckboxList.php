@@ -16,6 +16,10 @@
    */
   class CheckboxList extends \Fiv\Form\Element\Multiple {
 
+    /**
+     * @param mixed $data
+     * @return $this
+     */
     public function setValue($data) {
       if (!is_array($data)) {
         $data = (array) $data;

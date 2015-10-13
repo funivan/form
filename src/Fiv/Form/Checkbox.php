@@ -10,8 +10,14 @@
    */
   class Checkbox extends Element\Input {
 
+    /**
+     * @var int
+     */
     protected $value = 1;
 
+    /**
+     * @var string
+     */
     protected $label = '';
 
 

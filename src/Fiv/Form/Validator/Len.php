@@ -2,8 +2,6 @@
 
   namespace Fiv\Form\Validator;
 
-  use Fiv\Form\Validator\Base;
-
   /**
    * Check value length
    *
@@ -12,17 +10,37 @@
    */
   class Len extends \Fiv\Form\Validator\Base {
 
+    /**
+     * @var int|null
+     */
     protected $exactLen;
 
+    /**
+     * @var string|null
+     */
     protected $exactLenError;
 
-    protected $maxLen = null;
 
-    protected $maxLenError;
+    /**
+     * @var int|null
+     */
+    protected $minLen;
 
+    /**
+     * @var string|null
+     */
     protected $minLenError;
 
-    protected $minLen;
+
+    /**
+     * @var int|null
+     */
+    protected $maxLen;
+
+    /**
+     * @var string|null
+     */
+    protected $maxLenError;
 
 
     /**

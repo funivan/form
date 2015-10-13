@@ -5,6 +5,10 @@
    */
   namespace Fiv\Form\Validator;
 
+  /**
+   *
+   * @package Fiv\Form\Validator
+   */
   abstract class Base {
 
     /**
@@ -31,11 +35,17 @@
     }
 
 
+    /**
+     * @return bool
+     */
     public function hasErrors() {
       return !empty($this->errors);
     }
 
 
+    /**
+     * @return array
+     */
     public function getErrors() {
       return $this->errors;
     }
@@ -50,6 +60,9 @@
     }
 
 
+    /**
+     * @return null|string
+     */
     public function getFirstError() {
       return !empty($this->errors[0]) ? $this->errors[0] : null;
     }

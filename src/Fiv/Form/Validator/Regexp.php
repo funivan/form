@@ -7,8 +7,14 @@
    */
   class Regexp extends Base {
 
+    /**
+     * @var string
+     */
     protected $error = 'Invalid value';
 
+    /**
+     * @var string
+     */
     protected $regexp = '';
 
 

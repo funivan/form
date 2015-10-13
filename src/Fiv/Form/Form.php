@@ -18,7 +18,6 @@
 
     /**
      * @var null
-     * Form "name" attribute
      */
     protected $uid = null;
 

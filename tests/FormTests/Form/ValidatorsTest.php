@@ -83,4 +83,25 @@
 
       $this->assertFalse($form->isValid());
     }
+
+    public function testIn() {
+      $inValidator = \Fiv\Form\Validator\In::i();
+      $inValidator->setValues(['a', 'b', 'c']);
+
+      $form = new Form();
+      $form->input('inputName')
+        ->addValidator($inValidator);
+
+      $form->setData([
+        $form->getUid() => 1,
+        'inputName' => 'a'
+      ]);
+      $this->assertTrue($form->isValid());
+
+      $form->setData([
+        $form->getUid() => 1,
+        'inputName' => 'd'
+      ]);
+      $this->assertFalse($form->isValid());
+    }
   }

@@ -27,7 +27,8 @@
 
       $this->assertFalse($form->isValid());
     }
-    
+
+
     /**
      *
      */
@@ -66,7 +67,7 @@
 
 
     /**
-     * @throws \Exception
+     *
      */
     public function testIsSubmittedFalse() {
       $form = new Form();
@@ -74,8 +75,9 @@
       $this->assertEquals(false, $form->isSubmitted());
     }
 
+
     /**
-     * @throws \Exception
+     *
      */
     public function testIsSubmittedTrue() {
       $form = new Form();
@@ -95,21 +97,14 @@
 
 
     /**
-     *
+     * @expectedException \Exception
      */
     public function testThrowExceptionWithoutData() {
-      $exception = null;
-
-      try {
-        $form = new Form();
-        $form->setName('test-form');
-        $form->isValid();
-      } catch (\Exception $e) {
-        $exception = $e;
-      }
-      
-      $this->assertNotEmpty($exception, 'Should throw exception if data not set!');
+      $form = new Form();
+      $form->setName('test-form');
+      $form->isValid();
     }
+
 
     /**
      *

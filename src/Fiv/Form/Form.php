@@ -54,7 +54,7 @@
      */
     public function getData() {
       if (!isset($this->data)) {
-        throw new \Exception("Data not exists!");
+        throw new \Exception("Data does not exist!");
       }
 
       return $this->data;

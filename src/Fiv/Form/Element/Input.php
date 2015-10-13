@@ -11,6 +11,7 @@
 
     protected $type = 'text';
 
+
     /**
      * @return string
      */
@@ -18,9 +19,10 @@
       if (empty($this->attributes['type'])) {
         $this->attributes['type'] = $this->type;
       }
-      
+
       return $this->attributes['type'];
     }
+
 
     /**
      * @param string $type
@@ -41,6 +43,7 @@
       $this->setAttribute('value', $this->value);
       return $this;
     }
+
 
     /**
      *

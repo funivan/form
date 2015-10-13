@@ -14,6 +14,7 @@
 
     protected $values = [];
 
+
     /**
      * @param array $values
      * @return $this
@@ -28,6 +29,7 @@
       $this->error = $error;
       return $this;
     }
+
 
     /**
      * @param string $value

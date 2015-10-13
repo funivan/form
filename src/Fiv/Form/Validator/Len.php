@@ -24,6 +24,7 @@
 
     protected $minLen;
 
+
     /**
      * Maximum len of value
      *
@@ -36,6 +37,7 @@
       $this->maxLenError = $error;
       return $this;
     }
+
 
     /**
      * Minimum len of value
@@ -50,6 +52,7 @@
       return $this;
     }
 
+
     /**
      * Expect exact len of value
      *
@@ -62,6 +65,7 @@
       $this->exactLenError = $error;
       return $this;
     }
+
 
     /**
      * Validate value

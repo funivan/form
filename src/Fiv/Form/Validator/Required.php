@@ -14,6 +14,7 @@
 
     protected $error = 'Field is required ';
 
+
     /**
      * @param $error
      * @return $this
@@ -22,6 +23,7 @@
       $this->error = $error;
       return $this;
     }
+
 
     /**
      * @param string $value

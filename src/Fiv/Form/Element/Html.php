@@ -24,12 +24,14 @@
      */
     protected $attributes = [];
 
+
     /**
      * @return string
      */
     public function __toString() {
       return $this->render();
     }
+
 
     /**
      * @param $name
@@ -49,6 +51,7 @@
       }
     }
 
+
     /**
      * @param string $className
      * @return $this
@@ -63,6 +66,7 @@
       return $this;
     }
 
+
     /**
      * @param array $attributes
      * @return string
@@ -74,6 +78,7 @@
       }
       return $attributesInline;
     }
+
 
     /**
      *
@@ -94,6 +99,7 @@
       return $html;
     }
 
+
     /**
      * @param array $attributes
      * @return $this
@@ -102,6 +108,7 @@
       $this->attributes = $attributes;
       return $this;
     }
+
 
     /**
      * Add multiple attributes
@@ -116,6 +123,7 @@
       return $this;
     }
 
+
     /**
      * @param string $name
      * @param string $value
@@ -126,6 +134,7 @@
       return $this;
     }
 
+
     /**
      * @param $name
      * @return $this
@@ -135,6 +144,7 @@
       return $this;
     }
 
+
     /**
      * @param string $name Attribute name
      * @return string|null
@@ -142,6 +152,7 @@
     public function getAttribute($name) {
       return !empty($this->attributes[$name]) ? $this->attributes[$name] : null;
     }
+
 
     /**
      * @return string
@@ -157,6 +168,7 @@
     public function render() {
       return static::tag($this->tag, $this->attributes, $this->getContent());
     }
+
 
     /**
      * @return null|string

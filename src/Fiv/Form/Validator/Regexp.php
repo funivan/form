@@ -11,6 +11,7 @@
 
     protected $regexp = '';
 
+
     /**
      * @param string $regexp
      * @return $this
@@ -19,6 +20,7 @@
       $this->regexp = $regexp;
       return $this;
     }
+
 
     /**
      * @param string $error

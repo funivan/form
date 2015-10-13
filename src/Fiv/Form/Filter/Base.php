@@ -22,6 +22,7 @@
      */
     public abstract function apply($value);
 
+
     /**
      * @return static
      */

@@ -14,10 +14,12 @@
       return new static();
     }
 
+
     /**
      * @var array
      */
     protected $errors = [];
+
 
     /**
      * @param string $message
@@ -28,13 +30,16 @@
       return $this;
     }
 
+
     public function hasErrors() {
       return !empty($this->errors);
     }
 
+
     public function getErrors() {
       return $this->errors;
     }
+
 
     /**
      * @return $this
@@ -44,9 +49,11 @@
       return $this;
     }
 
+
     public function getFirstError() {
       return !empty($this->errors[0]) ? $this->errors[0] : null;
     }
+
 
     /**
      * @param string $value

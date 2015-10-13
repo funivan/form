@@ -14,6 +14,7 @@
 
     protected $label = '';
 
+
     /**
      * Value in checkbox can be true or false
      *
@@ -29,6 +30,7 @@
 
     }
 
+
     /**
      * @return $this
      */
@@ -37,6 +39,7 @@
       parent::setValue(1);
       return $this;
     }
+
 
     /**
      * Set value to 0
@@ -48,6 +51,7 @@
       return $this;
     }
 
+
     /**
      * @param string $text
      * @return $this
@@ -56,6 +60,7 @@
       $this->label = $text;
       return $this;
     }
+
 
     /**
      * @return string

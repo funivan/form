@@ -18,7 +18,7 @@
 
     public function setValue($data) {
       if (!is_array($data)) {
-        $data = (array)$data;
+        $data = (array) $data;
       }
 
       foreach ($data as $i => $value) {
@@ -32,6 +32,7 @@
       return $this;
     }
 
+
     /**
      * Alias of setValue
      *
@@ -41,6 +42,7 @@
     public function setChecked($values) {
       return $this->setValue($values);
     }
+
 
     /**
      * @return string

@@ -2,7 +2,6 @@
 
   namespace Fiv\Form\Validator;
 
-  use Fiv\Form\Validator\Base;
 
   /**
    * @author  Ivan Shcherbak <dev@funivan.com>
@@ -10,9 +9,16 @@
    */
   class In extends Base {
 
+    /**
+     * @var string
+     */
     protected $error = 'Invalid value';
 
+    /**
+     * @var array
+     */
     protected $values = [];
+
 
     /**
      * @param array $values
@@ -24,10 +30,15 @@
     }
 
 
+    /**
+     * @param string $error
+     * @return $this
+     */
     public function setError($error) {
       $this->error = $error;
       return $this;
     }
+
 
     /**
      * @param string $value

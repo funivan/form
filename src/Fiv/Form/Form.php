@@ -16,10 +16,14 @@
    */
   class Form extends Element\Html {
 
+    /**
+     * @var null
+     */
     protected $uid = null;
 
-    protected $prepareDone = false;
-
+    /**
+     * @var mixed
+     */
     protected $validResultCache = null;
 
     /**
@@ -32,6 +36,7 @@
      */
     protected $elements = [];
 
+
     /**
      * @param $name
      * @return $this
@@ -42,60 +47,64 @@
       return $this;
     }
 
+
     /**
-     * @param bool $ignoreSubmit
      * @return array
+     * @throws \Exception
      */
-    public function getData($ignoreSubmit = true) {
-      $this->prepare();
+    public function getData() {
+      if (!isset($this->data)) {
+        throw new \Exception("Data does not exist!");
+      }
 
-      $result = $this->data;
-      if ($ignoreSubmit) {
-        foreach ($this->elements as $el) {
-          if ($el instanceof Submit) {
-            unset($result[$el->getName()]);
-          }
+      return $this->data;
+    }
+
+
+    /**
+     * @param array|\Iterator $data
+     * @throws \Exception
+     */
+    public function setData($data) {
+      if ($data instanceof \Iterator) {
+        $data = iterator_to_array($data);
+      }
+
+      if (!is_array($data)) {
+        throw new \Exception('Data should be an array');
+      }
+
+
+      $this->flushCacheFlags();
+
+      foreach ($this->elements as $element) {
+        $name = $element->getName();
+
+        if ($element instanceof Checkbox) {
+          $data[$name] = isset($data[$name]) ? 1 : 0;
+        } elseif ($element instanceof CheckboxList) {
+          $data[$name] = isset($data[$name]) ? $data[$name] : array();
+        }
+
+        if (array_key_exists($name, $data)) {
+          $element->setValue($data[$name]);
+          $data[$name] = $element->getValue();
         }
 
       }
 
-      unset($result[$this->uid]);
-
-      return $result;
+      $this->data = $data;
     }
 
+
+    /**
+     * @deprecated
+     * @todo remove method
+     */
     public function prepare() {
-      if ($this->prepareDone !== true) {
-        $method = $this->getMethod();
-        if ($method == 'post') {
-          $data = $_POST;
-        } else {
-          $data = $_GET;
-        }
-
-        # data is key value storage
-        $this->flushCacheFlags();
-
-        foreach ($this->elements as $element) {
-          $name = $element->getName();
-
-          if ($element instanceof Checkbox) {
-            $data[$name] = isset($data[$name]) ? 1 : 0;
-          } elseif ($element instanceof CheckboxList) {
-            $data[$name] = isset($data[$name]) ? $data[$name] : array();
-          }
-
-          if (array_key_exists($name, $data)) {
-            $element->setValue($data[$name]);
-          }
-
-          $this->data[$name] = $element->getValue();
-
-        }
-
-        $this->prepareDone = true;
-      }
+      return;
     }
+
 
     /**
      * @return string
@@ -108,11 +117,14 @@
       }
     }
 
+
+    /**
+     *
+     */
     protected function flushCacheFlags() {
       $this->validResultCache = null;
-      $this->prepareDone = null;
-
     }
+
 
     /**
      * Check if form is submitted and all elements are valid
@@ -124,19 +136,20 @@
         return $this->validResultCache;
       }
 
-      if ($this->isSubmitted()) {
-
-        $this->validResultCache = 1;
-        foreach ($this->elements as $element) {
-          if (!$element->validate()) {
-            $this->validResultCache = false;
-          }
-        }
-        return $this->validResultCache;
+      if (!$this->isSubmitted()) {
+        return false;
       }
 
-      return false;
+      $this->validResultCache = true;
+      foreach ($this->elements as $element) {
+        if (!$element->validate()) {
+          $this->validResultCache = false;
+        }
+      }
+
+      return $this->validResultCache;
     }
+
 
     /**
      * Check if form is submitted
@@ -144,14 +157,11 @@
      * @return bool
      */
     public function isSubmitted() {
-      $uid = $this->getUid();
+      $data = $this->getData();
 
-      if ($this->getMethod() == 'get' and isset($_GET[$uid])) {
-        return true;
-      }
-
-      return isset($_POST[$uid]);
+      return isset($data[$this->getUid()]);
     }
+
 
     /**
      * Return unique id of form
@@ -166,12 +176,14 @@
       return $this->uid;
     }
 
+
     /**
      * @return \Fiv\Form\Element\Base[]
      */
     public function getElements() {
       return $this->elements;
     }
+
 
     /**
      * @param string $name
@@ -187,6 +199,7 @@
       return $input;
     }
 
+
     /**
      * @param string $name
      * @param        $text
@@ -200,6 +213,7 @@
       return $input;
     }
 
+
     /**
      * Connect element to block and to form
      *
@@ -211,6 +225,7 @@
       $this->elements[$element->getName()] = $element;
       return $this;
     }
+
 
     /**
      * @param      $name
@@ -225,6 +240,7 @@
       return $select;
     }
 
+
     /**
      * @param        $name
      * @param string $text
@@ -238,6 +254,7 @@
       return $radio;
     }
 
+
     /**
      * @param      $name
      * @param null $text
@@ -250,6 +267,7 @@
       $this->setElement($input);
       return $input;
     }
+
 
     /**
      * ```
@@ -268,6 +286,7 @@
       return $hidden;
     }
 
+
     /**
      * ```
      * $form->submit('register', 'зареєструватись');
@@ -283,6 +302,7 @@
       $this->setElement($input);
       return $input;
     }
+
 
     /**
      * ```
@@ -300,6 +320,7 @@
       return $checkbox;
     }
 
+
     /**
      * @param string $name
      * @param null $text
@@ -313,6 +334,7 @@
       return $checkbox;
     }
 
+
     /**
      * Render full form
      *
@@ -321,6 +343,7 @@
     public function render() {
       return $this->renderStart() . $this->renderElements() . $this->renderEnd();
     }
+
 
     /**
      * You can easy rewrite this method for custom design of your forms
@@ -340,6 +363,7 @@
       return $formHtml;
     }
 
+
     /**
      * @return string
      */
@@ -353,6 +377,7 @@
 
       return '<form ' . $this->getAttributesAsString() . '>' . $hidden->render();
     }
+
 
     /**
      * @return string

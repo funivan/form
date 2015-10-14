@@ -16,9 +16,13 @@
    */
   class CheckboxList extends \Fiv\Form\Element\Multiple {
 
+    /**
+     * @param mixed $data
+     * @return $this
+     */
     public function setValue($data) {
       if (!is_array($data)) {
-        $data = (array)$data;
+        $data = (array) $data;
       }
 
       foreach ($data as $i => $value) {
@@ -32,6 +36,7 @@
       return $this;
     }
 
+
     /**
      * Alias of setValue
      *
@@ -41,6 +46,7 @@
     public function setChecked($values) {
       return $this->setValue($values);
     }
+
 
     /**
      * @return string

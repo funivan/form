@@ -15,6 +15,7 @@
 
     protected $to = '';
 
+
     /**
      * @param        $from
      * @param string $to
@@ -25,6 +26,7 @@
       $this->to = $to;
       return $this;
     }
+
 
     /**
      * @param sting $value

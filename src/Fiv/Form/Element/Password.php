@@ -9,6 +9,7 @@
 
     protected $type = 'password';
 
+
     public function render() {
       $this->attributes['value'] = null;
       return parent::render();

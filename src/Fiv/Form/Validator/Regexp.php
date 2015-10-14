@@ -7,9 +7,16 @@
    */
   class Regexp extends Base {
 
+    /**
+     * @var string
+     */
     protected $error = 'Invalid value';
 
+    /**
+     * @var string
+     */
     protected $regexp = '';
+
 
     /**
      * @param string $regexp
@@ -19,6 +26,7 @@
       $this->regexp = $regexp;
       return $this;
     }
+
 
     /**
      * @param string $error

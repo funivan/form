@@ -11,6 +11,7 @@
 
     protected $options = [];
 
+
     /**
      * @param array $values
      * @return $this
@@ -20,12 +21,14 @@
       return $this;
     }
 
+
     /**
      * @return array
      */
     public function getOptions() {
       return $this->options;
     }
+
 
     public function setValue($value) {
       if (!isset($this->options[$value])) {

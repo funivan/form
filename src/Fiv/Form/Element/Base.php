@@ -42,6 +42,7 @@
      */
     protected $text = '';
 
+
     /**
      * Attach validator to current element
      *
@@ -64,6 +65,7 @@
       return $this;
     }
 
+
     /**
      * @param string $text
      * @return $this
@@ -73,12 +75,14 @@
       return $this;
     }
 
+
     /**
      * @return mixed
      */
     public function getText() {
       return $this->text;
     }
+
 
     /**
      * Attach filter to current element
@@ -101,6 +105,7 @@
       return $this;
     }
 
+
     /**
      * @param $value
      * @return $this
@@ -117,12 +122,14 @@
       return $this;
     }
 
+
     /**
      * @return \Fiv\Form\Filter\Base[]
      */
     public function getFilters() {
       return $this->filters;
     }
+
 
     /**
      * Return true if element is valid
@@ -146,6 +153,7 @@
       return $this->validationResult;
     }
 
+
     /**
      * @return string
      */
@@ -153,12 +161,14 @@
       return $this->value;
     }
 
+
     /**
      * @return \Fiv\Form\Validator\Base[]
      */
     public function getValidators() {
       return $this->validators;
     }
+
 
     /**
      * @return array
@@ -171,6 +181,7 @@
 
       return $errors;
     }
+
 
     /**
      * @return $this

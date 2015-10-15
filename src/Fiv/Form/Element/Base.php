@@ -2,6 +2,7 @@
 
   namespace Fiv\Form\Element;
 
+  use Fiv\Form\Form;
   use Fiv\Form\Validator;
 
   /**
@@ -18,7 +19,7 @@
   abstract class Base extends \Fiv\Form\Element\Html {
 
     /**
-     * @var \Fiv\Form\Form
+     * @var Form
      */
     protected $form = null;
 
@@ -49,7 +50,7 @@
 
 
     /**
-     * @return \Fiv\Form\Form
+     * @return Form
      */
     public function getForm() {
       return $this->form;
@@ -57,10 +58,10 @@
 
 
     /**
-     * @param \Fiv\Form\Form $form
+     * @param Form $form
      * @return $this
      */
-    public function setForm($form) {
+    public function setForm(Form $form) {
       $this->form = $form;
       return $this;
     }

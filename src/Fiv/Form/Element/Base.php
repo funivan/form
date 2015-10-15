@@ -2,6 +2,7 @@
 
   namespace Fiv\Form\Element;
 
+  use Fiv\Form\Form;
   use Fiv\Form\Validator;
 
   /**
@@ -16,6 +17,11 @@
    * @package Fiv\Form
    */
   abstract class Base extends \Fiv\Form\Element\Html {
+
+    /**
+     * @var Form
+     */
+    protected $form = null;
 
     /**
      * @var null|string
@@ -41,6 +47,24 @@
      * @var string
      */
     protected $text = '';
+
+
+    /**
+     * @return Form
+     */
+    public function getForm() {
+      return $this->form;
+    }
+
+
+    /**
+     * @param Form $form
+     * @return $this
+     */
+    public function setForm(Form $form) {
+      $this->form = $form;
+      return $this;
+    }
 
 
     /**
@@ -189,5 +213,6 @@
     public function required() {
       return $this->addValidator(\Fiv\Form\Validator\Required::i());
     }
+
 
   }

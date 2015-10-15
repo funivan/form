@@ -18,6 +18,11 @@
   abstract class Base extends \Fiv\Form\Element\Html {
 
     /**
+     * @var \Fiv\Form\Form
+     */
+    protected $form = null;
+
+    /**
      * @var null|string
      */
     protected $value = null;
@@ -41,6 +46,24 @@
      * @var string
      */
     protected $text = '';
+
+
+    /**
+     * @return \Fiv\Form\Form
+     */
+    public function getForm() {
+      return $this->form;
+    }
+
+
+    /**
+     * @param \Fiv\Form\Form $form
+     * @return $this
+     */
+    public function setForm($form) {
+      $this->form = $form;
+      return $this;
+    }
 
 
     /**
@@ -189,5 +212,6 @@
     public function required() {
       return $this->addValidator(\Fiv\Form\Validator\Required::i());
     }
+
 
   }

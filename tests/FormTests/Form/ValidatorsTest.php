@@ -3,6 +3,7 @@
   namespace FormTests\Form;
 
   use Fiv\Form\Form;
+  use Fiv\Form\Validator\CallBackValidator;
 
   /**
    * @package FormTests\Form
@@ -61,10 +62,11 @@
       $this->assertFalse($form->isValid());
     }
 
+
     public function testRegexp() {
       $regexpValidator = \Fiv\Form\Validator\Regexp::i();
       $regexpValidator->setRegexp('![^\@]+\@[^\@]+!');
-      
+
       $form = new Form();
       $form->input('email')
         ->addValidator($regexpValidator);
@@ -83,6 +85,7 @@
 
       $this->assertFalse($form->isValid());
     }
+
 
     public function testIn() {
       $inValidator = \Fiv\Form\Validator\In::i();
@@ -103,5 +106,43 @@
         'inputName' => 'd'
       ]);
       $this->assertFalse($form->isValid());
+    }
+
+
+    public function testCallBackValidatorEmail() {
+      $form = new Form();
+
+      $existEmailList = [
+        'test1@gmail.com',
+        'promo@yandex.ru',
+      ];
+
+      $callBackValidator = (new CallBackValidator(function ($value) use ($existEmailList) {
+        if (empty($value)) {
+          return true;
+        }
+        if (in_array($value, $existEmailList)) {
+          return false;
+        }
+        return true;
+      }))->setErrorMessage('Email already exist!');
+
+      $input = $form->input('email');
+      $input->addValidator($callBackValidator);
+      
+      $form->setData([
+        $form->getUid() => 1,
+        'email' => 'test1@gmail.com',
+      ]);
+      
+      $this->assertFalse($form->isValid());
+      $this->assertEquals('Email already exist!', $callBackValidator->getFirstError());
+
+      $form->setData([
+        $form->getUid() => 1,
+        'email' => 'new-email@gmail.com',
+      ]);
+
+      $this->assertTrue($form->isValid());
     }
   }

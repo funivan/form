@@ -14,7 +14,7 @@
     protected $callback;
 
     /**
-     * @var
+     * @var string|null
      */
     protected $errorMessage;
 

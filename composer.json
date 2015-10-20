@@ -1,11 +1,10 @@
 {
   "name": "fiv/form",
   "description": "Form bundle",
-  "require-dev": {
-  },
   "autoload": {
     "psr-0": {
-      "Fiv\\Form\\": "src/"
+      "Fiv\\Form\\": "src/",
+      "FormTests\\": "tests/"
     }
   },
   "license": "MIT",

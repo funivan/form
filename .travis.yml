@@ -1,0 +1,24 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+  
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: 7.0
+
+before_script:
+  - composer self-update
+  - composer install --dev --no-interaction
+
+script:
+  - phpunit --coverage-text --coverage-clover=./build/coverage.clover tests/
+
+after_script:
+  - if [ "$TRAVIS_PHP_VERSION" != "7.0" ]; then wget https://scrutinizer-ci.com/ocular.phar  -O build/ocular.phar; fi
+  - if [ "$TRAVIS_PHP_VERSION" != "7.0" ]; then php ./build/ocular.phar code-coverage:upload --format=php-clover ./build/coverage.clover; fi

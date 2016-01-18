@@ -40,7 +40,7 @@
     /**
      * Alias of setValue
      *
-     * @param array $values
+     * @param string[] $values
      * @return $this
      */
     public function setChecked($values) {

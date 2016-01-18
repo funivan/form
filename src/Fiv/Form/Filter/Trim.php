@@ -6,11 +6,10 @@
    * @author  Ivan Shcherbak <dev@funivan.com>
    * @package Fiv\Form\Filter
    */
-  class Trim extends \Fiv\Form\Filter\Base {
+  class Trim implements FilterInterface{
 
     /**
-     * @param string $value
-     * @return string
+     * @inheritdoc
      */
     public function apply($value) {
       return trim($value);

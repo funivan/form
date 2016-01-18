@@ -2,6 +2,7 @@
 
   namespace Fiv\Form\Element;
 
+  use Fiv\Form\Filter\FilterInterface;
   use Fiv\Form\Form;
   use Fiv\Form\Validator;
 
@@ -39,7 +40,7 @@
     protected $validationResult = null;
 
     /**
-     * @var \Fiv\Form\Filter\Base[]
+     * @var \Fiv\Form\Filter\FilterInterface[]
      */
     protected $filters = [];
 
@@ -111,7 +112,7 @@
     /**
      * Attach filter to current element
      *
-     * @param \Fiv\Form\Filter\Base|\Fiv\Form\Filter\Base[] $filter
+     * @param \Fiv\Form\Filter\FilterInterface|\Fiv\Form\Filter\FilterInterface[] $filter
      * @throws \Exception
      * @return $this
      */
@@ -120,7 +121,7 @@
         $filter = array($filter);
       }
       foreach ($filter as $filterClass) {
-        if (!($filterClass instanceof \Fiv\Form\Filter\Base)) {
+        if (!($filterClass instanceof FilterInterface)) {
           throw new \Exception('Invalid filter class: ' . get_class($filterClass));
         }
         $this->filters[] = $filterClass;
@@ -148,7 +149,7 @@
 
 
     /**
-     * @return \Fiv\Form\Filter\Base[]
+     * @return \Fiv\Form\Filter\FilterInterface[]
      */
     public function getFilters() {
       return $this->filters;

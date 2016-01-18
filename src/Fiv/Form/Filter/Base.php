@@ -2,24 +2,10 @@
 
   namespace Fiv\Form\Filter;
 
-
   /**
-   * Filters used to prepare input value
-   *
-   * If user add some whitespaces you can apply trim filter
-   *
-   * @author  Ivan Shcherbak <dev@funivan.com>
-   * @package Fiv\Form
+   * @deprecated use FilterInterface instead
    */
-  abstract class Base {
-
-    /**
-     * Modify value and return it
-     *
-     * @param mixed $value
-     * @return string
-     */
-    public abstract function apply($value);
+  abstract class Base implements FilterInterface {
 
 
     /**

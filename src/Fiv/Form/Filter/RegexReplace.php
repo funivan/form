@@ -9,7 +9,7 @@
    *
    * @package Fiv\Form\Filter
    */
-  class RegexReplace extends \Fiv\Form\Filter\Base {
+  class RegexReplace implements FilterInterface{
 
     /**
      * @var null
@@ -35,8 +35,7 @@
 
 
     /**
-     * @param string $value
-     * @return mixed|string
+     * @inheritdoc
      */
     public function apply($value) {
       return preg_replace($this->from, $this->to, $value);

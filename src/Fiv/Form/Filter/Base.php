@@ -4,7 +4,6 @@
 
 
   /**
-   * Class Form
    * Filters used to prepare input value
    *
    * If user add some whitespaces you can apply trim filter
@@ -17,7 +16,7 @@
     /**
      * Modify value and return it
      *
-     * @param $value value
+     * @param mixed $value
      * @return string
      */
     public abstract function apply($value);

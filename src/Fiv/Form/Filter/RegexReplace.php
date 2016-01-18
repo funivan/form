@@ -11,8 +11,14 @@
    */
   class RegexReplace extends \Fiv\Form\Filter\Base {
 
+    /**
+     * @var null
+     */
     protected $from = null;
 
+    /**
+     * @var string
+     */
     protected $to = '';
 
 
@@ -29,7 +35,7 @@
 
 
     /**
-     * @param sting $value
+     * @param string $value
      * @return mixed|string
      */
     public function apply($value) {

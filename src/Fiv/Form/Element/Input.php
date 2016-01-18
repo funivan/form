@@ -7,8 +7,14 @@
    */
   class Input extends Base {
 
+    /**
+     * @var string
+     */
     protected $tag = 'input';
 
+    /**
+     * @var string
+     */
     protected $type = 'text';
 
 

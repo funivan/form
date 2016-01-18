@@ -12,9 +12,12 @@
   abstract class Base {
 
     /**
+     * @deprecated  use new keyword instead
+     * 
      * @return $this
      */
     public static function i() {
+      trigger_error('Deprecated', E_USER_DEPRECATED);
       return new static();
     }
 

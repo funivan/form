@@ -5,8 +5,14 @@
   use \Fiv\Form\Validator;
   use \Fiv\Form\Filter;
 
+  /**
+   * 
+   */
   class Unique extends \Fiv\Form\Validator\Base {
 
+    /**
+     * @var string
+     */
     protected $error = 'Value must be unique';
 
     /**
@@ -43,16 +49,16 @@
       # login
       $login = $this->input('login', 'Логін');
       $login->addValidator([
-        \Fiv\Form\Validator\Required::i()->setError('заповніть поле "логін"'),
-        \Fiv\Form\Validator\Len::i()->min(3, 'Мінімальна довжина %s символи'),
-        \Fiv\Form\Validator\Len::i()->max(10, 'Максимальна довжина %s символів'),
-        Unique::i()->setError('логін повинен бути унікальним')
+        (new \Fiv\Form\Validator\Required())->setError('заповніть поле "логін"'),
+        (new \Fiv\Form\Validator\Len())->min(3, 'Мінімальна довжина %s символи'),
+        (new \Fiv\Form\Validator\Len())->max(10, 'Максимальна довжина %s символів'),
+        (new Unique())->setError('логін повинен бути унікальним')
       ]);
       $login->addFilter(\Fiv\Form\Filter\Trim::i());
 
       # checkbox list
       $checkbox = $this->checkboxList('languages', 'Мови на яких ви спілкуєтесь:');
-      $checkbox->addValidator(\Fiv\Form\Validator\Required::i());
+      $checkbox->addValidator(new \Fiv\Form\Validator\Required);
       $checkbox->setOptions([
         'en' => 'En',
         'ru' => 'Ru',
@@ -76,7 +82,7 @@
       $this->textarea('info')->setText('Коротко про себе');
 
       $login = $this->input('tel')->setText('Телефон:');
-      $login->addValidator(\Fiv\Form\Validator\Len::i()->exact(3, 'Телефон з 3х цифр'));
+      $login->addValidator((new \Fiv\Form\Validator\Len())->exact(3, 'Телефон з 3х цифр'));
       $login->addFilter(\Fiv\Form\Filter\Trim::i());
       $login->addFilter(new \Fiv\Form\Filter\RegexReplace('! !', ''));
 

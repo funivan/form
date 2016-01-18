@@ -19,4 +19,5 @@
     public function render() {
       return '<textarea ' . $this->getAttributesAsString() . '>' . $this->getValue() . '</textarea>';
     }
+
   }

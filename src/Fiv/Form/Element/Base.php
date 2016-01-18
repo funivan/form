@@ -211,7 +211,7 @@
      * @return $this
      */
     public function required() {
-      return $this->addValidator(\Fiv\Form\Validator\Required::i());
+      return $this->addValidator(new \Fiv\Form\Validator\Required());
     }
 
 

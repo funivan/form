@@ -17,14 +17,14 @@
   class Form extends Element\Html {
 
     /**
-     * @var null
+     * @var null|string
      */
     protected $uid = null;
 
     /**
-     * @var mixed
+     * @var boolean|null
      */
-    protected $validResultCache = null;
+    protected $validationResult = null;
 
     /**
      * @var array|null
@@ -75,7 +75,7 @@
       }
 
 
-      $this->flushCacheFlags();
+      $this->cleanValidationFlag();
 
       foreach ($this->elements as $element) {
         $name = $element->getName();
@@ -83,7 +83,7 @@
         if ($element instanceof Checkbox) {
           $data[$name] = isset($data[$name]) ? 1 : 0;
         } elseif ($element instanceof CheckboxList) {
-          $data[$name] = isset($data[$name]) ? $data[$name] : array();
+          $data[$name] = isset($data[$name]) ? $data[$name] : [];
         }
 
         if (array_key_exists($name, $data)) {
@@ -110,10 +110,10 @@
      * @return string
      */
     public function getMethod() {
-      if (!empty($this->attributes['method']) and strtolower($this->attributes['method']) == 'post') {
-        return 'post';
-      } else {
+      if (!empty($this->attributes['method']) and strtolower($this->attributes['method']) == 'get') {
         return 'get';
+      } else {
+        return 'post';
       }
     }
 
@@ -121,8 +121,8 @@
     /**
      *
      */
-    protected function flushCacheFlags() {
-      $this->validResultCache = null;
+    protected function cleanValidationFlag() {
+      $this->validationResult = null;
     }
 
 
@@ -132,22 +132,22 @@
      * @return bool|null
      */
     public function isValid() {
-      if ($this->validResultCache !== null) {
-        return $this->validResultCache;
+      if ($this->validationResult !== null) {
+        return $this->validationResult;
       }
 
       if (!$this->isSubmitted()) {
         return false;
       }
 
-      $this->validResultCache = true;
+      $this->validationResult = true;
       foreach ($this->elements as $element) {
         if (!$element->validate()) {
-          $this->validResultCache = false;
+          $this->validationResult = false;
         }
       }
 
-      return $this->validResultCache;
+      return $this->validationResult;
     }
 
 
@@ -187,7 +187,7 @@
 
     /**
      * @param string $name
-     * @param        $text
+     * @param string|null $text
      * @return \Fiv\Form\Element\Input
      */
     public function input($name, $text = null) {
@@ -202,7 +202,7 @@
 
     /**
      * @param string $name
-     * @param        $text
+     * @param string|null $text
      * @return \Fiv\Form\Element\Input
      */
     public function password($name, $text = null) {
@@ -211,19 +211,6 @@
       $input->setText($text);
       $this->setElement($input);
       return $input;
-    }
-
-
-    /**
-     * Connect element to block and to form
-     *
-     * @param Element\Base $element
-     * @return $this
-     */
-    protected function setElement(\Fiv\Form\Element\Base $element) {
-      $this->flushCacheFlags();
-      $this->elements[$element->getName()] = $element;
-      return $this;
     }
 
 
@@ -336,6 +323,19 @@
 
 
     /**
+     * Connect element to block and to form
+     *
+     * @param Element\Base $element
+     * @return $this
+     */
+    protected function setElement(\Fiv\Form\Element\Base $element) {
+      $this->cleanValidationFlag();
+      $this->elements[$element->getName()] = $element;
+      return $this;
+    }
+
+
+    /**
      * Render full form
      *
      * @return string
@@ -370,9 +370,9 @@
     public function renderStart() {
       $hidden = new Element\Input();
       $hidden->setType('hidden');
-      $hidden->addAttributes(array(
+      $hidden->addAttributes([
         'name' => $this->getUid(),
-      ));
+      ]);
       $hidden->setValue(1);
 
       return '<form ' . $this->getAttributesAsString() . '>' . $hidden->render();
@@ -385,4 +385,5 @@
     public function renderEnd() {
       return '</form> ';
     }
+
   }

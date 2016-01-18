@@ -11,7 +11,7 @@
   class ValidatorsTest extends \FormTests\Main {
 
     public function testLen() {
-      $lengthValidator = \Fiv\Form\Validator\Len::i();
+      $lengthValidator = new \Fiv\Form\Validator\Len();
       $lengthValidator->min(5, 'Мінімальна довжина логіну - 5 символів.');
       $lengthValidator->max(25, 'Максимальна довжина логіну - 25 символів.');
 
@@ -45,7 +45,7 @@
     public function testRequire() {
       $form = new Form();
       $form->input('login')
-        ->addValidator(\Fiv\Form\Validator\Required::i());
+        ->addValidator(new \Fiv\Form\Validator\Required());
 
       $form->setData([
         $form->getUid() => 1,
@@ -64,7 +64,7 @@
 
 
     public function testRegexp() {
-      $regexpValidator = \Fiv\Form\Validator\Regexp::i();
+      $regexpValidator = new \Fiv\Form\Validator\Regexp();
       $regexpValidator->setRegexp('![^\@]+\@[^\@]+!');
 
       $form = new Form();
@@ -88,7 +88,7 @@
 
 
     public function testIn() {
-      $inValidator = \Fiv\Form\Validator\In::i();
+      $inValidator = new \Fiv\Form\Validator\In();
       $inValidator->setValues(['a', 'b', 'c']);
 
       $form = new Form();

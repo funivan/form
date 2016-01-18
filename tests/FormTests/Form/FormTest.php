@@ -56,13 +56,16 @@
      */
     public function testFormMethods() {
       $form = new Form();
-      $this->assertEquals('get', $form->getMethod());
+      $this->assertEquals('post', $form->getMethod());
 
       $form->setMethod('post');
       $this->assertEquals('post', $form->getMethod());
+      
+      $form->setMethod('get');
+      $this->assertEquals('get', $form->getMethod());
 
       $form->setMethod('t');
-      $this->assertEquals('get', $form->getMethod());
+      $this->assertEquals('post', $form->getMethod());
     }
 
 

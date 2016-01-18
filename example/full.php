@@ -54,7 +54,7 @@
         (new \Fiv\Form\Validator\Len())->max(10, 'Максимальна довжина %s символів'),
         (new Unique())->setError('логін повинен бути унікальним')
       ]);
-      $login->addFilter(\Fiv\Form\Filter\Trim::i());
+      $login->addFilter(new \Fiv\Form\Filter\Trim());
 
       # checkbox list
       $checkbox = $this->checkboxList('languages', 'Мови на яких ви спілкуєтесь:');
@@ -83,7 +83,7 @@
 
       $login = $this->input('tel')->setText('Телефон:');
       $login->addValidator((new \Fiv\Form\Validator\Len())->exact(3, 'Телефон з 3х цифр'));
-      $login->addFilter(\Fiv\Form\Filter\Trim::i());
+      $login->addFilter(new \Fiv\Form\Filter\Trim());
       $login->addFilter(new \Fiv\Form\Filter\RegexReplace('! !', ''));
 
       $this->submit('send', 'зареєструватись');

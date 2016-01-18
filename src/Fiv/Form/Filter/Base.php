@@ -26,6 +26,7 @@
      * @return static
      */
     public static function i() {
+      trigger_error('Deprecated', E_USER_DEPRECATED);
       return new static();
     }
 

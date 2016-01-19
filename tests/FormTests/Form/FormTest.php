@@ -18,7 +18,7 @@
 
       $form->setData([
         $form->getUid() => 1,
-        'email' => 'test@test'
+        'email' => 'test@test',
       ]);
 
       $this->assertTrue($form->isValid());
@@ -60,12 +60,25 @@
 
       $form->setMethod('post');
       $this->assertEquals('post', $form->getMethod());
-      
+
       $form->setMethod('get');
       $this->assertEquals('get', $form->getMethod());
 
-      $form->setMethod('t');
-      $this->assertEquals('post', $form->getMethod());
+      $form->setMethod('put');
+      $this->assertEquals('put', $form->getMethod());
+    }
+
+
+    /**
+     *
+     */
+    public function testFormRender() {
+      $form = new Form();
+      $this->assertContains('method="post"', $form->render());
+
+      $form = new Form();
+      $form->setMethod('get');
+      $this->assertContains('method="get"', $form->render());
     }
 
 
@@ -86,14 +99,14 @@
       $form = new Form();
       $form->setName('test-form');
       $form->setData([
-        'test-form' => 1
+        'test-form' => 1,
       ]);
       $this->assertEquals(true, $form->isSubmitted());
 
       $form = new Form();
       $form->submit('test-submit', 'test-value');
       $form->setData([
-        $form->getUid() => 1
+        $form->getUid() => 1,
       ]);
       $this->assertEquals(true, $form->isSubmitted());
     }

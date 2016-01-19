@@ -10,8 +10,6 @@
    * @method Form setAction($action);
    * @method string|null getAction();
    *
-   * @method Form setMethod($method)
-   *
    * @author Ivan Shcherbak <dev@funivan.com>
    */
   class Form extends Element\Html {
@@ -35,6 +33,15 @@
      * @var Element\Base[]
      */
     protected $elements = [];
+
+    /**
+     * Default form attributes
+     *
+     * @var array
+     */
+    protected $attributes = [
+      'method' => 'post',
+    ];
 
 
     /**
@@ -110,11 +117,22 @@
      * @return string
      */
     public function getMethod() {
-      if (!empty($this->attributes['method']) and strtolower($this->attributes['method']) == 'get') {
-        return 'get';
-      } else {
-        return 'post';
+      if (!empty($this->attributes['method'])) {
+        return strtolower($this->attributes['method']);
       }
+
+      return false;
+    }
+
+
+    /**
+     * @param string $method
+     * @return $this
+     */
+    public function setMethod($method) {
+      $this->attributes['method'] = $method;
+
+      return $this;
     }
 
 
@@ -374,6 +392,11 @@
         'name' => $this->getUid(),
       ]);
       $hidden->setValue(1);
+
+
+      # get default attribute
+      $method = $this->getMethod();
+      $this->setAttribute('method', $method);
 
       return '<form ' . $this->getAttributesAsString() . '>' . $hidden->render();
     }

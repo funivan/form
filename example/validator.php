@@ -29,8 +29,9 @@
       $validator = new \Fiv\Form\Validator\Len();
       $validator->min(4, 'Minimum login len %s');
 
-      $input->addValidators([$validator]);
-      $input->addValidators([new \Fiv\Form\Validator\Required()]);
+      $input->addValidator($validator);
+      $input->addValidator(new \Fiv\Form\Validator\Required());
+  
 
       $this->submit('register')->setValue('go');
     }

@@ -5,6 +5,9 @@
 ### Changed
 - Default method is post
 - \Fiv\Form\setElement changed to public
+- \Fiv\Form\Element\BaseElement::addValidator changed signature. Pass only 1 validator
+- \Fiv\Form\Element\BaseElement::addFilter changed signature. Pass only 1 filter
+
 
 ### Added
 - \Fiv\Form\addElement
@@ -16,7 +19,3 @@
 - \Fiv\Form\Validator\Base use \Fiv\Form\Validator\BaseValidator
 - \Fiv\Form\Filter\Base::i
 - \Fiv\Form\Filter use \Fiv\Form\Filter\FilterInterface instead
-
-- \Fiv\Form\Element\BaseElement::addValidator use \Fiv\Form\Element\BaseElement::addValidators(array)
-- \Fiv\Form\Element\BaseElement::addFilter use \Fiv\Form\Element\BaseElement::addFilters(array)
-

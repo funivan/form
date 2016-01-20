@@ -11,11 +11,11 @@
   $userName = $form->input('user_name')
     ->setAttribute('placeholder', 'Enter your name');
 
-  $userName->addValidators([new \Fiv\Form\Validator\Required()]);
+  $userName->addValidator(new \Fiv\Form\Validator\Required());
   $lengthValidator = new Fiv\Form\Validator\Len();
   $lengthValidator->min(4, '< 4');
   $lengthValidator->max(25, '> 25');
-  $userName->addValidators([$lengthValidator]);
+  $userName->addValidator($lengthValidator);
 
   $form->input('user_surname')
     ->setAttribute('placeholder', 'Enter your surname');

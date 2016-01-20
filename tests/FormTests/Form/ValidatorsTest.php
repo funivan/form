@@ -17,7 +17,7 @@
 
       $form = new Form();
       $form->input('login')
-        ->addValidators([$lengthValidator]);
+        ->addValidator($lengthValidator);
 
       $form->setData([
         $form->getUid() => 1,
@@ -45,7 +45,7 @@
     public function testRequire() {
       $form = new Form();
       $form->input('login')
-        ->addValidators([new \Fiv\Form\Validator\Required()]);
+        ->addValidator(new \Fiv\Form\Validator\Required());
 
       $form->setData([
         $form->getUid() => 1,
@@ -69,7 +69,7 @@
 
       $form = new Form();
       $form->input('email')
-        ->addValidators([$regexpValidator]);
+        ->addValidator($regexpValidator);
 
       $form->setData([
         $form->getUid() => 1,
@@ -93,7 +93,7 @@
 
       $form = new Form();
       $form->input('inputName')
-        ->addValidators([$inValidator]);
+        ->addValidator($inValidator);
 
       $form->setData([
         $form->getUid() => 1,
@@ -128,7 +128,7 @@
       }))->setErrorMessage('Email already exist!');
 
       $input = $form->input('email');
-      $input->addValidators([$callBackValidator]);
+      $input->addValidator($callBackValidator);
       
       $form->setData([
         $form->getUid() => 1,

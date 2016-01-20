@@ -59,9 +59,7 @@
       $input->setType('hidden');
       $value = ' 123"234 \' 44 ';
 
-      $input->addFilters([
-        new Trim(),
-      ]);
+      $input->addFilter(new Trim());
 
       $input->setValue($value);
 

@@ -7,6 +7,7 @@
   use Fiv\Form\Validator\ValidatorInterface;
 
   /**
+   * @method addFilters
    * @package Fiv\Form\Element
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
@@ -23,7 +24,7 @@
     protected $validators = [];
 
     /**
-     * @var \Fiv\Form\Filter\FilterInterface[]
+     * @var FilterInterface[]
      */
     protected $filters = [];
 
@@ -41,40 +42,11 @@
     /**
      * Attach validator to current element
      *
-     * @deprecated
-     * @see addValidators
-     *
-     * @param \Fiv\Form\Validator\ValidatorInterface[]|\Fiv\Form\Validator\ValidatorInterface $validator
-     * @throws \Exception
+     * @param ValidatorInterface $validator
      * @return $this
      */
-    public function addValidator($validator) {
-      trigger_error('Deprecates. See addValidators', E_USER_DEPRECATED);
-      if (!is_array($validator)) {
-        $validator = [$validator];
-      }
-      $this->addValidators($validator);
-      return $this;
-    }
-
-
-    /**
-     * Attach validators to current element
-     *
-     * @param ValidatorInterface[] $validators
-     * @return $this
-     * @throws \Exception
-     */
-    public function addValidators(array $validators) {
-      $this->validationResult = null;
-      foreach ($validators as $validator) {
-        if (!($validator instanceof Validator\ValidatorInterface)) {
-          throw new \Exception('Invalid validator class: ' . get_class($validator));
-        }
-        $this->validators[] = $validator;
-      }
-
-
+    public function addValidator(ValidatorInterface $validator) {
+      $this->validators[] = $validator;
       return $this;
     }
 
@@ -88,44 +60,19 @@
 
 
     /**
-     * @deprecated
-     * @see addFilters
      *
-     * @param \Fiv\Form\Filter\FilterInterface|\Fiv\Form\Filter\FilterInterface[] $filter
+     * @param FilterInterface $filter
      * @throws \Exception
      * @return $this
      */
-    public function addFilter($filter) {
-      trigger_error('Deprecates. See addFilters', E_USER_DEPRECATED);
-      if (!is_array($filter)) {
-        $filter = [$filter];
-      }
-      $this->addFilters($filter);
+    public function addFilter(FilterInterface $filter) {
+      $this->filters[] = $filter;
       return $this;
     }
 
 
     /**
-     * Attach filters to current element
-     *
-     * @param FilterInterface[] $filters
-     * @return $this
-     * @throws \Exception
-     */
-    public function addFilters(array $filters) {
-      foreach ($filters as $filter) {
-        if (!($filter instanceof FilterInterface)) {
-          throw new \Exception('Invalid filter class: ' . get_class($filter));
-        }
-        $this->filters[] = $filter;
-      }
-
-      return $this;
-    }
-
-
-    /**
-     * @return \Fiv\Form\Filter\FilterInterface[]
+     * @return FilterInterface[]
      */
     public function getFilters() {
       return $this->filters;
@@ -221,12 +168,12 @@
 
     /**
      * @deprecated
-     * @see addValidators
+     * @see addValidator
      * @return $this
      */
     public function required() {
       trigger_error('Deprecated', E_USER_DEPRECATED);
-      return $this->addValidators([new \Fiv\Form\Validator\Required()]);
+      return $this->addValidator(new \Fiv\Form\Validator\Required());
     }
 
 

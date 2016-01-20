@@ -2,11 +2,11 @@
 
   include __DIR__ . '/../vendor/autoload.php';
 
-  use \Fiv\Form\Validator;
-  use \Fiv\Form\Filter;
+  use Fiv\Form\Filter;
+  use Fiv\Form\Validator;
 
   /**
-   * 
+   *
    */
   class Unique extends \Fiv\Form\Validator\Base {
 
@@ -14,6 +14,7 @@
      * @var string
      */
     protected $error = 'Value must be unique';
+
 
     /**
      * @param string $error
@@ -23,6 +24,7 @@
       $this->error = $error;
       return $this;
     }
+
 
     /**
      * @param string $value
@@ -48,17 +50,18 @@
 
       # login
       $login = $this->input('login', 'Логін');
-      $login->addValidators([
-        (new \Fiv\Form\Validator\Required())->setError('заповніть поле "логін"'),
-        (new \Fiv\Form\Validator\Len())->min(3, 'Мінімальна довжина %s символи'),
-        (new \Fiv\Form\Validator\Len())->max(10, 'Максимальна довжина %s символів'),
-        (new Unique())->setError('логін повинен бути унікальним')
-      ]);
-      $login->addFilters([new \Fiv\Form\Filter\Trim()]);
+
+      $login->addValidator((new \Fiv\Form\Validator\Required())->setError('заповніть поле "логін"'));
+      $login->addValidator((new \Fiv\Form\Validator\Len())->min(3, 'Мінімальна довжина %s символи'));
+      $login->addValidator((new \Fiv\Form\Validator\Len())->max(10, 'Максимальна довжина %s символів'));
+      $login->addValidator((new Unique())->setError('логін повинен бути унікальним'));
+
+      $login->addFilter(new \Fiv\Form\Filter\Trim());
 
       # checkbox list
       $checkbox = $this->checkboxList('languages', 'Мови на яких ви спілкуєтесь:');
-      $checkbox->addValidators([new \Fiv\Form\Validator\Required]);
+      $checkbox->addValidator(new \Fiv\Form\Validator\Required);
+
       $checkbox->setOptions([
         'en' => 'En',
         'ru' => 'Ru',
@@ -83,8 +86,8 @@
 
       $login = $this->input('tel')->setText('Телефон:');
       $login->addValidator((new \Fiv\Form\Validator\Len())->exact(3, 'Телефон з 3х цифр'));
-      $login->addFilters([new \Fiv\Form\Filter\Trim()]);
-      $login->addFilters([new \Fiv\Form\Filter\RegexReplace('! !', '')]);
+      $login->addFilter(new \Fiv\Form\Filter\Trim());
+      $login->addFilter(new \Fiv\Form\Filter\RegexReplace('! !', ''));
 
       $this->submit('send', 'зареєструватись');
     }

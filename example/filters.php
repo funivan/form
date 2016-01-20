@@ -19,15 +19,15 @@
      */
     public $hiddenUid;
 
+
     public function init() {
       $this->setMethod('post');
 
       $input = $this->input('text');
-      $input->addFilters([
-          new \Fiv\Form\Filter\Trim(),
-          new \Fiv\Form\Filter\RegexReplace('!\d!', '?')
-        ]
-      );
+
+      $input->addFilter(new \Fiv\Form\Filter\Trim());
+      $input->addFilter(new \Fiv\Form\Filter\RegexReplace('!\d!', '?'));
+
       $input->setValue('test aa-009   ');
 
       $this->submit = $this->submit('send', 'go');

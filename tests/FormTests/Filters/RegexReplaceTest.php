@@ -27,10 +27,7 @@
       $form = new Form();
       $form->setName('test_form');
 
-      $form->input('text')->addFilters([
-        new RegexReplace('!\s{2,}!', ' '),
-        new Trim(),
-      ]);
+      $form->input('text')->addFilter(new RegexReplace('!\s{2,}!', ' '))->addFilter(new Trim());
 
       $form->setData([
         'test_form' => 1,

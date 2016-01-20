@@ -25,7 +25,7 @@
 
       # add text field
       $text = $this->input('text');
-      $text->addFilters([new \Fiv\Form\Filter\Trim()]);
+      $text->addFilter(new \Fiv\Form\Filter\Trim());
       $text->setValue('Trim value');
 
       $this->text = $text;

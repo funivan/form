@@ -9,7 +9,6 @@
       $this->setMethod('post');
 
       $checkbox = $this->checkboxList('languages', 'Select your languages');
-//      $checkbox->addValidator(\Fiv\Form\Validator\Required::i());
       $checkbox->setOptions([
         'en' => 'En',
         'ru' => 'Ru',

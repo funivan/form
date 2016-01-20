@@ -35,7 +35,7 @@
 
     public function testFilter() {
       $element = $this->getElement();
-      $element->addFilter(new Trim());
+      $element->addFilters([new Trim()]);
 
       $this->assertEmpty($element->getValue());
 

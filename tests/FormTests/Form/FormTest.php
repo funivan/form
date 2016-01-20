@@ -193,11 +193,11 @@
 
       $checkedItemsNum = 0;
 
-      $element->addValidator(new CallBackValidator(function ($value) use (&$checkedItemsNum) {
+      $element->addValidators([new CallBackValidator(function ($value) use (&$checkedItemsNum) {
         $checkedItemsNum++;
 
         return !empty($value);
-      }));
+      })]);
 
       $form->setElement($element);
       # emulate form submit

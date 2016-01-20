@@ -48,17 +48,17 @@
 
       # login
       $login = $this->input('login', 'Логін');
-      $login->addValidator([
+      $login->addValidators([
         (new \Fiv\Form\Validator\Required())->setError('заповніть поле "логін"'),
         (new \Fiv\Form\Validator\Len())->min(3, 'Мінімальна довжина %s символи'),
         (new \Fiv\Form\Validator\Len())->max(10, 'Максимальна довжина %s символів'),
         (new Unique())->setError('логін повинен бути унікальним')
       ]);
-      $login->addFilter(new \Fiv\Form\Filter\Trim());
+      $login->addFilters([new \Fiv\Form\Filter\Trim()]);
 
       # checkbox list
       $checkbox = $this->checkboxList('languages', 'Мови на яких ви спілкуєтесь:');
-      $checkbox->addValidator(new \Fiv\Form\Validator\Required);
+      $checkbox->addValidators([new \Fiv\Form\Validator\Required]);
       $checkbox->setOptions([
         'en' => 'En',
         'ru' => 'Ru',
@@ -83,8 +83,8 @@
 
       $login = $this->input('tel')->setText('Телефон:');
       $login->addValidator((new \Fiv\Form\Validator\Len())->exact(3, 'Телефон з 3х цифр'));
-      $login->addFilter(new \Fiv\Form\Filter\Trim());
-      $login->addFilter(new \Fiv\Form\Filter\RegexReplace('! !', ''));
+      $login->addFilters([new \Fiv\Form\Filter\Trim()]);
+      $login->addFilters([new \Fiv\Form\Filter\RegexReplace('! !', '')]);
 
       $this->submit('send', 'зареєструватись');
     }

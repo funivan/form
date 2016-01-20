@@ -23,7 +23,7 @@
       $this->setMethod('post');
 
       $input = $this->input('text');
-      $input->addFilter([
+      $input->addFilters([
           new \Fiv\Form\Filter\Trim(),
           new \Fiv\Form\Filter\RegexReplace('!\d!', '?')
         ]

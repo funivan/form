@@ -9,12 +9,6 @@
   /**
    * @package Fiv\Form\Element
    * @author Ivan Shcherbak <dev@funivan.com> 2016
-   * @method $this setName($name);
-   * @method string getName();
-   * @method $this setClass($class);
-   * @method string getClass();
-   * @method $this setId($id);
-   * @method string getId();
    */
   class BaseElement extends \Fiv\Form\Element\Html {
 
@@ -55,6 +49,7 @@
      * @return $this
      */
     public function addValidator($validator) {
+      trigger_error('Deprecates. See addValidators', E_USER_DEPRECATED);
       if (!is_array($validator)) {
         $validator = [$validator];
       }
@@ -85,6 +80,14 @@
 
 
     /**
+     * @return \Fiv\Form\Validator\Base[]
+     */
+    public function getValidators() {
+      return $this->validators;
+    }
+
+
+    /**
      * @deprecated
      * @see addFilters
      *
@@ -93,6 +96,7 @@
      * @return $this
      */
     public function addFilter($filter) {
+      trigger_error('Deprecates. See addFilters', E_USER_DEPRECATED);
       if (!is_array($filter)) {
         $filter = [$filter];
       }
@@ -121,20 +125,10 @@
 
 
     /**
-     * @param string $text
-     * @return $this
+     * @return \Fiv\Form\Filter\FilterInterface[]
      */
-    public function setText($text) {
-      $this->text = $text;
-      return $this;
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getText() {
-      return $this->text;
+    public function getFilters() {
+      return $this->filters;
     }
 
 
@@ -147,6 +141,14 @@
     public function setValue($value) {
       $this->setAttribute('value', $value);
       return $this;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getValue() {
+      return $this->value;
     }
 
 
@@ -168,14 +170,6 @@
       }
 
       return parent::setAttribute($name, $value);
-    }
-
-
-    /**
-     * @return \Fiv\Form\Filter\FilterInterface[]
-     */
-    public function getFilters() {
-      return $this->filters;
     }
 
 
@@ -203,18 +197,15 @@
 
 
     /**
-     * @return string
+     * @return array
      */
-    public function getValue() {
-      return $this->value;
-    }
+    public function getValidatorsErrors() {
+      $errors = [];
+      foreach ($this->validators as $validator) {
+        $errors = array_merge($errors, $validator->getErrors());
+      }
 
-
-    /**
-     * @return \Fiv\Form\Validator\Base[]
-     */
-    public function getValidators() {
-      return $this->validators;
+      return $errors;
     }
 
 
@@ -229,25 +220,85 @@
 
 
     /**
-     * @return array
-     */
-    public function getValidatorsErrors() {
-      $errors = [];
-      foreach ($this->validators as $validator) {
-        $errors = array_merge($errors, $validator->getErrors());
-      }
-
-      return $errors;
-    }
-
-
-    /**
-     * @deprecated use addValidator(new \Fiv\Form\Validator\Required()) instead
-     * @see addValidator
+     * @deprecated
+     * @see addValidators
      * @return $this
      */
     public function required() {
       trigger_error('Deprecated', E_USER_DEPRECATED);
-      return $this->addValidator(new \Fiv\Form\Validator\Required());
+      return $this->addValidators([new \Fiv\Form\Validator\Required()]);
     }
+
+
+    /**
+     * @param string $text
+     * @return $this
+     */
+    public function setText($text) {
+      $this->text = $text;
+      return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getText() {
+      return $this->text;
+    }
+
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name) {
+      $this->setAttribute('name', $name);
+      return $this;
+    }
+
+
+    /**
+     * @return null|string
+     */
+    public function getName() {
+      return $this->getAttribute('name');
+    }
+
+
+    /**
+     * @param string $class
+     * @return $this
+     */
+    public function setClass($class) {
+      $this->setAttribute('class', $class);
+      return $this;
+    }
+
+
+    /**
+     * @return null|string
+     */
+    public function getClass() {
+      return $this->getAttribute('class');
+    }
+
+
+    /**
+     * @param string $id
+     * @return $this
+     */
+    public function setId($id) {
+      $this->setAttribute('id', $id);
+      return $this;
+    }
+
+
+    /**
+     * @return null|string
+     */
+    public function getId() {
+      return $this->getAttribute('id');
+    }
+
   }

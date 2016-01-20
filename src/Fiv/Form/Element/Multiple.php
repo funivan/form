@@ -7,7 +7,7 @@
    * @author  Ivan Shcherbak <dev@funivan.com>
    * @package Fiv\Form\Html
    */
-  class Multiple extends \Fiv\Form\Element\Base {
+  class Multiple extends \Fiv\Form\Element\BaseElement {
 
     /**
      * @var array

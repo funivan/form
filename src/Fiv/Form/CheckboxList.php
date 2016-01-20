@@ -17,7 +17,7 @@
   class CheckboxList extends \Fiv\Form\Element\Multiple {
 
     /**
-     * @param mixed $data
+     * @param array|string $data
      * @return $this
      */
     public function setValue($data) {

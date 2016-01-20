@@ -71,7 +71,7 @@
      * @param array $attributes
      * @return string
      */
-    public static function renderAttributes($attributes = array()) {
+    public static function renderAttributes(array $attributes = []) {
       $attributesInline = '';
       foreach ($attributes as $name => $value) {
         $attributesInline .= $name . '="' . addslashes($value) . '" ';
@@ -82,12 +82,12 @@
 
     /**
      *
-     * @param      $tag
-     * @param      $attributes
+     * @param string $tag
+     * @param array $attributes
      * @param bool $content
      * @return string
      */
-    public static function tag($tag, $attributes, $content = null) {
+    public static function tag($tag, array $attributes, $content = null) {
       $html = '<' . $tag . ' ' . static::renderAttributes($attributes);
 
       if ($content !== null) {
@@ -136,7 +136,7 @@
 
 
     /**
-     * @param $name
+     * @param string $name
      * @return $this
      */
     public function removeAttribute($name) {

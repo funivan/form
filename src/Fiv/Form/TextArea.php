@@ -2,7 +2,7 @@
 
   namespace Fiv\Form;
 
-  use Fiv\Form\Element\Base;
+  use Fiv\Form\Element\BaseElement;
 
   /**
    * Class TextArea
@@ -11,7 +11,7 @@
    * @author  Ivan Shcherbak <dev@funivan.com>
    * @package Fiv\Form
    */
-  class TextArea extends Base {
+  class TextArea extends BaseElement {
 
     /**
      * @return string

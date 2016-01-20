@@ -30,7 +30,7 @@
     protected $data = null;
 
     /**
-     * @var Element\Base[]
+     * @var Element\BaseElement[]
      */
     protected $elements = [];
 
@@ -138,7 +138,7 @@
     /**
      * Check if form is submitted and all elements are valid
      *
-     * @return bool|null
+     * @return boolean
      */
     public function isValid() {
       if ($this->validationResult !== null) {
@@ -187,7 +187,7 @@
 
 
     /**
-     * @return \Fiv\Form\Element\Base[]
+     * @return \Fiv\Form\Element\BaseElement[]
      */
     public function getElements() {
       return $this->elements;
@@ -223,7 +223,7 @@
 
 
     /**
-     * @param      $name
+     * @param string $name
      * @param null $text
      * @return Select
      */
@@ -251,7 +251,7 @@
 
 
     /**
-     * @param      $name
+     * @param string $name
      * @param null $text
      * @return TextArea
      */
@@ -268,7 +268,7 @@
      * ```
      * $form->hidden('key', md5($this-user->id . HASH_A);
      * ```
-     * @param      $name
+     * @param string $name
      * @param null $value
      * @return \Fiv\Form\Element\Input
      */
@@ -286,7 +286,7 @@
      * ```
      * $form->submit('register', 'зареєструватись');
      * ```
-     * @param      $name
+     * @param string $name
      * @param null $value
      * @return Submit
      */
@@ -333,10 +333,10 @@
     /**
      * Connect element to block and to form
      *
-     * @param Element\Base $element
+     * @param Element\BaseElement $element
      * @return $this
      */
-    protected function setElement(\Fiv\Form\Element\Base $element) {
+    protected function setElement(\Fiv\Form\Element\BaseElement $element) {
       $this->cleanValidationFlag();
       $this->elements[$element->getName()] = $element;
       return $this;

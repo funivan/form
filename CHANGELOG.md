@@ -6,6 +6,8 @@
 - Default method is post
 
 ### Deprecated
+- \Fiv\Form\Element\Base use \Fiv\Form\Element\BaseElement
+- \Fiv\Form\Element\BaseElement::required
 - \Fiv\Form\Validator\Base::i
 - \Fiv\Form\Validator\Base use \Fiv\Form\Validator\BaseValidator
 - \Fiv\Form\Filter\Base::i

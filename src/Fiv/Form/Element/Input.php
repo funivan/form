@@ -5,7 +5,7 @@
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 7/11/14
    */
-  class Input extends Base {
+  class Input extends BaseElement {
 
     /**
      * @var string
@@ -21,18 +21,20 @@
 
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getType() {
-      if (empty($this->attributes['type'])) {
-        $this->attributes['type'] = $this->type;
+      if (!empty($this->attributes['type'])) {
+        return $this->attributes['type'];
       }
 
-      return $this->attributes['type'];
+      return null;
     }
 
 
     /**
+     * Alias of $this->setAttribute('type' 'text');
+     * 
      * @param string $type
      * @return $this
      */

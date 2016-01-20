@@ -9,7 +9,7 @@
    *
    * @package Fiv\Form\Filter
    */
-  class RegexReplace implements FilterInterface{
+  class RegexReplace implements FilterInterface {
 
     /**
      * @var null
@@ -23,7 +23,7 @@
 
 
     /**
-     * @param        $from
+     * @param string $from
      * @param string $to
      * @return \Fiv\Form\Filter\RegexReplace
      */

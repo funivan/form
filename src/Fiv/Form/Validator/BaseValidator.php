@@ -33,7 +33,7 @@
 
     /**
      * @param string $message
-     * @return Base
+     * @return $this
      */
     public function addError($message) {
       $this->errors[] = $message;
@@ -58,7 +58,7 @@
 
 
     /**
-     * @return Base
+     * @return $this
      */
     public function flushErrors() {
       $this->errors = [];

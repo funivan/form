@@ -132,7 +132,6 @@
           $value = $filter->apply($value);
         }
 
-        $value = htmlentities($value, ENT_QUOTES);
         $this->value = $value;
       }
 
@@ -184,6 +183,16 @@
      */
     public function getValidators() {
       return $this->validators;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function render() {
+      $value = $this->getValue();
+      $this->attributes['value'] = htmlentities($value, ENT_QUOTES);
+      return parent::render();
     }
 
 

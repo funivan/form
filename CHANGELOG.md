@@ -4,6 +4,10 @@
 
 ### Changed
 - Default method is post
+- \Fiv\Form\setElement changed to public
+
+### Added
+- \Fiv\Form\addElement
 
 ### Deprecated
 - \Fiv\Form\Element\Base use \Fiv\Form\Element\BaseElement

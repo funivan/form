@@ -112,7 +112,7 @@
         return strtolower($this->attributes['method']);
       }
 
-      return false;
+      return null;
     }
 
 
@@ -187,7 +187,7 @@
 
 
     /**
-     * @return \Fiv\Form\Element\BaseElement[]
+     * @return Element\BaseElement[]
      */
     public function getElements() {
       return $this->elements;
@@ -203,7 +203,7 @@
       $input = new Element\Input();
       $input->setName($name);
       $input->setText($text);
-      $this->setElement($input);
+      $this->addElement($input);
       return $input;
     }
 
@@ -217,7 +217,7 @@
       $input = new Element\Password();
       $input->setName($name);
       $input->setText($text);
-      $this->setElement($input);
+      $this->addElement($input);
       return $input;
     }
 
@@ -231,7 +231,7 @@
       $select = new Select();
       $select->setName($name);
       $select->setText($text);
-      $this->setElement($select);
+      $this->addElement($select);
       return $select;
     }
 
@@ -245,7 +245,7 @@
       $radio = new RadioList();
       $radio->setName($name);
       $radio->setText($text);
-      $this->setElement($radio);
+      $this->addElement($radio);
       return $radio;
     }
 
@@ -259,7 +259,7 @@
       $input = new TextArea();
       $input->setName($name);
       $input->setText($text);
-      $this->setElement($input);
+      $this->addElement($input);
       return $input;
     }
 
@@ -277,7 +277,7 @@
       $hidden->setType('hidden');
       $hidden->setName($name);
       $hidden->setValue($value);
-      $this->setElement($hidden);
+      $this->addElement($hidden);
       return $hidden;
     }
 
@@ -294,7 +294,7 @@
       $input = new Submit();
       $input->setName($name);
       $input->setValue($value);
-      $this->setElement($input);
+      $this->addElement($input);
       return $input;
     }
 
@@ -311,7 +311,7 @@
       $checkbox = new Checkbox();
       $checkbox->setName($name);
       $checkbox->setLabel($label);
-      $this->setElement($checkbox);
+      $this->addElement($checkbox);
       return $checkbox;
     }
 
@@ -325,18 +325,34 @@
       $checkbox = new CheckboxList();
       $checkbox->setName($name);
       $checkbox->setText($text);
-      $this->setElement($checkbox);
+      $this->addElement($checkbox);
       return $checkbox;
     }
 
 
     /**
-     * Connect element to block and to form
+     * Attach element to this form. Overwrite element with same name
      *
      * @param Element\BaseElement $element
      * @return $this
      */
-    protected function setElement(\Fiv\Form\Element\BaseElement $element) {
+    public function setElement(Element\BaseElement $element) {
+      $this->cleanValidationFlag();
+      $this->elements[$element->getName()] = $element;
+      return $this;
+    }
+
+
+    /**
+     * @param Element\BaseElement $element
+     * @return $this
+     * @throws \Exception
+     */
+    public function addElement(Element\BaseElement $element) {
+      if (isset($this->elements[$element->getName()])) {
+        throw new \Exception('Element with name ' . $element->getName() . ' is already added. Use setElement to overwrite it or change name');
+      }
+
       $this->cleanValidationFlag();
       $this->elements[$element->getName()] = $element;
       return $this;

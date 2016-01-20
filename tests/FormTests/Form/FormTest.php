@@ -2,7 +2,9 @@
 
   namespace FormTests\Form;
 
+  use Fiv\Form\Element\Input;
   use Fiv\Form\Form;
+  use Fiv\Form\Validator\CallBackValidator;
 
   /**
    * @package FormTests\Form
@@ -58,7 +60,7 @@
       $form = new Form();
       $this->assertEquals('post', $form->getMethod());
 
-      $form->setMethod('post');
+      $form->setMethod('POST');
       $this->assertEquals('post', $form->getMethod());
 
       $form->setMethod('get');
@@ -66,6 +68,13 @@
 
       $form->setMethod('put');
       $this->assertEquals('put', $form->getMethod());
+
+      $form->setMethod(false);
+      $this->assertEquals(null, $form->getMethod());
+
+      $form->setAttribute('method', 'test');
+      $this->assertEquals('test', $form->getMethod());
+
     }
 
 
@@ -138,5 +147,73 @@
 
       $this->assertNotEmpty($exception, 'Should throw exception if data not array or Iterator!');
     }
+
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testAddElementsWithSameNames() {
+      $form = new Form();
+      $form->addElement((new Input())->setName('test'));
+
+
+      $this->assertCount(1, $form->getElements());
+
+      $form->addElement((new Input())->setName('test'));
+    }
+
+
+    /**
+     *
+     */
+    public function testSetElementsWithSameNames() {
+      $form = new Form();
+      $form->setElement((new Input())->setName('test')->setValue('first'));
+
+
+      $elements = $form->getElements();
+      $this->assertCount(1, $elements);
+      $this->assertEquals('first', $elements['test']->getValue());
+
+      $form->setElement((new Input())->setName('test')->setValue('second'));
+
+      $elements = $form->getElements();
+      $this->assertCount(1, $elements);
+      $this->assertEquals('second', $elements['test']->getValue());
+
+    }
+
+
+    public function testFormValidationCache() {
+      $form = new Form();
+      $form->setName('user_registration');
+
+
+      $element = (new Input())->setName('test')->setValue('first');
+
+      $checkedItemsNum = 0;
+
+      $element->addValidator(new CallBackValidator(function ($value) use (&$checkedItemsNum) {
+        $checkedItemsNum++;
+
+        return !empty($value);
+      }));
+
+      $form->setElement($element);
+      # emulate form submit
+      $form->setData([
+        $form->getUid() => '1',
+        'test' => '123',
+      ]);
+
+      $this->assertTrue($form->isValid());
+      $this->assertEquals(1, $checkedItemsNum);
+      $this->assertTrue($form->isValid());
+      $this->assertTrue($form->isValid());
+
+      $this->assertEquals(1, $checkedItemsNum);
+
+    }
+
 
   }

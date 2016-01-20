@@ -4,6 +4,7 @@
 
   use Fiv\Form\Filter\FilterInterface;
   use Fiv\Form\Validator;
+  use Fiv\Form\Validator\ValidatorInterface;
 
   /**
    * @package Fiv\Form\Element
@@ -46,6 +47,9 @@
     /**
      * Attach validator to current element
      *
+     * @deprecated
+     * @see addValidators
+     *
      * @param \Fiv\Form\Validator\ValidatorInterface[]|\Fiv\Form\Validator\ValidatorInterface $validator
      * @throws \Exception
      * @return $this
@@ -54,12 +58,62 @@
       if (!is_array($validator)) {
         $validator = [$validator];
       }
+      $this->addValidators($validator);
+      return $this;
+    }
+
+
+    /**
+     * Attach validators to current element
+     *
+     * @param ValidatorInterface[] $validators
+     * @return $this
+     * @throws \Exception
+     */
+    public function addValidators(array $validators) {
       $this->validationResult = null;
-      foreach ($validator as $validatorClass) {
-        if (!($validatorClass instanceof Validator\ValidatorInterface)) {
-          throw new \Exception('Invalid validator class: ' . get_class($validatorClass));
+      foreach ($validators as $validator) {
+        if (!($validator instanceof Validator\ValidatorInterface)) {
+          throw new \Exception('Invalid validator class: ' . get_class($validator));
         }
-        $this->validators[] = $validatorClass;
+        $this->validators[] = $validator;
+      }
+
+
+      return $this;
+    }
+
+
+    /**
+     * @deprecated
+     * @see addFilters
+     *
+     * @param \Fiv\Form\Filter\FilterInterface|\Fiv\Form\Filter\FilterInterface[] $filter
+     * @throws \Exception
+     * @return $this
+     */
+    public function addFilter($filter) {
+      if (!is_array($filter)) {
+        $filter = [$filter];
+      }
+      $this->addFilters($filter);
+      return $this;
+    }
+
+
+    /**
+     * Attach filters to current element
+     *
+     * @param FilterInterface[] $filters
+     * @return $this
+     * @throws \Exception
+     */
+    public function addFilters(array $filters) {
+      foreach ($filters as $filter) {
+        if (!($filter instanceof FilterInterface)) {
+          throw new \Exception('Invalid filter class: ' . get_class($filter));
+        }
+        $this->filters[] = $filter;
       }
 
       return $this;
@@ -81,28 +135,6 @@
      */
     public function getText() {
       return $this->text;
-    }
-
-
-    /**
-     * Attach filter to current element
-     *
-     * @param \Fiv\Form\Filter\FilterInterface|\Fiv\Form\Filter\FilterInterface[] $filter
-     * @throws \Exception
-     * @return $this
-     */
-    public function addFilter($filter) {
-      if (!is_array($filter)) {
-        $filter = [$filter];
-      }
-      foreach ($filter as $filterClass) {
-        if (!($filterClass instanceof FilterInterface)) {
-          throw new \Exception('Invalid filter class: ' . get_class($filterClass));
-        }
-        $this->filters[] = $filterClass;
-      }
-
-      return $this;
     }
 
 

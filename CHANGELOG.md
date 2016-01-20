@@ -16,3 +16,7 @@
 - \Fiv\Form\Validator\Base use \Fiv\Form\Validator\BaseValidator
 - \Fiv\Form\Filter\Base::i
 - \Fiv\Form\Filter use \Fiv\Form\Filter\FilterInterface instead
+
+- \Fiv\Form\Element\BaseElement::addValidator use \Fiv\Form\Element\BaseElement::addValidators(array)
+- \Fiv\Form\Element\BaseElement::addFilter use \Fiv\Form\Element\BaseElement::addFilters(array)
+

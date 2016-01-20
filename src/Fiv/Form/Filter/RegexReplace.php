@@ -12,9 +12,9 @@
   class RegexReplace implements FilterInterface {
 
     /**
-     * @var null
+     * @var string
      */
-    protected $from = null;
+    protected $from;
 
     /**
      * @var string

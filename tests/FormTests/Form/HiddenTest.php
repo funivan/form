@@ -57,7 +57,7 @@
       $input = new Input();
       $input->setName('test');
       $input->setType('hidden');
-      $value = ' 123"234 ';
+      $value = ' 123"234 \' 44 ';
 
       $input->addFilter([
         new Trim(),
@@ -65,7 +65,7 @@
 
       $input->setValue($value);
 
-      $this->assertContains('<input type="hidden" name="test" value="123&quot;234"', $input->render());
+      $this->assertContains('<input type="hidden" name="test" value="123&quot;234 &#039; 44"', $input->render());
 
     }
 

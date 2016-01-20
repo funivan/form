@@ -24,11 +24,7 @@
      * @return null|string
      */
     public function getType() {
-      if (!empty($this->attributes['type'])) {
-        return $this->attributes['type'];
-      }
-
-      return null;
+      return $this->getAttribute('type');
     }
 
 
@@ -39,7 +35,7 @@
      * @return $this
      */
     public function setType($type) {
-      $this->attributes['type'] = $type;
+      $this->setAttribute('type', $type);
       return $this;
     }
 
@@ -53,13 +49,5 @@
       return $this;
     }
 
-    /**
-     *
-     * @return string
-     */
-    public function render() {
-      $this->setAttribute('type', $this->getType());
-      return parent::render();
-    }
 
   }

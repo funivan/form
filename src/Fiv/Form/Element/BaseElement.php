@@ -132,7 +132,7 @@
           $value = $filter->apply($value);
         }
 
-        $value = htmlentities($value, ENT_COMPAT);
+        $value = htmlentities($value, ENT_QUOTES);
         $this->value = $value;
       }
 

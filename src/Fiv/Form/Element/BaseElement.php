@@ -107,19 +107,36 @@
 
 
     /**
+     * Alias of setAttribute('value', $value)
+     *
      * @param $value
      * @return $this
      */
     public function setValue($value) {
-      $this->validationResult = null;
+      $this->setAttribute('value', $value);
+      return $this;
+    }
 
-      $filters = $this->getFilters();
-      foreach ($filters as $filter) {
-        $value = $filter->apply($value);
+
+    /**
+     * @inheritdoc
+     */
+    public function setAttribute($name, $value) {
+      if ($name === 'value') {
+
+        $this->validationResult = null;
+
+        # apply filters to the value
+        $filters = $this->getFilters();
+        foreach ($filters as $filter) {
+          $value = $filter->apply($value);
+        }
+
+        $value = htmlentities($value, ENT_COMPAT);
+        $this->value = $value;
       }
 
-      $this->value = $value;
-      return $this;
+      return parent::setAttribute($name, $value);
     }
 
 
@@ -183,7 +200,7 @@
     }
 
 
-    /**                                              
+    /**
      * @deprecated use addValidator(new \Fiv\Form\Validator\Required()) instead
      * @see addValidator
      * @return $this

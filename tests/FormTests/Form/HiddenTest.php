@@ -2,6 +2,8 @@
 
   namespace FormTests\Form;
 
+  use Fiv\Form\Element\Input;
+  use Fiv\Form\Filter\Trim;
   use Fiv\Form\Form;
 
   /**
@@ -17,11 +19,13 @@
       return $form->hidden("test");
     }
 
+
     public function testRender() {
       $element = $this->getElement();
 
-      $this->assertContains("hidden", (string)$element);
+      $this->assertContains("hidden", (string) $element);
     }
+
 
     public function testAttributes() {
 
@@ -46,4 +50,23 @@
       }
       $this->assertInstanceOf('Exception', $error);
     }
+
+
+    public function testValueWithSlashes() {
+
+      $input = new Input();
+      $input->setName('test');
+      $input->setType('hidden');
+      $value = ' 123"234 ';
+
+      $input->addFilter([
+        new Trim(),
+      ]);
+
+      $input->setValue($value);
+
+      $this->assertContains('<input type="hidden" name="test" value="123&quot;234"', $input->render());
+
+    }
+
   }

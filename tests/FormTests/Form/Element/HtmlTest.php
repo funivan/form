@@ -27,16 +27,17 @@
       $this->assertEquals("custom_class other_class", $htmlElement->getAttribute('class'));
     }
 
+
     public function testTag() {
 
-      $imgHtml = \Fiv\Form\Element\Html::tag('img', array(
+      $imgHtml = \Fiv\Form\Element\Html::tag('img', [
         'src' => "/images/logo.png",
-        'title' => "logo"
-      ));
+        'title' => "logo",
+      ]);
 
-      $this->assertTrue((boolean)preg_match("!/>!", $imgHtml));
-      $this->assertTrue((boolean)preg_match("!title=!", $imgHtml));
-      $this->assertTrue((boolean)preg_match("!src=!", $imgHtml));
+      $this->assertTrue((boolean) preg_match("!/>!", $imgHtml));
+      $this->assertTrue((boolean) preg_match("!title=!", $imgHtml));
+      $this->assertTrue((boolean) preg_match("!src=!", $imgHtml));
     }
 
   }

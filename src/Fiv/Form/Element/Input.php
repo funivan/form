@@ -34,7 +34,7 @@
 
     /**
      * Alias of $this->setAttribute('type' 'text');
-     * 
+     *
      * @param string $type
      * @return $this
      */
@@ -49,11 +49,9 @@
      * @return $this
      */
     public function setValue($value) {
-      parent::setValue($value);
-      $this->setAttribute('value', $this->value);
+      $this->setAttribute('value', $value);
       return $this;
     }
-
 
     /**
      *

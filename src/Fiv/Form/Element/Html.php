@@ -40,12 +40,13 @@
      * @throws \Exception
      */
     public function __call($name, $arguments) {
+
       if (strpos($name, 'set') === 0 and isset($arguments[0])) {
-        $this->attributes[strtolower(substr($name, 3))] = $arguments[0];
+        $name = strtolower(substr($name, 3));
+        $this->setAttribute($name, $arguments[0]);
         return $this;
       } elseif (strpos($name, 'get') === 0 and !isset($arguments[0])) {
-        $key = strtolower(substr($name, 3));
-        return isset($this->attributes[$key]) ? $this->attributes[$key] : null;
+        return $this->getAttribute(strtolower(substr($name, 3)));
       } else {
         throw new \Exception('Invalid method: ' . $name);
       }
@@ -57,11 +58,13 @@
      * @return $this
      */
     public function addClass($className) {
-      if (empty($this->attributes['class'])) {
-        $this->attributes['class'] = $className;
-      } else {
-        $this->attributes['class'] = $this->attributes['class'] . ' ' . $className;
+      $currentClass = $this->getAttribute('class');
+
+      if (!empty($currentClass)) {
+        $className = $currentClass . ' ' . $className;
       }
+
+      $this->setAttribute('class', $className);
 
       return $this;
     }
@@ -105,7 +108,9 @@
      * @return $this
      */
     public function setAttributes(array $attributes) {
-      $this->attributes = $attributes;
+      foreach ($attributes as $name => $value) {
+        $this->setAttribute($name, $value);
+      }
       return $this;
     }
 
@@ -117,9 +122,7 @@
      * @return $this
      */
     public function addAttributes(array $attributes) {
-      foreach ($attributes as $name => $value) {
-        $this->attributes[$name] = $value;
-      }
+      $this->setAttributes($attributes);
       return $this;
     }
 

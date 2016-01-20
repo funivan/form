@@ -5,7 +5,7 @@
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 7/11/14
    */
-  class Regexp extends Base {
+  class Regexp extends BaseValidator {
 
     /**
      * @var string

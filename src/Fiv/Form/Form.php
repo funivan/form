@@ -105,15 +105,6 @@
 
 
     /**
-     * @deprecated
-     * @todo remove method
-     */
-    public function prepare() {
-      return;
-    }
-
-
-    /**
      * @return string
      */
     public function getMethod() {
@@ -212,7 +203,6 @@
       $input = new Element\Input();
       $input->setName($name);
       $input->setText($text);
-      $input->setType('text');
       $this->setElement($input);
       return $input;
     }

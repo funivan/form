@@ -14,20 +14,11 @@
   class Submit extends \Fiv\Form\Element\Input {
 
     /**
-     * Check if submit button is clicked
-     *
-     * @param Submit $submitButton
-     * @throws \Exception
-     * @return bool
+     * @var array
      */
-    public function isClicked(Submit $submitButton) {
-      throw new \Exception('@todo');
-    }
+    protected $attributes = [
+      'type' => 'submit',
+    ];
 
-
-    public function render() {
-      $this->setType('submit');
-      return parent::render();
-    }
 
   }

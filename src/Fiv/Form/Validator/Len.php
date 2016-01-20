@@ -8,7 +8,7 @@
    * @author  Ivan Shcherbak <dev@funivan.com>
    * @package Fiv\Form\Validator
    */
-  class Len extends \Fiv\Form\Validator\Base {
+  class Len extends BaseValidator{
 
     /**
      * @var int|null

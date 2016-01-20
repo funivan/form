@@ -20,6 +20,12 @@
      */
     protected $label = '';
 
+    /**
+     * @var array
+     */
+    protected $attributes = [
+      'type' => 'checkbox',
+    ];
 
     /**
      * Value in checkbox can be true or false
@@ -72,7 +78,6 @@
      * @return string
      */
     public function render() {
-      $this->setType('checkbox');
       return '<label>' . parent::render() . $this->label . '</label>';
     }
 

@@ -7,9 +7,17 @@
    */
   class Password extends Input {
 
-    protected $type = 'password';
+    /**
+     * @var array
+     */
+    protected $attributes = [
+      'type' => 'password',
+    ];
 
 
+    /**
+     * @return string
+     */
     public function render() {
       $this->attributes['value'] = null;
       return parent::render();

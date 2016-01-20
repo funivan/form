@@ -51,37 +51,19 @@
 
 
     /**
-     * @return Form
-     */
-    public function getForm() {
-      return $this->form;
-    }
-
-
-    /**
-     * @param Form $form
-     * @return $this
-     */
-    public function setForm(Form $form) {
-      $this->form = $form;
-      return $this;
-    }
-
-
-    /**
      * Attach validator to current element
      *
-     * @param \Fiv\Form\Validator\Base[]|\Fiv\Form\Validator\Base $validator
+     * @param \Fiv\Form\Validator\ValidatorInterface[]|\Fiv\Form\Validator\ValidatorInterface $validator
      * @throws \Exception
      * @return $this
      */
     public function addValidator($validator) {
       if (!is_array($validator)) {
-        $validator = array($validator);
+        $validator = [$validator];
       }
       $this->validationResult = null;
       foreach ($validator as $validatorClass) {
-        if (!($validatorClass instanceof \Fiv\Form\Validator\Base)) {
+        if (!($validatorClass instanceof Validator\ValidatorInterface)) {
           throw new \Exception('Invalid validator class: ' . get_class($validatorClass));
         }
         $this->validators[] = $validatorClass;
@@ -118,7 +100,7 @@
      */
     public function addFilter($filter) {
       if (!is_array($filter)) {
-        $filter = array($filter);
+        $filter = [$filter];
       }
       foreach ($filter as $filterClass) {
         if (!($filterClass instanceof FilterInterface)) {
@@ -199,7 +181,7 @@
      * @return array
      */
     public function getValidatorsErrors() {
-      $errors = array();
+      $errors = [];
       foreach ($this->validators as $validator) {
         $errors = array_merge($errors, $validator->getErrors());
       }

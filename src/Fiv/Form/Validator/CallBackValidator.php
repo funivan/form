@@ -6,7 +6,7 @@
    *
    * @package Fiv\Form\Validator
    */
-  class CallBackValidator extends Base {
+  class CallBackValidator extends BaseValidator {
 
     /**
      * @var callable

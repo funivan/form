@@ -13,9 +13,11 @@
     protected $tag = 'input';
 
     /**
-     * @var string
+     * @var array
      */
-    protected $type = 'text';
+    protected $attributes = [
+      'type' => 'text',
+    ];
 
 
     /**

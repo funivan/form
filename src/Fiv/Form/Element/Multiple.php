@@ -9,6 +9,9 @@
    */
   class Multiple extends \Fiv\Form\Element\Base {
 
+    /**
+     * @var array
+     */
     protected $options = [];
 
 
@@ -30,6 +33,10 @@
     }
 
 
+    /**
+     * @param string $value
+     * @return $this
+     */
     public function setValue($value) {
       if (!isset($this->options[$value])) {
         reset($this->options);

@@ -8,12 +8,12 @@
    *
    * @package Fiv\Form\Validator
    */
-  class Required extends Base {
+  class Required extends BaseValidator {
 
     /**
      * @var string
      */
-    protected $error = 'Field is required ';
+    protected $error = 'Field is required';
 
 
     /**

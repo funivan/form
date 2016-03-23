@@ -4,6 +4,7 @@
 
 ### Changed
 - Default method is post
+- Render hidden elements on start
 - \Fiv\Form\setElement changed to public
 - \Fiv\Form\Element\BaseElement::addValidator changed signature. Pass only 1 validator
 - \Fiv\Form\Element\BaseElement::addFilter changed signature. Pass only 1 filter

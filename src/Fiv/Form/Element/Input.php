@@ -35,7 +35,7 @@
      * @return $this
      */
     public function setType($type) {
-      $this->setAttribute('type', $type);
+      $this->setAttribute('type', strtolower($type));
       return $this;
     }
 

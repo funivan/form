@@ -216,4 +216,21 @@
     }
 
 
+    public function testRenderStartEnd() {
+      $form = new Form();
+      $form->hidden('test', '123');
+      $start = $form->renderStart();
+      $this->assertContains('<input type="hidden" name="test" value="123"', $start);
+
+      $this->assertEquals('</form>', $form->renderEnd());
+    }
+
+
+    public function testRenderElements() {
+      $form = new Form();
+      $form->textarea('text', '123');
+      $this->assertContains('<dl><dt>123</dt><dd><textarea name="text" ></textarea></dd></dl>', $form->render());
+    }
+
+
   }

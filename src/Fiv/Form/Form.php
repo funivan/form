@@ -378,6 +378,11 @@
       $formHtml = '<dl>';
 
       foreach ($this->elements as $element) {
+        # skip hidden element
+        if ($element instanceof Element\Input and $element->getType() === 'hidden') {
+          continue;
+        }
+
         $formHtml .=
           '<dt>' . $element->getText() . '</dt>' .
           '<dd>' . $element->render() . '</dd>';
@@ -404,7 +409,18 @@
       $method = $this->getMethod();
       $this->setAttribute('method', $method);
 
-      return '<form ' . $this->getAttributesAsString() . '>' . $hidden->render();
+      $html = '<form ' . $this->getAttributesAsString() . '>';
+      $html .= $hidden->render();
+
+      # render hidden element
+      foreach ($this->elements as $element) {
+        if ($element instanceof Element\Input and $element->getType() === 'hidden') {
+          $html .= $element->render();
+        }
+      }
+
+
+      return $html;
     }
 
 
@@ -412,7 +428,7 @@
      * @return string
      */
     public function renderEnd() {
-      return '</form> ';
+      return '</form>';
     }
 
   }

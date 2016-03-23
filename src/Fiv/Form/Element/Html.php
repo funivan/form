@@ -34,13 +34,14 @@
 
 
     /**
+     * @deprecated
      * @param $name
      * @param $arguments
      * @return $this|null
      * @throws \Exception
      */
     public function __call($name, $arguments) {
-
+      trigger_error('Deprecated', E_USER_DEPRECATED);
       if (strpos($name, 'set') === 0 and isset($arguments[0])) {
         $name = strtolower(substr($name, 3));
         $this->setAttribute($name, $arguments[0]);

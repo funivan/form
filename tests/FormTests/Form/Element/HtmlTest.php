@@ -14,17 +14,17 @@
 
       $this->assertEmpty($currentClassName);
 
-      $htmlElement->addClass("test");
-      $this->assertEquals("test", $htmlElement->getAttribute('class'));
+      $htmlElement->addClass('test');
+      $this->assertEquals('test', $htmlElement->getAttribute('class'));
 
-      $htmlElement->setClass("");
+      $htmlElement->setAttribute('class', '');
       $this->assertEmpty($htmlElement->getAttribute('class'));
 
-      $htmlElement->setClass("custom_class");
+      $htmlElement->setAttribute('class', 'custom_class');
       $this->assertEquals("custom_class", $htmlElement->getAttribute('class'));
 
-      $htmlElement->addClass("other_class");
-      $this->assertEquals("custom_class other_class", $htmlElement->getAttribute('class'));
+      $htmlElement->addClass('other_class');
+      $this->assertEquals('custom_class other_class', $htmlElement->getAttribute('class'));
     }
 
 

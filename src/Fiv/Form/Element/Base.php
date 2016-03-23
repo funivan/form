@@ -4,6 +4,8 @@
 
   use Fiv\Form\Validator;
 
+  trigger_error('Deprecated. Use BaseElement instead', E_USER_DEPRECATED);
+
   /**
    * @deprecated
    * @see BaseElement

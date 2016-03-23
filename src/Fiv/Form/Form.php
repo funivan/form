@@ -7,9 +7,6 @@
   use Fiv\Form\Element\Submit;
 
   /**
-   * @method Form setAction($action);
-   * @method string|null getAction();
-   *
    * @author Ivan Shcherbak <dev@funivan.com>
    */
   class Form extends Element\Html {

@@ -2,22 +2,11 @@
 
   namespace Fiv\Form;
 
-  use Fiv\Form\Element\BaseElement;
+  trigger_error('Deprecated. Use ' . \Fiv\Form\Element\TextArea::class, E_USER_DEPRECATED);
 
   /**
-   * Class TextArea
-   * Generate <textarea></textarea> html tag
-   *
-   * @author  Ivan Shcherbak <dev@funivan.com>
-   * @package Fiv\Form
+   * @deprecated
    */
-  class TextArea extends BaseElement {
-
-    /**
-     * @return string
-     */
-    public function render() {
-      return '<textarea ' . $this->getAttributesAsString() . '>' . $this->getValue() . '</textarea>';
-    }
+  class TextArea extends \Fiv\Form\Element\TextArea {
 
   }

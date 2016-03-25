@@ -4,7 +4,10 @@
   namespace Fiv\Form;
 
   use Fiv\Form\Element;
+  use Fiv\Form\Element\Checkbox;
+  use Fiv\Form\Element\CheckboxList;
   use Fiv\Form\Element\Submit;
+  use Fiv\Form\Element\TextArea;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com>
@@ -225,7 +228,7 @@
      * @return Select
      */
     public function select($name, $text = null) {
-      $select = new Select();
+      $select = new Element\Select();
       $select->setName($name);
       $select->setText($text);
       $this->addElement($select);
@@ -234,12 +237,12 @@
 
 
     /**
-     * @param        $name
+     * @param string $name
      * @param string $text
      * @return RadioList
      */
     public function radioList($name, $text = null) {
-      $radio = new RadioList();
+      $radio = new Element\RadioList();
       $radio->setName($name);
       $radio->setText($text);
       $this->addElement($radio);

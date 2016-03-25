@@ -2,33 +2,11 @@
 
   namespace Fiv\Form;
 
-  use Fiv\Form\Element\Multiple;
+  trigger_error('Deprecated. Use ' . \Fiv\Form\Element\Select::class, E_USER_DEPRECATED);
 
   /**
-   * Class TextArea
-   * Generate <select></select> html tag
-   *
-   * @author  Ivan Shcherbak <dev@funivan.com>
-   * @package Fiv\Form
+   * @deprecated
    */
-  class Select extends Multiple {
+  class Select extends \Fiv\Form\Element\Select {
 
-    /**
-     * @return string
-     */
-    public function render() {
-      $html = '<select ' . $this->getAttributesAsString() . ' >';
-      $currentValue = $this->getValue();
-
-      foreach ($this->options as $value => $text) {
-        $html .= '<option'
-          . ($currentValue == $value ? ' selected="1" ' : '')
-          . ' value="' . $value . '"'
-          . '>'
-          . $text
-          . '</option>';
-      }
-      $html .= '</select>';
-      return $html;
-    }
   }

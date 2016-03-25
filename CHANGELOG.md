@@ -17,6 +17,12 @@
 - \Fiv\Form\Element\Base use \Fiv\Form\Element\BaseElement
 - \Fiv\Form\Element\BaseElement::required
 - \Fiv\Form\Element\Validator\Len
+- \Fiv\Form\Checkbox use \Fiv\Form\Element\Checkbox
+- \Fiv\Form\CheckboxList use \Fiv\Form\Element\CheckboxList
+- \Fiv\Form\Select use \Fiv\Form\Element\Select
+- \Fiv\Form\RadioList use \Fiv\Form\Element\RadioList
+- \Fiv\Form\Select use \Fiv\Form\Element\Select
+- \Fiv\Form\TextArea use \Fiv\Form\Element\TextArea
 - \Fiv\Form\Validator\Base::i
 - \Fiv\Form\Validator\Base use \Fiv\Form\Validator\BaseValidator
 - \Fiv\Form\Filter\Base::i

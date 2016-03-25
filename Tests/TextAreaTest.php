@@ -11,7 +11,7 @@
   class TextAreaTest extends \Tests\Fiv\Form\FormTestCase {
 
     /**
-     * @return \Fiv\Form\TextArea
+     * @return \Fiv\Form\Element\TextArea
      */
     protected function getElement() {
       $form = new Form();

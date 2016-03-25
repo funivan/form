@@ -15,7 +15,7 @@
      * @return string
      */
     public function render() {
-      return '<textarea ' . $this->getAttributesAsString() . '>' . $this->getValue() . '</textarea>';
+      return '<textarea ' . Html::renderAttributes($this->getAttributes()) . '>' . $this->getValue() . '</textarea>';
     }
 
   }

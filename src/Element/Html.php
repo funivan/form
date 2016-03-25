@@ -170,6 +170,7 @@
      * @return string
      */
     public function getAttributesAsString() {
+      trigger_error('Deprecated. use Html::renderAttributes', E_USER_DEPRECATED);
       return static::renderAttributes($this->attributes);
     }
 

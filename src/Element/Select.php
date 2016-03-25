@@ -14,7 +14,7 @@
      * @return string
      */
     public function render() {
-      $html = '<select ' . $this->getAttributesAsString() . ' >';
+      $html = '<select ' . Html::renderAttributes($this->getAttributes()) . ' >';
       $currentValue = $this->getValue();
 
       foreach ($this->options as $value => $text) {

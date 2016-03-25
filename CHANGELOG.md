@@ -11,7 +11,10 @@
 
 
 ### Added
-- \Fiv\Form\addElement
+- \Fiv\Form::addElement
+- \Fiv\Form\Element\Html::getTag
+- \Fiv\Form\Element\Html::setTag
+- \Fiv\Form\Element\Html::getAttributes
 
 ### Deprecated
 - \Fiv\Form\Element\Base use \Fiv\Form\Element\BaseElement

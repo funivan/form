@@ -414,7 +414,7 @@
       $method = $this->getMethod();
       $this->setAttribute('method', $method);
 
-      $html = '<form ' . $this->getAttributesAsString() . '>';
+      $html = '<form ' . Element\Html::renderAttributes($this->getAttributes()) . '>';
       $html .= $hidden->render();
 
       # render hidden element

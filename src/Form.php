@@ -88,7 +88,7 @@
         $name = $element->getName();
 
         if ($element instanceof Checkbox) {
-          $data[$name] = isset($data[$name]) ? 1 : 0;
+          $data[$name] = array_key_exists($name, $data) ? 1 : 0;
         } elseif ($element instanceof CheckboxList) {
           $data[$name] = isset($data[$name]) ? $data[$name] : [];
         }

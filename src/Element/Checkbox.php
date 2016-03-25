@@ -15,7 +15,7 @@
     /**
      * @var int
      */
-    protected $value = 1;
+    protected $value = 0;
 
     /**
      * @var string
@@ -29,14 +29,19 @@
       'type' => 'checkbox',
     ];
 
+
     /**
      * Value in checkbox can be true or false
      *
-     * @param int|boolean $value
+     * @param int $value
      * @return $this
      */
     public function setValue($value) {
-      if (!empty($value)) {
+      if ($value !== 1 and $value !== 0) {
+        throw new \InvalidArgumentException('Expect int: 1 or 0');
+      }
+
+      if ($value === 1) {
         return $this->check();
       } else {
         return $this->unCheck();
@@ -63,6 +68,14 @@
       $this->removeAttribute('checked');
       parent::setValue(0);
       return $this;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function isChecked() {
+      return $this->getValue() === 1;
     }
 
 

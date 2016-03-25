@@ -17,6 +17,7 @@
 - \Fiv\Form\Element\Html::getAttributes
 
 ### Deprecated
+- \Fiv\Form\Element\Html::getAttributesAsString use \Fiv\Form\Element\Html::renderAttributes
 - \Fiv\Form\Element\Base use \Fiv\Form\Element\BaseElement
 - \Fiv\Form\Element\Validator\Len
 - \Fiv\Form\Element\BaseElement::required use validator instead

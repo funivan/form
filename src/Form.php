@@ -65,8 +65,8 @@
      * @throws \Exception
      */
     public function getData() {
-      if (!isset($this->data)) {
-        throw new \Exception("Data does not exist!");
+      if ($this->data === null) {
+        throw new \Exception('Data does not exist!');
       }
 
       return $this->data;

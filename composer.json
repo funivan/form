@@ -2,7 +2,7 @@
   "name": "fiv/form",
   "description": "Form bundle",
   "autoload": {
-    "psr-0": {
+    "psr-4": {
       "Fiv\\Form\\": "src/"
     }
   },

@@ -11,7 +11,7 @@
    * @package Fiv\Form\Element
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class BaseElement extends \Fiv\Form\Element\Html {
+  class BaseElement extends \Fiv\Form\Element\Html implements ElementInterface {
 
     /**
      * @var null|boolean
@@ -124,7 +124,7 @@
      * Return true if element is valid
      * @return boolean
      */
-    public function validate() {
+    public function isValid() {
 
       if ($this->validationResult !== null) {
         return $this->validationResult;
@@ -144,12 +144,23 @@
 
 
     /**
+     * @return bool
+     */
+    public function validate() {
+      trigger_error('Deprecated. Use isValid', E_USER_DEPRECATED);
+      return $this->isValid();
+    }
+
+
+    /**
      * @return array
      */
     public function getValidatorsErrors() {
       $errors = [];
       foreach ($this->validators as $validator) {
-        $errors = array_merge($errors, $validator->getErrors());
+        foreach ($validator->getErrors() as $error) {
+          $errors[] = $error;
+        }
       }
 
       return $errors;

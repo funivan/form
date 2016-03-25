@@ -15,8 +15,9 @@
 
 ### Deprecated
 - \Fiv\Form\Element\Base use \Fiv\Form\Element\BaseElement
-- \Fiv\Form\Element\BaseElement::required
 - \Fiv\Form\Element\Validator\Len
+- \Fiv\Form\Element\BaseElement::required use validator instead
+- \Fiv\Form\BaseElement::validate use \Fiv\Form\BaseElement::isValid
 - \Fiv\Form\Checkbox use \Fiv\Form\Element\Checkbox
 - \Fiv\Form\CheckboxList use \Fiv\Form\Element\CheckboxList
 - \Fiv\Form\Select use \Fiv\Form\Element\Select

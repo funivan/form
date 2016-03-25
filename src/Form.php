@@ -151,7 +151,7 @@
 
       $this->validationResult = true;
       foreach ($this->elements as $element) {
-        if (!$element->validate()) {
+        if (!$element->isValid()) {
           $this->validationResult = false;
         }
       }

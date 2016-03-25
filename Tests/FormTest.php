@@ -9,7 +9,7 @@
   /**
    * @package Tests\Form\Form
    */
-  class PHPUnitFrameworkTest extends \PHPUnit_Framework_TestCase {
+  class FormTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *
@@ -41,6 +41,26 @@
 
       $form->setName('test');
       $this->assertEquals('test', $form->getUid());
+    }
+
+
+    /**
+     *
+     */
+    public function testData() {
+      $form = new Form();
+      $form->input('email');
+
+      $form->setData([
+        $form->getUid() => 1,
+        'other_custom_data' => 123,
+        'email' => 'test@test',
+      ]);
+
+      $this->assertEquals([
+        'email' => 'test@test',
+      ], $form->getData());
+
     }
 
 
@@ -122,12 +142,13 @@
 
 
     /**
-     * @expectedException \Exception
+     *
      */
-    public function testThrowExceptionWithoutData() {
+    public function testValidateWithoutSubmit() {
       $form = new Form();
       $form->setName('test-form');
-      $form->isValid();
+      $this->assertFalse($form->isValid());
+      $this->assertFalse($form->isSubmitted());
     }
 
 

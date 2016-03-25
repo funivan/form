@@ -30,6 +30,11 @@
     protected $data = null;
 
     /**
+     * @var bool
+     */
+    protected $isSubmitted = false;
+
+    /**
      * @var Element\BaseElement[]
      */
     protected $elements = [];
@@ -84,6 +89,7 @@
 
       $this->cleanValidationFlag();
 
+      $formData = [];
       foreach ($this->elements as $element) {
         $name = $element->getName();
 
@@ -95,12 +101,13 @@
 
         if (array_key_exists($name, $data)) {
           $element->setValue($data[$name]);
-          $data[$name] = $element->getValue();
+          $formData[$name] = $element->getValue();
         }
 
       }
 
-      $this->data = $data;
+      $this->isSubmitted = isset($data[$this->getUid()]);
+      $this->data = $formData;
     }
 
 
@@ -166,9 +173,7 @@
      * @return bool
      */
     public function isSubmitted() {
-      $data = $this->getData();
-
-      return isset($data[$this->getUid()]);
+      return $this->isSubmitted;
     }
 
 

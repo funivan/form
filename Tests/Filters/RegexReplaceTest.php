@@ -1,17 +1,17 @@
 <?php
 
 
-  namespace FormTests\Filters;
+  namespace Tests\Form\Filters;
 
   use Fiv\Form\Filter\RegexReplace;
   use Fiv\Form\Filter\Trim;
   use Fiv\Form\Form;
 
   /**
-   * @package FormTests\Filters
+   * @package Tests\Form\Filters
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class RegexReplaceTest extends \FormTests\Main {
+  class RegexReplaceTest extends \Tests\Form\MainTestCase {
 
 
     public function testSimpleReplace() {

@@ -1,14 +1,14 @@
 <?php
 
-  namespace FormTests\Form;
+  namespace Tests\Form\Form;
 
   use Fiv\Form\Form;
   use Fiv\Form\Validator\CallBackValidator;
 
   /**
-   * @package FormTests\Form
+   * @package Tests\Form\Form
    */
-  class ValidatorsTest extends \FormTests\Main {
+  class ValidatorsTest extends \Tests\Form\MainTestCase {
 
     public function testCallback() {
       $lengthValidator = new CallBackValidator(function ($value) {

@@ -3,8 +3,12 @@
   "description": "Form bundle",
   "autoload": {
     "psr-0": {
-      "Fiv\\Form\\": "src/",
-      "FormTests\\": "tests/"
+      "Fiv\\Form\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-0": {
+      "Tests\\Form\\": "Tests/"
     }
   },
   "license": "MIT",

@@ -1,14 +1,14 @@
 <?php
 
-  namespace FormTests\Form;
+  namespace Tests\Form\Form;
 
   use Fiv\Form\Filter\Trim;
   use Fiv\Form\Form;
 
   /**
-   * @package FormTests\Form
+   * @package Tests\Form\Form
    */
-  class TextAreaTest extends \FormTests\Main {
+  class TextAreaTest extends \Tests\Form\MainTestCase {
 
     /**
      * @return \Fiv\Form\TextArea

@@ -1,15 +1,15 @@
 <?php
 
-  namespace FormTests\Form;
+  namespace Tests\Form\Form;
 
   use Fiv\Form\Element\Input;
   use Fiv\Form\Filter\Trim;
   use Fiv\Form\Form;
 
   /**
-   * @package FormTests\Form
+   * @package Tests\Form\Form
    */
-  class HiddenTest extends \FormTests\Main {
+  class HiddenTest extends \Tests\Form\MainTestCase {
 
     /**
      * @return \Fiv\Form\Element\Input

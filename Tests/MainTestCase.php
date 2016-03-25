@@ -1,11 +1,11 @@
 <?php
 
-  namespace FormTests;
+  namespace Tests\Form;
 
   /**
    * @package DemoProjectTests
    */
-  class Main extends \PHPUnit_Framework_TestCase {
+  class MainTestCase extends \PHPUnit_Framework_TestCase {
 
     protected function getDemoDataDirectoryPath() {
       return __DIR__ . '/../demo-data/';

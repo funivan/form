@@ -1,15 +1,15 @@
 <?php
 
-  namespace FormTests\Form;
+  namespace Tests\Form\Form;
 
   use Fiv\Form\Element\Input;
   use Fiv\Form\Form;
   use Fiv\Form\Validator\CallBackValidator;
 
   /**
-   * @package FormTests\Form
+   * @package Tests\Form\Form
    */
-  class FormTest extends \FormTests\Main {
+  class FormTest extends \Tests\Form\MainTestCase {
 
     /**
      *

@@ -1,6 +1,6 @@
 <?php
 
-  namespace Tests\Form\Form;
+  namespace Tests\Fiv\Form;
 
   use Fiv\Form\Form;
   use Fiv\Form\Validator\CallBackValidator;
@@ -8,7 +8,7 @@
   /**
    * @package Tests\Form\Form
    */
-  class ValidatorsTest extends \Tests\Form\MainTestCase {
+  class ValidatorsTest extends \Tests\Fiv\Form\FormTestCase {
 
     public function testCallback() {
       $lengthValidator = new CallBackValidator(function ($value) {
@@ -47,25 +47,6 @@
     }
 
 
-    public function testRequire() {
-      $form = new Form();
-      $form->input('login')
-        ->addValidator(new \Fiv\Form\Validator\Required());
-
-      $form->setData([
-        $form->getUid() => 1,
-        'login' => 'testLogin',
-      ]);
-
-      $this->assertTrue($form->isValid());
-
-      $form->setData([
-        $form->getUid() => 1,
-        'login' => '',
-      ]);
-
-      $this->assertFalse($form->isValid());
-    }
 
 
     public function testRegexp() {

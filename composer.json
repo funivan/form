@@ -7,8 +7,8 @@
     }
   },
   "autoload-dev": {
-    "psr-0": {
-      "Tests\\Form\\": "Tests/"
+    "psr-4": {
+      "Tests\\Fiv\\Form\\": "Tests/"
     }
   },
   "license": "MIT",

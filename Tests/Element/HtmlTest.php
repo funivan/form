@@ -1,11 +1,11 @@
 <?php
 
-  namespace Tests\Form\Form\Element;
+  namespace Tests\Fiv\Form\Element;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 9/17/14
    */
-  class HtmlTest extends \Tests\Form\MainTestCase {
+  class HtmlTest extends \Tests\Fiv\Form\FormTestCase {
 
     public function testAddClass() {
       $htmlElement = new \Fiv\Form\Element\Html();

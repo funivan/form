@@ -1,6 +1,6 @@
 <?php
 
-  namespace Tests\Form\Form;
+  namespace Tests\Fiv\Form;
 
   use Fiv\Form\Filter\Trim;
   use Fiv\Form\Form;
@@ -8,7 +8,7 @@
   /**
    * @package Tests\Form\Form
    */
-  class TextAreaTest extends \Tests\Form\MainTestCase {
+  class TextAreaTest extends \Tests\Fiv\Form\FormTestCase {
 
     /**
      * @return \Fiv\Form\TextArea

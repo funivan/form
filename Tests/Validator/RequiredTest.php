@@ -1,0 +1,48 @@
+<?php
+
+  namespace Tests\Fiv\Form\Validator;
+
+  use Fiv\Form\Form;
+  use Fiv\Form\Validator\Required;
+  use Tests\Fiv\Form\FormTestCase;
+
+  /**
+   *
+   */
+  class RequiredTest extends FormTestCase {
+
+
+    public function testSimpleValidation() {
+      $validator = new Required();
+      $validator->setError('Test error message');
+
+      $form = new Form();
+      $form->input('login')
+        ->addValidator($validator);
+
+      $form->setData([
+        $form->getUid() => 1,
+        'login' => 'testLogin',
+      ]);
+
+      $this->assertTrue($form->isValid());
+      $this->assertEmpty($validator->getErrors());
+
+
+      $form->setData([
+        $form->getUid() => 1,
+        'login' => '',
+      ]);
+
+      $this->assertFalse($form->isValid());
+      $this->assertEquals('Test error message', $validator->getFirstError());
+
+
+      $form->setData([
+        $form->getUid() => 1,
+        'login' => '0',
+      ]);
+      $this->assertTrue($form->isValid());
+    }
+
+  }

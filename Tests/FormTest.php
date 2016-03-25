@@ -1,6 +1,6 @@
 <?php
 
-  namespace Tests\Form\Form;
+  namespace Tests\Fiv\Form;
 
   use Fiv\Form\Element\Input;
   use Fiv\Form\Form;
@@ -9,7 +9,7 @@
   /**
    * @package Tests\Form\Form
    */
-  class FormTest extends \Tests\Form\MainTestCase {
+  class FormTest extends \Tests\Fiv\Form\FormTestCase {
 
     /**
      *

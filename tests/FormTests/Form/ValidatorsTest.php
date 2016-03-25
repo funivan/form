@@ -10,10 +10,10 @@
    */
   class ValidatorsTest extends \FormTests\Main {
 
-    public function testLen() {
-      $lengthValidator = new \Fiv\Form\Validator\Len();
-      $lengthValidator->min(5, 'Мінімальна довжина логіну - 5 символів.');
-      $lengthValidator->max(25, 'Максимальна довжина логіну - 25 символів.');
+    public function testCallback() {
+      $lengthValidator = new CallBackValidator(function ($value) {
+        return strlen($value) > 3 and strlen($value) < 10;
+      });
 
       $form = new Form();
       $form->input('login')
@@ -21,21 +21,26 @@
 
       $form->setData([
         $form->getUid() => 1,
-        'login' => 'testLogin'
+        'login' => 'testLogin',
       ]);
 
       $this->assertTrue($form->isValid());
+      $this->assertFalse($lengthValidator->hasErrors());
+
+
+
 
       $form->setData([
         $form->getUid() => 1,
-        'login' => 'tes'
+        'login' => 'tes',
       ]);
 
       $this->assertFalse($form->isValid());
+      $this->assertTrue($lengthValidator->hasErrors());
 
       $form->setData([
         $form->getUid() => 1,
-        'login' => 'testtesttesttesttesttesttesttest'
+        'login' => 'testtesttesttesttesttesttesttest',
       ]);
 
       $this->assertFalse($form->isValid());
@@ -49,14 +54,14 @@
 
       $form->setData([
         $form->getUid() => 1,
-        'login' => 'testLogin'
+        'login' => 'testLogin',
       ]);
 
       $this->assertTrue($form->isValid());
 
       $form->setData([
         $form->getUid() => 1,
-        'login' => ''
+        'login' => '',
       ]);
 
       $this->assertFalse($form->isValid());
@@ -73,14 +78,14 @@
 
       $form->setData([
         $form->getUid() => 1,
-        'email' => 'test@test'
+        'email' => 'test@test',
       ]);
 
       $this->assertTrue($form->isValid());
 
       $form->setData([
         $form->getUid() => 1,
-        'email' => 'test'
+        'email' => 'test',
       ]);
 
       $this->assertFalse($form->isValid());
@@ -97,13 +102,13 @@
 
       $form->setData([
         $form->getUid() => 1,
-        'inputName' => 'a'
+        'inputName' => 'a',
       ]);
       $this->assertTrue($form->isValid());
 
       $form->setData([
         $form->getUid() => 1,
-        'inputName' => 'd'
+        'inputName' => 'd',
       ]);
       $this->assertFalse($form->isValid());
     }
@@ -129,12 +134,12 @@
 
       $input = $form->input('email');
       $input->addValidator($callBackValidator);
-      
+
       $form->setData([
         $form->getUid() => 1,
         'email' => 'test1@gmail.com',
       ]);
-      
+
       $this->assertFalse($form->isValid());
       $this->assertEquals('Email already exist!', $callBackValidator->getFirstError());
 

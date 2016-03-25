@@ -46,11 +46,13 @@
      */
     public function isValid($value) {
 
-      if (!in_array($value, $this->values)) {
-        $this->addError($this->error);
+      if (in_array($value, $this->values)) {
+        return true;
       }
 
-      return !$this->hasErrors();
+      $this->addError($this->error);
+      return false;
+
     }
 
   }

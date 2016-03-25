@@ -2,8 +2,12 @@
 
   namespace Fiv\Form\Validator;
 
+  trigger_error('Deprecated', E_USER_DEPRECATED);
+
   /**
    * Check value length
+   *
+   * @deprecated
    *
    * @author  Ivan Shcherbak <dev@funivan.com>
    * @package Fiv\Form\Validator

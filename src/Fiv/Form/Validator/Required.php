@@ -1,7 +1,7 @@
 <?php
 
   namespace Fiv\Form\Validator;
-  
+
   /**
    * Check if value not empty
    * Algorithm based on value length
@@ -32,11 +32,16 @@
      */
     public function isValid($value) {
 
-      if ((is_string($value) and strlen($value) === 0) or empty($value)) {
-        $this->addError($this->error);
+      if (!empty($value)) {
+        return true;
       }
 
-      return !$this->hasErrors();
+      if (is_string($value) and $value !== '') {
+        return true;
+      }
+
+      $this->addError($this->error);
+      return false;
     }
 
   }

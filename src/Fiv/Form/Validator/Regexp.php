@@ -13,16 +13,20 @@
     protected $error = 'Invalid value';
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $regexp = '';
+    protected $regexp = null;
 
 
     /**
      * @param string $regexp
      * @return $this
+     * @throws \InvalidArgumentException
      */
     public function setRegexp($regexp) {
+      if (!is_string($regexp)) {
+        throw new \InvalidArgumentException('Invalid regexp type. Expect string');
+      }
       $this->regexp = $regexp;
       return $this;
     }
@@ -39,15 +43,22 @@
 
 
     /**
+     * @todo check if we can pass array
+     *
      * @param string $value
      * @return bool
      */
     public function isValid($value) {
-      if (!empty($this->regexp) and !preg_match($this->regexp, $value)) {
-        $this->addError($this->error);
+      if ($this->regexp === null) {
+        return true;
       }
 
-      return !$this->hasErrors();
+      if (preg_match($this->regexp, $value)) {
+        return true;
+      }
+
+      $this->addError($this->error);
+      return false;
     }
 
   }

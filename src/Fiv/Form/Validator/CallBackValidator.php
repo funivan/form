@@ -43,9 +43,11 @@
      */
     public function isValid($value) {
       $result = call_user_func($this->callback, $value);
-      if (!$result) {
-        $this->addError($this->errorMessage);
+      if ($result) {
+        return true;
       }
-      return $result;
+
+      $this->addError($this->errorMessage);
+      return false;
     }
   }

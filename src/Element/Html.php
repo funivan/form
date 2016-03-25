@@ -105,6 +105,14 @@
 
 
     /**
+     * @return array
+     */
+    public function getAttributes() {
+      return $this->attributes;
+    }
+
+
+    /**
      * @param array $attributes
      * @return $this
      */
@@ -179,6 +187,27 @@
      */
     public function getContent() {
       return $this->content;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getTag() {
+      return $this->tag;
+    }
+
+
+    /**
+     * @param string $tag
+     * @return $this
+     */
+    public function setTag($tag) {
+      if (!is_string($tag)) {
+        throw new \InvalidArgumentException('Expect tag to be a valid string');
+      }
+      $this->tag = $tag;
+      return $this;
     }
 
   }

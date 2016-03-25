@@ -2,6 +2,8 @@
 
   namespace Tests\Fiv\Form\Element;
 
+  use Fiv\Form\Element\Html;
+
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 9/17/14
    */
@@ -38,6 +40,21 @@
       $this->assertTrue((boolean) preg_match("!/>!", $imgHtml));
       $this->assertTrue((boolean) preg_match("!title=!", $imgHtml));
       $this->assertTrue((boolean) preg_match("!src=!", $imgHtml));
+    }
+
+
+    public function testAttributes() {
+
+      $tag = new Html();
+      $tag->setTag('input');
+      $tag->setAttributes([
+        'value' => 123,
+      ]);
+      $tag->addClass('test');
+      $tag->addClass('other');
+
+      $this->assertEquals(['value' => 123, 'class' => 'test other'], $tag->getAttributes());
+
     }
 
   }

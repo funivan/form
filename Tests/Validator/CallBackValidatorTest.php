@@ -1,16 +1,16 @@
 <?php
 
-  namespace Tests\Fiv\Form;
+  namespace Tests\Fiv\Form\Validator;
 
   use Fiv\Form\Form;
   use Fiv\Form\Validator\CallBackValidator;
 
   /**
-   * @package Tests\Form\Form
+   *
    */
-  class ValidatorsTest extends \Tests\Fiv\Form\FormTestCase {
+  class CallBackValidatorTest extends \PHPUnit_Framework_TestCase {
 
-    public function testCallback() {
+    public function testLen() {
       $lengthValidator = new CallBackValidator(function ($value) {
         return strlen($value) > 3 and strlen($value) < 10;
       });
@@ -26,8 +26,6 @@
 
       $this->assertTrue($form->isValid());
       $this->assertFalse($lengthValidator->hasErrors());
-
-
 
 
       $form->setData([
@@ -47,55 +45,7 @@
     }
 
 
-
-
-    public function testRegexp() {
-      $regexpValidator = new \Fiv\Form\Validator\Regexp();
-      $regexpValidator->setRegexp('![^\@]+\@[^\@]+!');
-
-      $form = new Form();
-      $form->input('email')
-        ->addValidator($regexpValidator);
-
-      $form->setData([
-        $form->getUid() => 1,
-        'email' => 'test@test',
-      ]);
-
-      $this->assertTrue($form->isValid());
-
-      $form->setData([
-        $form->getUid() => 1,
-        'email' => 'test',
-      ]);
-
-      $this->assertFalse($form->isValid());
-    }
-
-
-    public function testIn() {
-      $inValidator = new \Fiv\Form\Validator\In();
-      $inValidator->setValues(['a', 'b', 'c']);
-
-      $form = new Form();
-      $form->input('inputName')
-        ->addValidator($inValidator);
-
-      $form->setData([
-        $form->getUid() => 1,
-        'inputName' => 'a',
-      ]);
-      $this->assertTrue($form->isValid());
-
-      $form->setData([
-        $form->getUid() => 1,
-        'inputName' => 'd',
-      ]);
-      $this->assertFalse($form->isValid());
-    }
-
-
-    public function testCallBackValidatorEmail() {
+    public function testEmailVirtualDbValidation() {
       $form = new Form();
 
       $existEmailList = [

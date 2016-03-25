@@ -9,7 +9,7 @@
   /**
    * @package Tests\Form\Form
    */
-  class FormTest extends \Tests\Fiv\Form\FormTestCase {
+  class PHPUnitFrameworkTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *

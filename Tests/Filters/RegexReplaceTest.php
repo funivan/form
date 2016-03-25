@@ -11,7 +11,7 @@
    * @package Tests\Form\Filters
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class RegexReplaceTest extends \Tests\Fiv\Form\FormTestCase {
+  class RegexReplaceTest extends \PHPUnit_Framework_TestCase {
 
 
     public function testSimpleReplace() {

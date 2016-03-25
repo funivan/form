@@ -52,7 +52,6 @@
 
       $this->addError($this->error);
       return false;
-
     }
 
   }

@@ -1,6 +1,6 @@
 <?php
 
-  namespace Tests\Fiv\Form;
+  namespace Tests\Fiv\Form\Element;
 
   use Fiv\Form\Element\Input;
   use Fiv\Form\Filter\Trim;
@@ -9,7 +9,7 @@
   /**
    * @package Tests\Form\Form
    */
-  class HiddenTest extends \Tests\Fiv\Form\FormTestCase {
+  class HiddenTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @return \Fiv\Form\Element\Input

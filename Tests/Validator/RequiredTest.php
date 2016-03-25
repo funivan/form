@@ -4,12 +4,12 @@
 
   use Fiv\Form\Form;
   use Fiv\Form\Validator\Required;
-  use Tests\Fiv\Form\FormTestCase;
+  use PHPUnit_Framework_TestCase;
 
   /**
    *
    */
-  class RequiredTest extends FormTestCase {
+  class RequiredTest extends PHPUnit_Framework_TestCase {
 
 
     public function testSimpleValidation() {

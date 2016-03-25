@@ -1,6 +1,6 @@
 <?php
 
-  namespace Tests\Fiv\Form;
+  namespace Tests\Fiv\Form\Element;
 
   use Fiv\Form\Filter\Trim;
   use Fiv\Form\Form;
@@ -8,23 +8,23 @@
   /**
    * @package Tests\Form\Form
    */
-  class TextAreaTest extends \Tests\Fiv\Form\FormTestCase {
+  class TextAreaTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @return \Fiv\Form\Element\TextArea
      */
     protected function getElement() {
       $form = new Form();
-      return $form->textarea("test");
+      return $form->textarea('test');
     }
 
     public function testRender() {
       $element = $this->getElement();
-      $this->assertContains("<textarea", (string)$element);
-      $this->assertContains("</textarea", (string)$element);
+      $this->assertContains('<textarea', (string)$element);
+      $this->assertContains('</textarea', (string)$element);
 
-      $element->setValue("custom data");
-      $this->assertContains(">custom data<", $element->render());
+      $element->setValue('custom data');
+      $this->assertContains('>custom data<', $element->render());
     }
 
     public function testAttributes() {
@@ -39,11 +39,11 @@
 
       $this->assertEmpty($element->getValue());
 
-      $element->setValue("test_value");
-      $this->assertEquals("test_value", $element->getValue());
+      $element->setValue('test_value');
+      $this->assertEquals('test_value', $element->getValue());
 
-      $element->setValue("  other value");
-      $this->assertEquals("other value", $element->getValue());
+      $element->setValue('  other value');
+      $this->assertEquals('other value', $element->getValue());
     }
 
   }

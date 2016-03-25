@@ -5,7 +5,7 @@
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 9/17/14
    */
-  class HtmlTest extends \Tests\Fiv\Form\FormTestCase {
+  class HtmlTest extends \PHPUnit_Framework_TestCase {
 
     public function testAddClass() {
       $htmlElement = new \Fiv\Form\Element\Html();

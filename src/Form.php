@@ -202,6 +202,7 @@
     /**
      * @param string $name
      * @return Element\BaseElement
+     * @throws \InvalidArgumentException
      */
     public function getElement($name) {
       if (empty($this->elements[$name])) {

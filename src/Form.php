@@ -201,6 +201,19 @@
 
     /**
      * @param string $name
+     * @return Element\BaseElement
+     * @throws \InvalidArgumentException
+     */
+    public function getElement($name) {
+      if (empty($this->elements[$name])) {
+        throw new \InvalidArgumentException('Element with name "' . $name . '" not found');
+      }
+      return $this->elements[$name];
+    }
+
+
+    /**
+     * @param string $name
      * @param string|null $text
      * @return \Fiv\Form\Element\Input
      */

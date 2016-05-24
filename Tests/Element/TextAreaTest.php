@@ -2,6 +2,7 @@
 
   namespace Tests\Fiv\Form\Element;
 
+  use Fiv\Form\Element\TextArea;
   use Fiv\Form\Filter\CallbackFilter;
   use Fiv\Form\Form;
   use Fiv\Form\RequestContext;

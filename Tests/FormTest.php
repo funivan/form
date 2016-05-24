@@ -3,8 +3,10 @@
   namespace Tests\Fiv\Form;
 
   use Fiv\Form\Element\Input;
+  use Fiv\Form\Element\TextArea;
   use Fiv\Form\Form;
   use Fiv\Form\Validator\CallBackValidator;
+  use Fiv\Form\Validator\Required;
 
   /**
    * @package Tests\Form\Form
@@ -253,6 +255,43 @@
       $this->assertContains('<dl><dt>123</dt><dd><textarea name="text" ></textarea></dd></dl>', $form->render());
     }
 
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testGetElementByInvalidName() {
+      $form = new Form();
+      $form->getElement('email');
+    }
+
+
+    public function testGetElementByName() {
+      $form = new Form();
+      $form->input('email');
+      $form->textarea('desc');
+
+      $this->assertInstanceOf(Input::class, $form->getElement('email'));
+      $this->assertInstanceOf(TextArea::class, $form->getElement('desc'));
+    }
+
+
+    public function testFormValidationErrors() {
+      $form = new Form();
+      $form->input('name')->addValidator((new Required())->setError('name input error'));
+      $form->input('email')->addValidator((new Required())->setError('email input error'));
+
+      $form->setData([$form->getUid() => 1]);
+      $this->assertFalse($form->isValid());
+      $this->assertEquals(['name input error', 'email input error'], $form->getErrors());
+
+      $form->setData([$form->getUid() => 1, 'email' => 'test@test.com']);
+      $this->assertFalse($form->isValid());
+      $this->assertEquals(['name input error'], $form->getErrors());
+
+      $form->setData([$form->getUid() => 1, 'name' => 'testName', 'email' => 'test@test.com']);
+      $this->assertTrue($form->isValid());
+      $this->assertEquals([], $form->getErrors());
+    }
 
     public function testReSetData() {
       $form = new Form();

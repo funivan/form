@@ -1,6 +1,13 @@
 # Changelog
 
-## [Unreleased]
+## [Unreleased] 0.1.0-alpha.4
+### Added
+- #22 Store validation errors to the form
+- #13 Add CallbackFilter
+### Deprecated
+- #26 Deprecate `\Fiv\Form\Filter\Trim`
+
+## 0.1.0-alpha3 [2016-03-25]
 
 ### Changed
 - Default method is post

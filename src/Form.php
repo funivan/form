@@ -74,7 +74,13 @@
       foreach ($this->getElements() as $element) {
         $element->handleRequestContext($requestContext);
       }
-      $this->setMethod($requestContext->getMethod());
+
+      $this->data = $requestContext->all();
+      $this->isSubmitted = false;
+      if ($requestContext->isMethod($this->getMethod()) and $requestContext->has($this->getUid())) {
+        $this->isSubmitted = true;
+      }
+
       return $this;
     }
 

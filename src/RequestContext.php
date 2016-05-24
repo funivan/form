@@ -49,8 +49,12 @@
     }
 
 
+    /**
+     * @param string $method
+     * @return bool
+     */
     public function isMethod($method) {
-      return $this->method == $method;
+      return $this->method == mb_strtoupper($method);
     }
 
 

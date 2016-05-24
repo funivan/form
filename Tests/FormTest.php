@@ -5,6 +5,7 @@
   use Fiv\Form\Element\Input;
   use Fiv\Form\Element\TextArea;
   use Fiv\Form\Form;
+  use Fiv\Form\RequestContext;
   use Fiv\Form\Validator\CallBackValidator;
   use Fiv\Form\Validator\Required;
 
@@ -293,6 +294,7 @@
       $this->assertEquals([], $form->getErrors());
     }
 
+
     public function testReSetData() {
       $form = new Form();
       $form->input('name');
@@ -306,6 +308,37 @@
       $form->setData(['name' => 'stepan']);
       $this->assertEquals(null, $form->getElements()['email']->getValue());
       $this->assertEquals('stepan', $form->getElements()['name']->getValue());
+    }
+
+
+    public function testHandleRequest() {
+      $form = new Form();
+      $form->addElement((new Input())->setName('email'));
+      $form->addElement((new TextArea())->setName('description'));
+      $form->setMethod('post');
+
+      $form->handleRequestContext(new RequestContext('post', [
+        $form->getUid() => 1,
+        'email' => 'test@test.com',
+        'description' => 'some description text'
+      ]));
+      $this->assertTrue($form->isSubmitted());
+      $this->assertEquals('test@test.com', $form->getElement('email')->getValue());
+      $this->assertEquals('some description text', $form->getElement('description')->getValue());
+
+      $form->handleRequestContext(new RequestContext('post', [
+        $form->getUid() => 1,
+        'email' => 'test@test.com',
+      ]));
+      $this->assertTrue($form->isSubmitted());
+      $this->assertEquals('test@test.com', $form->getElement('email')->getValue());
+      $this->assertNull($form->getElement('description')->getValue());
+
+      $form->handleRequestContext(new RequestContext('post', []));
+      $this->assertFalse($form->isSubmitted());
+      $this->assertNull($form->getElement('email')->getValue());
+      $this->assertNull($form->getElement('description')->getValue());
+
     }
 
   }

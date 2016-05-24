@@ -258,7 +258,7 @@
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testNotFoundElementException() {
+    public function testGetElementByInvalidName() {
       $form = new Form();
       $form->getElement('email');
     }

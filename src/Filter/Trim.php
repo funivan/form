@@ -9,6 +9,15 @@
   class Trim implements FilterInterface{
 
     /**
+     * @deprecated
+     * @see CallbackFilter
+     */
+    public function __construct() {
+      trigger_error('Deprecated', E_USER_DEPRECATED);
+    }
+
+
+    /**
      * @inheritdoc
      */
     public function apply($value) {

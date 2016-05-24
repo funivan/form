@@ -3,6 +3,7 @@
   namespace Fiv\Form\Element;
 
   use Fiv\Form\Filter\FilterInterface;
+  use Fiv\Form\RequestContext;
   use Fiv\Form\Validator;
   use Fiv\Form\Validator\ValidatorInterface;
 
@@ -11,7 +12,7 @@
    * @package Fiv\Form\Element
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class BaseElement extends \Fiv\Form\Element\Html implements ElementInterface {
+  class BaseElement extends Html implements ElementInterface {
 
     /**
      * @var null|boolean
@@ -140,6 +141,16 @@
       }
 
       return $this->validationResult;
+    }
+
+
+    /**
+     * @param RequestContext $requestContext
+     * @return $this
+     */
+    public function handleRequestContext(RequestContext $requestContext) {
+      $this->setValue($requestContext->get($this->getName()));
+      return $this;
     }
 
 

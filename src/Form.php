@@ -61,6 +61,20 @@
 
 
     /**
+     * @param RequestContext $requestContext
+     * @return $this
+     */
+    public function handleRequestContext(RequestContext $requestContext) {
+      $this->cleanValidationFlag();
+      foreach ($this->getElements() as $element) {
+        $element->handleRequestContext($requestContext);
+      }
+      $this->setMethod($requestContext->getMethod());
+      return $this;
+    }
+
+
+    /**
      * @return array
      * @throws \Exception
      */
@@ -76,6 +90,7 @@
     /**
      * @param array|\Iterator $data
      * @throws \Exception
+     * @deprecated
      */
     public function setData($data) {
       if ($data instanceof \Iterator) {

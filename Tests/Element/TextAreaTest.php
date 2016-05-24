@@ -2,7 +2,7 @@
 
   namespace Tests\Fiv\Form\Element;
 
-  use Fiv\Form\Filter\Trim;
+  use Fiv\Form\Filter\CallbackFilter;
   use Fiv\Form\Form;
 
   /**
@@ -18,14 +18,16 @@
       return $form->textarea('test');
     }
 
+
     public function testRender() {
       $element = $this->getElement();
-      $this->assertContains('<textarea', (string)$element);
-      $this->assertContains('</textarea', (string)$element);
+      $this->assertContains('<textarea', (string) $element);
+      $this->assertContains('</textarea', (string) $element);
 
       $element->setValue('custom data');
       $this->assertContains('>custom data<', $element->render());
     }
+
 
     public function testAttributes() {
       $element = $this->getElement();
@@ -33,9 +35,10 @@
       $this->assertEquals('', $element->renderAttributes());
     }
 
+
     public function testFilter() {
       $element = $this->getElement();
-      $element->addFilter(new Trim());
+      $element->addFilter(new CallbackFilter('trim'));
 
       $this->assertEmpty($element->getValue());
 

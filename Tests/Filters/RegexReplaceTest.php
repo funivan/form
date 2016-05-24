@@ -3,8 +3,8 @@
 
   namespace Tests\Fiv\Form\Filters;
 
+  use Fiv\Form\Filter\CallbackFilter;
   use Fiv\Form\Filter\RegexReplace;
-  use Fiv\Form\Filter\Trim;
   use Fiv\Form\Form;
 
   /**
@@ -27,7 +27,7 @@
       $form = new Form();
       $form->setName('test_form');
 
-      $form->input('text')->addFilter(new RegexReplace('!\s{2,}!', ' '))->addFilter(new Trim());
+      $form->input('text')->addFilter(new RegexReplace('!\s{2,}!', ' '))->addFilter(new CallbackFilter('trim'));
 
       $form->setData([
         'test_form' => 1,

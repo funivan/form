@@ -3,6 +3,7 @@
   namespace Tests\Fiv\Form;
 
   use Fiv\Form\Element\Input;
+  use Fiv\Form\Element\TextArea;
   use Fiv\Form\Form;
   use Fiv\Form\Validator\CallBackValidator;
   use Fiv\Form\Validator\Required;
@@ -252,6 +253,25 @@
       $form = new Form();
       $form->textarea('text', '123');
       $this->assertContains('<dl><dt>123</dt><dd><textarea name="text" ></textarea></dd></dl>', $form->render());
+    }
+
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testGetElementByInvalidName() {
+      $form = new Form();
+      $form->getElement('email');
+    }
+
+
+    public function testGetElementByName() {
+      $form = new Form();
+      $form->input('email');
+      $form->textarea('desc');
+
+      $this->assertInstanceOf(Input::class, $form->getElement('email'));
+      $this->assertInstanceOf(TextArea::class, $form->getElement('desc'));
     }
 
 

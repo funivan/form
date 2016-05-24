@@ -93,6 +93,17 @@
 
 
     /**
+     * @inheritdoc
+     */
+    public function clearValue() {
+      unset($this->attributes['value']);
+      $this->validationResult = null;
+      $this->value = null;
+      return $this;
+    }
+
+
+    /**
      * @return string
      */
     public function getValue() {
@@ -107,7 +118,6 @@
       if ($name === 'value') {
 
         $this->validationResult = null;
-
         # apply filters to the value
         $filters = $this->getFilters();
         foreach ($filters as $filter) {
@@ -149,7 +159,10 @@
      * @return $this
      */
     public function handleRequestContext(RequestContext $requestContext) {
-      $this->setValue($requestContext->get($this->getName()));
+      $this->clearValue();
+      if ($requestContext->has($this->getName())) {
+        $this->setValue($requestContext->get($this->getName()));
+      }
       return $this;
     }
 

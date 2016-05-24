@@ -15,6 +15,12 @@
 
 
     /**
+     * @return $this
+     */
+    public function clearValue();
+
+
+    /**
      * @return boolean
      */
     public function isValid();

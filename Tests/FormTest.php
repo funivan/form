@@ -254,4 +254,19 @@
     }
 
 
+    public function testReSetData() {
+      $form = new Form();
+      $form->input('name');
+      $form->input('email');
+      $form->input('age');
+
+      $form->setData(['email' => 'test@test.com', 'name' => 'petro']);
+      $this->assertEquals('test@test.com', $form->getElements()['email']->getValue());
+      $this->assertEquals(['email' => 'test@test.com', 'name' => 'petro'], $form->getData());
+
+      $form->setData(['name' => 'stepan']);
+      $this->assertEquals(null, $form->getElements()['email']->getValue());
+      $this->assertEquals('stepan', $form->getElements()['name']->getValue());
+    }
+
   }

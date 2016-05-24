@@ -4,6 +4,7 @@
 
   use Fiv\Form\Element\Checkbox;
   use Fiv\Form\Form;
+  use Fiv\Form\RequestContext;
 
   /**
    *
@@ -71,6 +72,16 @@
 
       $checkbox->setValue(4);
 
+    }
+
+
+    public function testHandleRequest() {
+      $checkbox = new Checkbox();
+      $checkbox->setName('test');
+      $checkbox->handleRequestContext(new RequestContext('post', ['test' => 1]));
+      $this->assertTrue($checkbox->isChecked());
+      $checkbox->handleRequestContext(new RequestContext('post', []));
+      $this->assertFalse($checkbox->isChecked());
     }
 
   }

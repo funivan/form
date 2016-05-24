@@ -106,6 +106,7 @@
 
       $formData = [];
       foreach ($this->elements as $element) {
+        $element->clearValue();
         $name = $element->getName();
 
         if ($element instanceof Checkbox) {

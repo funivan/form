@@ -3,7 +3,7 @@
   namespace Tests\Fiv\Form\Element;
 
   use Fiv\Form\Element\Input;
-  use Fiv\Form\Filter\Trim;
+  use Fiv\Form\Filter\CallbackFilter;
   use Fiv\Form\Form;
 
   /**
@@ -53,7 +53,7 @@
       $input->setType('hidden');
       $value = ' 123"234 \' 44 ';
 
-      $input->addFilter(new Trim());
+      $input->addFilter(new CallbackFilter('trim'));
 
       $input->setValue($value);
 

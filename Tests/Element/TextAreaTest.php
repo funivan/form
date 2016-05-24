@@ -2,8 +2,7 @@
 
   namespace Tests\Fiv\Form\Element;
 
-  use Fiv\Form\Element\TextArea;
-  use Fiv\Form\Filter\Trim;
+  use Fiv\Form\Filter\CallbackFilter;
   use Fiv\Form\Form;
   use Fiv\Form\RequestContext;
 
@@ -40,7 +39,7 @@
 
     public function testFilter() {
       $element = $this->getElement();
-      $element->addFilter(new Trim());
+      $element->addFilter(new CallbackFilter('trim'));
 
       $this->assertEmpty($element->getValue());
 

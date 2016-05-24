@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased] 0.1.0-alpha.1 [2016-03-25]
+## [Unreleased] 0.1.0-alpha.4
 ### Added
 - #22 Store validation errors to the form
 - #13 Add CallbackFilter

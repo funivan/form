@@ -2,6 +2,7 @@
 
   namespace Fiv\Form\Element;
 
+
   /**
    * Class TextArea
    * Generate
@@ -14,7 +15,7 @@
    * @author  Ivan Shcherbak <dev@funivan.com>
    * @package Fiv\Form
    */
-  class CheckboxList extends \Fiv\Form\Element\Multiple {
+  class CheckboxList extends Multiple {
 
     /**
      * @param array|string $data
@@ -34,6 +35,23 @@
 
       $this->value = array_values($data);
       return $this;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getValue() {
+      return (array) parent::getValue();
+    }
+
+
+    /**
+     * @param string $optionKey
+     * @return bool
+     */
+    public function isChecked($optionKey) {
+      return in_array($optionKey, $this->getValue());
     }
 
 

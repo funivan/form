@@ -25,6 +25,11 @@
     protected $validationResult = null;
 
     /**
+     * @var array
+     */
+    protected $errorList = [];
+
+    /**
      * @var array|null
      */
     protected $data = null;
@@ -138,6 +143,7 @@
      *
      */
     protected function cleanValidationFlag() {
+      $this->errorList = [];
       $this->validationResult = null;
     }
 
@@ -159,11 +165,34 @@
       $this->validationResult = true;
       foreach ($this->elements as $element) {
         if (!$element->isValid()) {
+          $this->errorList = array_merge($this->errorList, $element->getValidatorsErrors());
           $this->validationResult = false;
         }
       }
 
       return $this->validationResult;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getErrors() {
+      return $this->errorList;
+    }
+
+
+    /**
+     * @param string $error
+     * @return $this
+     */
+    protected function addError($error) {
+      if (!is_string($error)) {
+        throw new \InvalidArgumentException('Error should be a string, ' . gettype($error) . ' given.');
+      }
+      $this->validationResult = false;
+      $this->errorList[] = $error;
+      return $this;
     }
 
 
@@ -435,5 +464,4 @@
     public function renderEnd() {
       return '</form>';
     }
-
   }

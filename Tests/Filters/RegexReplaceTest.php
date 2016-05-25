@@ -6,6 +6,7 @@
   use Fiv\Form\Filter\CallbackFilter;
   use Fiv\Form\Filter\RegexReplace;
   use Fiv\Form\Form;
+  use Fiv\Form\RequestContext;
 
   /**
    * @package Tests\Form\Filters
@@ -29,10 +30,10 @@
 
       $form->input('text')->addFilter(new RegexReplace('!\s{2,}!', ' '))->addFilter(new CallbackFilter('trim'));
 
-      $form->setData([
+      $form->handleRequestContext(new RequestContext('post', [
         'test_form' => 1,
         'text' => 'hello    world         ',
-      ]);
+      ]));
 
       $this->assertTrue($form->isValid());
 

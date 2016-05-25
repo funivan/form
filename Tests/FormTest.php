@@ -21,15 +21,13 @@
       $form = new Form();
       $form->input('email');
 
-      $form->setData([
+      $form->handleRequestContext(new RequestContext('post', [
         $form->getUid() => 1,
         'email' => 'test@test',
-      ]);
-
+      ]));
       $this->assertTrue($form->isValid());
 
-      $form->setData([]);
-
+      $form->handleRequestContext(new RequestContext('post', []));
       $this->assertFalse($form->isValid());
     }
 
@@ -54,13 +52,15 @@
       $form = new Form();
       $form->input('email');
 
-      $form->setData([
+      $form->handleRequestContext(new RequestContext('post', [
         $form->getUid() => 1,
         'other_custom_data' => 123,
         'email' => 'test@test',
-      ]);
+      ]));
 
       $this->assertEquals([
+        $form->getUid() => 1,
+        'other_custom_data' => 123,
         'email' => 'test@test',
       ], $form->getData());
 
@@ -119,7 +119,7 @@
      */
     public function testIsSubmittedFalse() {
       $form = new Form();
-      $form->setData([]);
+      $form->handleRequestContext(new RequestContext('post', []));
       $this->assertEquals(false, $form->isSubmitted());
     }
 
@@ -130,16 +130,14 @@
     public function testIsSubmittedTrue() {
       $form = new Form();
       $form->setName('test-form');
-      $form->setData([
+      $form->handleRequestContext(new RequestContext('post', [
         'test-form' => 1,
-      ]);
+      ]));
       $this->assertEquals(true, $form->isSubmitted());
 
       $form = new Form();
       $form->submit('test-submit', 'test-value');
-      $form->setData([
-        $form->getUid() => 1,
-      ]);
+      $form->handleRequestContext(new RequestContext('post', [$form->getUid() => 1]));
       $this->assertEquals(true, $form->isSubmitted());
     }
 
@@ -158,18 +156,22 @@
     /**
      *
      */
-    public function testFormSetData() {
+    public function testHandleRequestContext() {
       $exception = null;
 
-      try {
-        $form = new Form();
-        $form->setName('test-form');
-        $form->setData(null);
-      } catch (\Exception $e) {
-        $exception = $e;
-      }
+      $form = new Form();
+      $form->setName('test-form');
+      $form->handleRequestContext(new RequestContext('post', [
+        $form->getUid() => 1,
+        'other_custom_data' => 123,
+        'email' => 'test@test',
+      ]));
 
-      $this->assertNotEmpty($exception, 'Should throw exception if data not array or Iterator!');
+      $this->assertTrue($form->isSubmitted());
+      $this->assertTrue($form->isValid());
+
+      $form->handleRequestContext(new RequestContext('post', []));
+      $this->assertFalse($form->isSubmitted());
     }
 
 
@@ -225,10 +227,10 @@
 
       $form->setElement($element);
       # emulate form submit
-      $form->setData([
+      $form->handleRequestContext(new RequestContext('post', [
         $form->getUid() => '1',
         'test' => '123',
-      ]);
+      ]));
 
       $this->assertTrue($form->isValid());
       $this->assertEquals(1, $checkedItemsNum);
@@ -281,15 +283,22 @@
       $form->input('name')->addValidator((new Required())->setError('name input error'));
       $form->input('email')->addValidator((new Required())->setError('email input error'));
 
-      $form->setData([$form->getUid() => 1]);
+      $form->handleRequestContext(new RequestContext('post', [$form->getUid() => 1]));
       $this->assertFalse($form->isValid());
       $this->assertEquals(['name input error', 'email input error'], $form->getErrors());
 
-      $form->setData([$form->getUid() => 1, 'email' => 'test@test.com']);
+      $form->handleRequestContext(new RequestContext('post', [
+        $form->getUid() => 1,
+        'email' => 'test@test.com'
+      ]));
       $this->assertFalse($form->isValid());
       $this->assertEquals(['name input error'], $form->getErrors());
 
-      $form->setData([$form->getUid() => 1, 'name' => 'testName', 'email' => 'test@test.com']);
+      $form->handleRequestContext(new RequestContext('post', [
+        $form->getUid() => 1,
+        'name' => 'testName',
+        'email' => 'test@test.com'
+      ]));
       $this->assertTrue($form->isValid());
       $this->assertEquals([], $form->getErrors());
     }
@@ -301,13 +310,18 @@
       $form->input('email');
       $form->input('age');
 
-      $form->setData(['email' => 'test@test.com', 'name' => 'petro']);
+      $form->handleRequestContext(new RequestContext('post', [
+        'email' => 'test@test.com',
+        'name' => 'petro'
+      ]));
       $this->assertEquals('test@test.com', $form->getElements()['email']->getValue());
       $this->assertEquals(['email' => 'test@test.com', 'name' => 'petro'], $form->getData());
 
-      $form->setData(['name' => 'stepan']);
-      $this->assertEquals(null, $form->getElements()['email']->getValue());
-      $this->assertEquals('stepan', $form->getElements()['name']->getValue());
+      $form->handleRequestContext(new RequestContext('post', [
+        'name' => 'stepan'
+      ]));
+      $this->assertEquals(null, $form->getElement('email')->getValue());
+      $this->assertEquals('stepan', $form->getElement('name')->getValue());
     }
 
 

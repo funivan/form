@@ -3,6 +3,7 @@
   namespace Tests\Fiv\Form\Validator;
 
   use Fiv\Form\Form;
+  use Fiv\Form\RequestContext;
 
   /**
    *
@@ -17,17 +18,17 @@
       $form->input('email')
         ->addValidator($regexpValidator);
 
-      $form->setData([
+      $form->handleRequestContext(new RequestContext('post', [
         $form->getUid() => 1,
         'email' => 'test@test',
-      ]);
+      ]));
 
       $this->assertTrue($form->isValid());
 
-      $form->setData([
+      $form->handleRequestContext(new RequestContext('post', [
         $form->getUid() => 1,
         'email' => 'test',
-      ]);
+      ]));
 
       $this->assertFalse($form->isValid());
     }

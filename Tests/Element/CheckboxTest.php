@@ -20,39 +20,46 @@
       $this->assertTrue($checkbox->isChecked());
 
       // use unchecked checkbox
-      $form->setData([
+      $form->handleRequestContext(new RequestContext('post', [
         'test_form' => 1,
-      ]);
+      ]));
 
 
-      $this->assertEquals(0, $checkbox->getValue());
+      $this->assertEmpty($checkbox->getValue());
 
-
-      $form->setData([
+      $form->handleRequestContext(new RequestContext('post', [
         'test_form' => 1,
-        'send_emails' => 0,
-      ]);
+        'send_emails' => 1,
+      ]));
 
       $this->assertEquals(1, $checkbox->getValue());
 
     }
 
 
-    public function testCheckedSubmit() {
+    public function testCheckedState() {
       $form = new Form();
       $form->setName('test_form');
       $checkbox = $form->checkbox('send_emails')->unCheck();
       $this->assertEquals(0, $checkbox->getValue());
       $this->assertFalse($checkbox->isChecked());
 
-      // use unchecked checkbox
-      $form->setData([
+      // submit checked value
+      $form->handleRequestContext(new RequestContext('post', [
         'test_form' => 1,
-        'send_emails' => 0, // any value
-      ]);
+        'send_emails' => 1,
+      ]));
 
       $this->assertEquals(1, $checkbox->getValue());
       $this->assertTrue($checkbox->isChecked());
+
+      // submit unchecked value
+      $form->handleRequestContext(new RequestContext('post', [
+        'test_form' => 1,
+        'send_emails' => 0,
+      ]));
+      $this->assertEquals(0, $checkbox->getValue());
+      $this->assertFalse($checkbox->isChecked());
     }
 
 

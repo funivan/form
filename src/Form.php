@@ -104,6 +104,8 @@
      * @deprecated
      */
     public function setData($data) {
+      trigger_error('Deprecated', E_USER_DEPRECATED);
+
       if ($data instanceof \Iterator) {
         $data = iterator_to_array($data);
       }

@@ -90,8 +90,6 @@
      * @throws \Exception
      */
     public function getData() {
-      trigger_error('Deprecated', E_USER_DEPRECATED);
-
       if ($this->data === null) {
         throw new \Exception('Data does not exist!');
       }

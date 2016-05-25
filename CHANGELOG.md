@@ -1,5 +1,19 @@
 # Changelog
 
+##[Unreleased] 2016-05-25
+### Added
+- #25 class RequestContext (alternate of `setData` function in `Form` class)
+- #25 function `handleRequest($request)` to `Form` class
+- #25 function `handleRequest($request)` to `BaseElement` class
+- #25 function `clearValue()` to `ElementInterface`
+- function `isChecked($value)` to `CheckBoxList` class
+- more tests for `\Fiv\Form\Element\...` classes
+### Deprecated
+- #25 Form method `setData` (migration to using `RequestContext` class)
+### Fixed
+- function `getValue` in CheckBoxList (always should return array)
+- Clearing each element value during handleRequest|setData process (Form class)
+
 ## [Unreleased] 0.1.0-alpha.4
 ### Added
 - #22 Store validation errors to the form

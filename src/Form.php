@@ -75,7 +75,7 @@
         $element->handleRequestContext($requestContext);
       }
 
-      $this->data = $requestContext->all();
+      $this->data = $requestContext->getData();
       $this->isSubmitted = false;
       if ($requestContext->isMethod($this->getMethod()) and $requestContext->has($this->getUid())) {
         $this->isSubmitted = true;
@@ -90,6 +90,8 @@
      * @throws \Exception
      */
     public function getData() {
+      trigger_error('Deprecated', E_USER_DEPRECATED);
+
       if ($this->data === null) {
         throw new \Exception('Data does not exist!');
       }

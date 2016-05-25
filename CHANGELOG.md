@@ -2,17 +2,17 @@
 
 ##[Unreleased] 2016-05-25
 ### Added
-- #25 class RequestContext (alternate of `setData` function in `Form` class)
-- #25 function `handleRequest($request)` to `Form` class
-- #25 function `handleRequest($request)` to `BaseElement` class
-- #25 function `clearValue()` to `ElementInterface`
-- function `isChecked($value)` to `CheckBoxList` class
-- more tests for `\Fiv\Form\Element\...` classes
+- #25 class `RequestContext`
+- #25 `Form` do not set value to each element item anymore. It just provide `RequestContext` object to elements by `Form::handleRequestContext`.
+- #25 function `Form::handleRequestContext($request)`
+- #25 function `BaseElement::handleRequestContext($request)`
+- #25 function `ElementInterface::clearValue()`
+- function `CheckBoxList::isChecked($value)` (to know is some value is checked)
 ### Deprecated
-- #25 Form method `setData` (migration to using `RequestContext` class)
+- #25 function `Form::setData` will be removed in next release. Please, use `Form::handleRequestContext`.
 ### Fixed
-- function `getValue` in CheckBoxList (always should return array)
-- Clearing each element value during handleRequest|setData process (Form class)
+- function `CheckBoxList::getValue` always should return array of values
+- Clearing each element value during `Form::handleRequestContext`|`Form:setData` process
 
 ## [Unreleased] 0.1.0-alpha.4
 ### Added

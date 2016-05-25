@@ -21,7 +21,7 @@
     /**
      * @var array
      */
-    protected $attributes = [];
+    protected $data = [];
 
 
     /**
@@ -32,17 +32,17 @@
       if (!is_string($method)) {
         throw new \InvalidArgumentException('Parameter "method" should be a string,  ' . gettype($method) . ' given.');
       }
-      $method = mb_strtoupper($method);
+      $method = strtoupper($method);
       if (!in_array($method, [self::METHOD_GET, self::METHOD_POST])) {
         throw new \InvalidArgumentException('Invalid http method name.');
       }
       $this->method = $method;
-      $this->attributes = $attributes;
+      $this->data = $attributes;
     }
 
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getMethod() {
       return $this->method;
@@ -63,7 +63,7 @@
      * @return bool
      */
     public function has($name) {
-      return isset($this->attributes[$name]);
+      return isset($this->data[$name]);
     }
 
 
@@ -72,15 +72,15 @@
      * @return mixed|null
      */
     public function get($name) {
-      return isset($this->attributes[$name]) ? $this->attributes[$name] : null;
+      return isset($this->data[$name]) ? $this->data[$name] : null;
     }
 
 
     /**
      * @return array
      */
-    public function all() {
-      return $this->attributes;
+    public function getData() {
+      return $this->data;
     }
 
 

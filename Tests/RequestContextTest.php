@@ -27,7 +27,7 @@
       $this->assertFalse($requestContext->isMethod(RequestContext::METHOD_GET));
       $this->assertTrue($requestContext->isMethod(RequestContext::METHOD_POST));
 
-      $this->assertEquals(['name' => 'petro', 'email' => 'petro@gmail.com'], $requestContext->all());
+      $this->assertEquals(['name' => 'petro', 'email' => 'petro@gmail.com'], $requestContext->getData());
 
       $this->assertEquals('petro', $requestContext->get('name'));
       $this->assertNull($requestContext->get('age'));

@@ -1,5 +1,19 @@
 # Changelog
 
+##[Unreleased] 2016-05-25
+### Added
+- #25 class `FormData`
+- #25 function `Form::handle($request)`
+- #25 function `ElementInterface::handle($request)`
+- function `CheckBoxList::isChecked($value)` (to know is some value is checked)
+- `Form` do not set value to each element item anymore. It just provide `FormData` object to elements by `Form::handle`
+
+### Deprecated
+- #25 function `Form::setData` will be removed in next release. Please, use `Form::handle`.
+
+### Fixed
+- function `CheckBoxList::getValue` always should return array of values
+
 ## [Unreleased] 0.1.0-alpha.4
 ### Added
 - #22 Store validation errors to the form

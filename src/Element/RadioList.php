@@ -8,7 +8,7 @@
    * @author  Ivan Shcherbak <dev@funivan.com>
    * @package Fiv\Form
    */
-  class RadioList extends \Fiv\Form\Element\Multiple {
+  class RadioList extends Multiple {
 
     /**
      * @return string

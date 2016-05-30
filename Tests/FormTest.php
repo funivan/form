@@ -5,6 +5,7 @@
   use Fiv\Form\Element\Input;
   use Fiv\Form\Element\TextArea;
   use Fiv\Form\Form;
+  use Fiv\Form\FormData;
   use Fiv\Form\Validator\CallBackValidator;
   use Fiv\Form\Validator\Required;
 
@@ -20,15 +21,13 @@
       $form = new Form();
       $form->input('email');
 
-      $form->setData([
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'test@test',
-      ]);
-
+      ]));
       $this->assertTrue($form->isValid());
 
-      $form->setData([]);
-
+      $form->handle(new FormData('post', []));
       $this->assertFalse($form->isValid());
     }
 
@@ -53,13 +52,15 @@
       $form = new Form();
       $form->input('email');
 
-      $form->setData([
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'other_custom_data' => 123,
         'email' => 'test@test',
-      ]);
+      ]));
 
       $this->assertEquals([
+        $form->getUid() => 1,
+        'other_custom_data' => 123,
         'email' => 'test@test',
       ], $form->getData());
 
@@ -118,7 +119,7 @@
      */
     public function testIsSubmittedFalse() {
       $form = new Form();
-      $form->setData([]);
+      $form->handle(new FormData('post', []));
       $this->assertEquals(false, $form->isSubmitted());
     }
 
@@ -129,16 +130,14 @@
     public function testIsSubmittedTrue() {
       $form = new Form();
       $form->setName('test-form');
-      $form->setData([
+      $form->handle(new FormData('post', [
         'test-form' => 1,
-      ]);
+      ]));
       $this->assertEquals(true, $form->isSubmitted());
 
       $form = new Form();
       $form->submit('test-submit', 'test-value');
-      $form->setData([
-        $form->getUid() => 1,
-      ]);
+      $form->handle(new FormData('post', [$form->getUid() => 1]));
       $this->assertEquals(true, $form->isSubmitted());
     }
 
@@ -157,18 +156,22 @@
     /**
      *
      */
-    public function testFormSetData() {
+    public function testHandleRequestContext() {
       $exception = null;
 
-      try {
-        $form = new Form();
-        $form->setName('test-form');
-        $form->setData(null);
-      } catch (\Exception $e) {
-        $exception = $e;
-      }
+      $form = new Form();
+      $form->setName('test-form');
+      $form->handle(new FormData('post', [
+        $form->getUid() => 1,
+        'other_custom_data' => 123,
+        'email' => 'test@test',
+      ]));
 
-      $this->assertNotEmpty($exception, 'Should throw exception if data not array or Iterator!');
+      $this->assertTrue($form->isSubmitted());
+      $this->assertTrue($form->isValid());
+
+      $form->handle(new FormData('post', []));
+      $this->assertFalse($form->isSubmitted());
     }
 
 
@@ -224,10 +227,10 @@
 
       $form->setElement($element);
       # emulate form submit
-      $form->setData([
+      $form->handle(new FormData('post', [
         $form->getUid() => '1',
         'test' => '123',
-      ]);
+      ]));
 
       $this->assertTrue($form->isValid());
       $this->assertEquals(1, $checkedItemsNum);
@@ -280,17 +283,76 @@
       $form->input('name')->addValidator((new Required())->setError('name input error'));
       $form->input('email')->addValidator((new Required())->setError('email input error'));
 
-      $form->setData([$form->getUid() => 1]);
+      $form->handle(new FormData('post', [$form->getUid() => 1]));
       $this->assertFalse($form->isValid());
       $this->assertEquals(['name input error', 'email input error'], $form->getErrors());
 
-      $form->setData([$form->getUid() => 1, 'email' => 'test@test.com']);
+      $form->handle(new FormData('post', [
+        $form->getUid() => 1,
+        'email' => 'test@test.com'
+      ]));
       $this->assertFalse($form->isValid());
       $this->assertEquals(['name input error'], $form->getErrors());
 
-      $form->setData([$form->getUid() => 1, 'name' => 'testName', 'email' => 'test@test.com']);
+      $form->handle(new FormData('post', [
+        $form->getUid() => 1,
+        'name' => 'testName',
+        'email' => 'test@test.com'
+      ]));
       $this->assertTrue($form->isValid());
       $this->assertEquals([], $form->getErrors());
+    }
+
+
+    public function testReSetData() {
+      $form = new Form();
+      $form->input('name');
+      $form->input('email');
+      $form->input('age');
+
+      $form->handle(new FormData('post', [
+        'email' => 'test@test.com',
+        'name' => 'petro'
+      ]));
+      $this->assertEquals('test@test.com', $form->getElements()['email']->getValue());
+      $this->assertEquals(['email' => 'test@test.com', 'name' => 'petro'], $form->getData());
+
+      $form->handle(new FormData('post', [
+        'name' => 'stepan'
+      ]));
+      $this->assertEquals(null, $form->getElement('email')->getValue());
+      $this->assertEquals('stepan', $form->getElement('name')->getValue());
+    }
+
+
+    public function testHandleRequest() {
+      $form = new Form();
+      $form->addElement((new Input())->setName('email'));
+      $form->addElement((new TextArea())->setName('description'));
+      $form->setMethod('post');
+
+      $form->handle(new FormData('post', [
+        $form->getUid() => 1,
+        'email' => 'test@test.com',
+        'description' => 'some description text'
+      ]));
+      $this->assertTrue($form->isSubmitted());
+      $this->assertEquals('test@test.com', $form->getElement('email')->getValue());
+      $this->assertEquals('some description text', $form->getElement('description')->getValue());
+
+      $form->handle(new FormData('post', [
+        $form->getUid() => 1,
+        'email' => 'test@test.com',
+      ]));
+      $this->assertTrue($form->isSubmitted());
+      $this->assertEquals('test@test.com', $form->getElement('email')->getValue());
+      $this->assertNull($form->getElement('description')->getValue());
+
+      $form->handle(new FormData('post', []));
+      $this->assertFalse($form->isSubmitted());
+      $this->assertNull($form->getElement('email')->getValue());
+      $this->assertNull($form->getElement('description')->getValue());
+
     }
 
   }

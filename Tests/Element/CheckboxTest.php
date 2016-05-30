@@ -4,6 +4,7 @@
 
   use Fiv\Form\Element\Checkbox;
   use Fiv\Form\Form;
+  use Fiv\Form\FormData;
 
   /**
    *
@@ -19,39 +20,46 @@
       $this->assertTrue($checkbox->isChecked());
 
       // use unchecked checkbox
-      $form->setData([
+      $form->handle(new FormData('post', [
         'test_form' => 1,
-      ]);
+      ]));
 
 
-      $this->assertEquals(0, $checkbox->getValue());
+      $this->assertEmpty($checkbox->getValue());
 
-
-      $form->setData([
+      $form->handle(new FormData('post', [
         'test_form' => 1,
-        'send_emails' => 0,
-      ]);
+        'send_emails' => 1,
+      ]));
 
       $this->assertEquals(1, $checkbox->getValue());
 
     }
 
 
-    public function testCheckedSubmit() {
+    public function testCheckedState() {
       $form = new Form();
       $form->setName('test_form');
       $checkbox = $form->checkbox('send_emails')->unCheck();
       $this->assertEquals(0, $checkbox->getValue());
       $this->assertFalse($checkbox->isChecked());
 
-      // use unchecked checkbox
-      $form->setData([
+      // submit checked value
+      $form->handle(new FormData('post', [
         'test_form' => 1,
-        'send_emails' => 0, // any value
-      ]);
+        'send_emails' => 1,
+      ]));
 
       $this->assertEquals(1, $checkbox->getValue());
       $this->assertTrue($checkbox->isChecked());
+
+      // submit unchecked value
+      $form->handle(new FormData('post', [
+        'test_form' => 1,
+        'send_emails' => 0,
+      ]));
+      $this->assertEquals(0, $checkbox->getValue());
+      $this->assertFalse($checkbox->isChecked());
     }
 
 
@@ -71,6 +79,16 @@
 
       $checkbox->setValue(4);
 
+    }
+
+
+    public function testHandleRequest() {
+      $checkbox = new Checkbox();
+      $checkbox->setName('test');
+      $checkbox->handle(new FormData('post', ['test' => 1]));
+      $this->assertTrue($checkbox->isChecked());
+      $checkbox->handle(new FormData('post', []));
+      $this->assertFalse($checkbox->isChecked());
     }
 
   }

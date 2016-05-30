@@ -2,10 +2,19 @@
 
   namespace Fiv\Form\Element;
 
+  use Fiv\Form\FormData;
+
   /**
    *
    */
   interface ElementInterface {
+
+    /**
+     * @param FormData $request
+     * @return $this
+     */
+    public function handle(FormData $request);
+
 
     /**
      * @param mixed $value

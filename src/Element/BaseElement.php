@@ -3,6 +3,7 @@
   namespace Fiv\Form\Element;
 
   use Fiv\Form\Filter\FilterInterface;
+  use Fiv\Form\FormData;
   use Fiv\Form\Validator;
   use Fiv\Form\Validator\ValidatorInterface;
 
@@ -11,12 +12,7 @@
    * @package Fiv\Form\Element
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class BaseElement extends \Fiv\Form\Element\Html implements ElementInterface {
-
-    /**
-     * @var null|boolean
-     */
-    protected $validationResult = null;
+  abstract class BaseElement extends Html implements ElementInterface {
 
     /**
      * @var \Fiv\Form\Validator\Base[]
@@ -37,6 +33,12 @@
      * @var null|string
      */
     protected $value = null;
+
+
+    /**
+     * @inheritdoc
+     */
+    public abstract function handle(FormData $data);
 
 
     /**
@@ -105,8 +107,6 @@
     public function setAttribute($name, $value) {
       if ($name === 'value') {
 
-        $this->validationResult = null;
-
         # apply filters to the value
         $filters = $this->getFilters();
         foreach ($filters as $filter) {
@@ -125,21 +125,15 @@
      * @return boolean
      */
     public function isValid() {
-
-      if ($this->validationResult !== null) {
-        return $this->validationResult;
-      }
-
-      $this->validationResult = true;
       $value = $this->getValue();
       foreach ($this->getValidators() as $validator) {
         $validator->flushErrors();
         if (!$validator->isValid($value)) {
-          $this->validationResult = false;
+          return false;
         }
       }
 
-      return $this->validationResult;
+      return true;
     }
 
 

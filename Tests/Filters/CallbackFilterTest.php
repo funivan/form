@@ -4,6 +4,7 @@
 
   use Fiv\Form\Filter\CallbackFilter;
   use Fiv\Form\Form;
+  use Fiv\Form\FormData;
 
   /**
    *
@@ -31,10 +32,10 @@
       $form->setName('test_form');
       $form->input('text')->addFilter(new CallbackFilter('trim'));
 
-      $form->setData([
+      $form->handle(new FormData('post', [
         'test_form' => 1,
         'text' => ' world         ',
-      ]);
+      ]));
 
       $this->assertTrue($form->isValid());
 

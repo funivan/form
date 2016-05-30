@@ -66,6 +66,26 @@
 
 
     /**
+     * @param FormData $data
+     * @return $this
+     */
+    public function handle(FormData $data) {
+      $this->cleanValidationFlag();
+      foreach ($this->getElements() as $element) {
+        $element->handle($data);
+      }
+
+      $this->data = $data->getData();
+      $this->isSubmitted = false;
+      if ($data->isMethod($this->getMethod()) and $data->has($this->getUid())) {
+        $this->isSubmitted = true;
+      }
+
+      return $this;
+    }
+
+
+    /**
      * @return array
      * @throws \Exception
      */
@@ -81,8 +101,11 @@
     /**
      * @param array|\Iterator $data
      * @throws \Exception
+     * @deprecated
      */
     public function setData($data) {
+      trigger_error('Deprecated', E_USER_DEPRECATED);
+
       if ($data instanceof \Iterator) {
         $data = iterator_to_array($data);
       }

@@ -3,6 +3,7 @@
   namespace Tests\Fiv\Form\Validator;
 
   use Fiv\Form\Form;
+  use Fiv\Form\FormData;
   use Fiv\Form\Validator\CallBackValidator;
 
   /**
@@ -19,27 +20,26 @@
       $form->input('login')
         ->addValidator($lengthValidator);
 
-      $form->setData([
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'login' => 'testLogin',
-      ]);
+      ]));
 
       $this->assertTrue($form->isValid());
       $this->assertFalse($lengthValidator->hasErrors());
 
-
-      $form->setData([
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'login' => 'tes',
-      ]);
+      ]));
 
       $this->assertFalse($form->isValid());
       $this->assertTrue($lengthValidator->hasErrors());
 
-      $form->setData([
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'login' => 'testtesttesttesttesttesttesttest',
-      ]);
+      ]));
 
       $this->assertFalse($form->isValid());
     }
@@ -66,18 +66,18 @@
       $input = $form->input('email');
       $input->addValidator($callBackValidator);
 
-      $form->setData([
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'test1@gmail.com',
-      ]);
+      ]));
 
       $this->assertFalse($form->isValid());
       $this->assertEquals('Email already exist!', $callBackValidator->getFirstError());
 
-      $form->setData([
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'new-email@gmail.com',
-      ]);
+      ]));
 
       $this->assertTrue($form->isValid());
     }

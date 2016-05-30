@@ -2,6 +2,7 @@
 
   namespace Tests\Form;
 
+  use Fiv\Form\FormData;
   use Tests\Fiv\Form\Fixtures\ExampleMessageForm;
 
 
@@ -20,21 +21,21 @@
       $form->input('emailTo');
       $form->input('message');
 
-      $form->setData([
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'emailFrom' => 'from@test.com',
         'emailTo' => 'to@test.com',
         'message' => 'new message text',
-      ]);
+      ]));
       $this->assertTrue($form->isValid());
       $this->assertEquals([], $form->getErrors());
 
-      $form->setData([
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'emailFrom' => 'from@test.com',
         'emailTo' => 'to@test.com',
         'message' => 'copy message text',
-      ]);
+      ]));
       $this->assertFalse($form->isValid());
       $this->assertEquals(['message duplicate error'], $form->getErrors());
     }

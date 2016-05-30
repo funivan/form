@@ -2,8 +2,10 @@
 
   namespace Tests\Fiv\Form\Element;
 
+  use Fiv\Form\Element\TextArea;
   use Fiv\Form\Filter\CallbackFilter;
   use Fiv\Form\Form;
+  use Fiv\Form\FormData;
 
   /**
    * @package Tests\Form\Form
@@ -47,6 +49,16 @@
 
       $element->setValue('  other value');
       $this->assertEquals('other value', $element->getValue());
+    }
+
+
+    public function testHandleRequest() {
+      $element = new TextArea();
+      $element->setName('test');
+      $element->handle(new FormData('post', ['test' => 'test text']));
+      $this->assertEquals('test text', $element->getValue());
+      $element->handle(new FormData('post', []));
+      $this->assertNull($element->getValue());
     }
 
   }

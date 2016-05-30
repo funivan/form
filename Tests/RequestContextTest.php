@@ -36,10 +36,4 @@
       $this->assertFalse($data->has('age'));
     }
 
-
-    public function testDefaultValue() {
-      $data = new FormData(FormData::METHOD_POST, []);
-      $this->assertEquals(123, $data->get('test', 123));
-      $this->assertNull($data->get('test'));
-    }
   }

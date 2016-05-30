@@ -16,12 +16,12 @@
     /**
      * @var string
      */
-    protected $method = null;
+    protected $method;
 
     /**
      * @var array
      */
-    protected $data = [];
+    protected $data;
 
 
     /**
@@ -54,7 +54,7 @@
      * @return bool
      */
     public function isMethod($method) {
-      return $this->method == mb_strtoupper($method);
+      return $this->method === strtoupper($method);
     }
 
 
@@ -69,14 +69,10 @@
 
     /**
      * @param string $name
-     * @param mixed $defaultValue
      * @return mixed|null
      */
-    public function get($name, $defaultValue = null) {
-      if (!isset($this->data[$name])) {
-        return $defaultValue;
-      }
-      return $this->data[$name];
+    public function get($name) {
+      return isset($this->data[$name]) ? $this->data[$name] : null;
     }
 
 
@@ -86,6 +82,5 @@
     public function getData() {
       return $this->data;
     }
-
 
   }

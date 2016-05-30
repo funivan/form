@@ -35,7 +35,9 @@
      * @inheritdoc
      */
     public function handle(FormData $data) {
-      $this->setValue($data->get($this->getName(), 0));
+      $value = $data->get($this->getName());
+      $value = ($value !== null) ? $value : 0;
+      $this->setValue($value);
     }
 
 

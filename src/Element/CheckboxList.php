@@ -23,7 +23,13 @@
      * @inheritdoc
      */
     public function handle(FormData $data) {
-      $values = (array) $data->get($this->getName(), []);
+      $values = $data->get($this->getName());
+      if ($values === null) {
+        $values = [];
+      } else {
+        $values = (array) $values;
+      }
+
       $this->setValue($values);
     }
 

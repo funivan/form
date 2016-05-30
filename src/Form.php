@@ -66,18 +66,18 @@
 
 
     /**
-     * @param RequestContext $requestContext
+     * @param FormData $data
      * @return $this
      */
-    public function handleRequestContext(RequestContext $requestContext) {
+    public function handle(FormData $data) {
       $this->cleanValidationFlag();
       foreach ($this->getElements() as $element) {
-        $element->handleRequestContext($requestContext);
+        $element->handle($data);
       }
 
-      $this->data = $requestContext->getData();
+      $this->data = $data->getData();
       $this->isSubmitted = false;
-      if ($requestContext->isMethod($this->getMethod()) and $requestContext->has($this->getUid())) {
+      if ($data->isMethod($this->getMethod()) and $data->has($this->getUid())) {
         $this->isSubmitted = true;
       }
 
@@ -119,7 +119,6 @@
 
       $formData = [];
       foreach ($this->elements as $element) {
-        $element->clearValue();
         $name = $element->getName();
 
         if ($element instanceof Checkbox) {

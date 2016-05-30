@@ -3,6 +3,7 @@
   namespace Fiv\Form\Element;
 
   use Fiv\Form\Element;
+  use Fiv\Form\FormData;
 
   /**
    * Generate <input type="submit" /> element
@@ -28,6 +29,14 @@
     protected $attributes = [
       'type' => 'checkbox',
     ];
+
+
+    /**
+     * @inheritdoc
+     */
+    public function handle(FormData $data) {
+      $this->setValue($data->get($this->getName(), 0));
+    }
 
 
     /**

@@ -2,6 +2,8 @@
 
   namespace Fiv\Form\Element;
 
+  use Fiv\Form\FormData;
+
   /**
    * Class TextArea
    * Generate <textarea></textarea> html tag
@@ -18,4 +20,11 @@
       return '<textarea ' . Html::renderAttributes($this->getAttributes()) . '>' . $this->getValue() . '</textarea>';
     }
 
+
+    /**
+     * @inheritdoc
+     */
+    public function handle(FormData $data) {
+      $this->setValue($data->get($this->getName()));
+    }
   }

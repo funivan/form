@@ -6,7 +6,7 @@
   use Fiv\Form\Filter\CallbackFilter;
   use Fiv\Form\Filter\RegexReplace;
   use Fiv\Form\Form;
-  use Fiv\Form\RequestContext;
+  use Fiv\Form\FormData;
 
   /**
    * @package Tests\Form\Filters
@@ -30,7 +30,7 @@
 
       $form->input('text')->addFilter(new RegexReplace('!\s{2,}!', ' '))->addFilter(new CallbackFilter('trim'));
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         'test_form' => 1,
         'text' => 'hello    world         ',
       ]));

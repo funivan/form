@@ -3,7 +3,7 @@
   namespace Fiv\Form\Element;
 
   use Fiv\Form\Filter\FilterInterface;
-  use Fiv\Form\RequestContext;
+  use Fiv\Form\FormData;
   use Fiv\Form\Validator;
   use Fiv\Form\Validator\ValidatorInterface;
 
@@ -12,12 +12,7 @@
    * @package Fiv\Form\Element
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class BaseElement extends Html implements ElementInterface {
-
-    /**
-     * @var null|boolean
-     */
-    protected $validationResult = null;
+  abstract class BaseElement extends Html implements ElementInterface {
 
     /**
      * @var \Fiv\Form\Validator\Base[]
@@ -38,6 +33,12 @@
      * @var null|string
      */
     protected $value = null;
+
+
+    /**
+     * @inheritdoc
+     */
+    public abstract function handle(FormData $data);
 
 
     /**
@@ -93,17 +94,6 @@
 
 
     /**
-     * @inheritdoc
-     */
-    public function clearValue() {
-      unset($this->attributes['value']);
-      $this->validationResult = null;
-      $this->value = null;
-      return $this;
-    }
-
-
-    /**
      * @return string
      */
     public function getValue() {
@@ -117,7 +107,6 @@
     public function setAttribute($name, $value) {
       if ($name === 'value') {
 
-        $this->validationResult = null;
         # apply filters to the value
         $filters = $this->getFilters();
         foreach ($filters as $filter) {
@@ -136,34 +125,15 @@
      * @return boolean
      */
     public function isValid() {
-
-      if ($this->validationResult !== null) {
-        return $this->validationResult;
-      }
-
-      $this->validationResult = true;
       $value = $this->getValue();
       foreach ($this->getValidators() as $validator) {
         $validator->flushErrors();
         if (!$validator->isValid($value)) {
-          $this->validationResult = false;
+          return false;
         }
       }
 
-      return $this->validationResult;
-    }
-
-
-    /**
-     * @param RequestContext $requestContext
-     * @return $this
-     */
-    public function handleRequestContext(RequestContext $requestContext) {
-      $this->clearValue();
-      if ($requestContext->has($this->getName())) {
-        $this->setValue($requestContext->get($this->getName()));
-      }
-      return $this;
+      return true;
     }
 
 

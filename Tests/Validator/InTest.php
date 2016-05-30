@@ -3,7 +3,7 @@
   namespace Tests\Fiv\Form\Validator;
 
   use Fiv\Form\Form;
-  use Fiv\Form\RequestContext;
+  use Fiv\Form\FormData;
 
   /**
    *
@@ -19,13 +19,13 @@
       $form->input('inputName')
         ->addValidator($inValidator);
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'inputName' => 'a',
       ]));
       $this->assertTrue($form->isValid());
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'inputName' => 'd',
       ]));

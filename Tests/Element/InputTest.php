@@ -5,7 +5,7 @@
 
 
   use Fiv\Form\Element\Input;
-  use Fiv\Form\RequestContext;
+  use Fiv\Form\FormData;
 
   class InputTest extends \PHPUnit_Framework_TestCase {
 
@@ -22,9 +22,9 @@
       $input = new Input();
       $input->setName('email');
 
-      $input->handleRequestContext(new RequestContext(RequestContext::METHOD_POST, ['email' => 'test@test.com']));
+      $input->handle(new FormData(FormData::METHOD_POST, ['email' => 'test@test.com']));
       $this->assertEquals('test@test.com', $input->getValue());
-      $input->handleRequestContext(new RequestContext(RequestContext::METHOD_POST, []));
+      $input->handle(new FormData(FormData::METHOD_POST, []));
       $this->assertNull($input->getValue());
     }
   }

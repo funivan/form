@@ -5,7 +5,7 @@
   use Fiv\Form\Element\TextArea;
   use Fiv\Form\Filter\CallbackFilter;
   use Fiv\Form\Form;
-  use Fiv\Form\RequestContext;
+  use Fiv\Form\FormData;
 
   /**
    * @package Tests\Form\Form
@@ -55,9 +55,9 @@
     public function testHandleRequest() {
       $element = new TextArea();
       $element->setName('test');
-      $element->handleRequestContext(new RequestContext('post', ['test' => 'test text']));
+      $element->handle(new FormData('post', ['test' => 'test text']));
       $this->assertEquals('test text', $element->getValue());
-      $element->handleRequestContext(new RequestContext('post', []));
+      $element->handle(new FormData('post', []));
       $this->assertNull($element->getValue());
     }
 

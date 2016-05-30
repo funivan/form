@@ -3,7 +3,7 @@
   namespace Tests\Fiv\Form\Validator;
 
   use Fiv\Form\Form;
-  use Fiv\Form\RequestContext;
+  use Fiv\Form\FormData;
   use Fiv\Form\Validator\Required;
   use PHPUnit_Framework_TestCase;
 
@@ -21,7 +21,7 @@
       $form->input('login')
         ->addValidator($validator);
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'login' => 'testLogin',
       ]));
@@ -29,7 +29,7 @@
       $this->assertTrue($form->isValid());
       $this->assertEmpty($validator->getErrors());
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'login' => '',
       ]));
@@ -37,7 +37,7 @@
       $this->assertFalse($form->isValid());
       $this->assertEquals('Test error message', $validator->getFirstError());
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'login' => '0',
       ]));

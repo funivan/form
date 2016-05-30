@@ -5,7 +5,7 @@
   use Fiv\Form\Element\Input;
   use Fiv\Form\Element\TextArea;
   use Fiv\Form\Form;
-  use Fiv\Form\RequestContext;
+  use Fiv\Form\FormData;
   use Fiv\Form\Validator\CallBackValidator;
   use Fiv\Form\Validator\Required;
 
@@ -21,13 +21,13 @@
       $form = new Form();
       $form->input('email');
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'test@test',
       ]));
       $this->assertTrue($form->isValid());
 
-      $form->handleRequestContext(new RequestContext('post', []));
+      $form->handle(new FormData('post', []));
       $this->assertFalse($form->isValid());
     }
 
@@ -52,7 +52,7 @@
       $form = new Form();
       $form->input('email');
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'other_custom_data' => 123,
         'email' => 'test@test',
@@ -119,7 +119,7 @@
      */
     public function testIsSubmittedFalse() {
       $form = new Form();
-      $form->handleRequestContext(new RequestContext('post', []));
+      $form->handle(new FormData('post', []));
       $this->assertEquals(false, $form->isSubmitted());
     }
 
@@ -130,14 +130,14 @@
     public function testIsSubmittedTrue() {
       $form = new Form();
       $form->setName('test-form');
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         'test-form' => 1,
       ]));
       $this->assertEquals(true, $form->isSubmitted());
 
       $form = new Form();
       $form->submit('test-submit', 'test-value');
-      $form->handleRequestContext(new RequestContext('post', [$form->getUid() => 1]));
+      $form->handle(new FormData('post', [$form->getUid() => 1]));
       $this->assertEquals(true, $form->isSubmitted());
     }
 
@@ -161,7 +161,7 @@
 
       $form = new Form();
       $form->setName('test-form');
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'other_custom_data' => 123,
         'email' => 'test@test',
@@ -170,7 +170,7 @@
       $this->assertTrue($form->isSubmitted());
       $this->assertTrue($form->isValid());
 
-      $form->handleRequestContext(new RequestContext('post', []));
+      $form->handle(new FormData('post', []));
       $this->assertFalse($form->isSubmitted());
     }
 
@@ -227,7 +227,7 @@
 
       $form->setElement($element);
       # emulate form submit
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => '1',
         'test' => '123',
       ]));
@@ -283,18 +283,18 @@
       $form->input('name')->addValidator((new Required())->setError('name input error'));
       $form->input('email')->addValidator((new Required())->setError('email input error'));
 
-      $form->handleRequestContext(new RequestContext('post', [$form->getUid() => 1]));
+      $form->handle(new FormData('post', [$form->getUid() => 1]));
       $this->assertFalse($form->isValid());
       $this->assertEquals(['name input error', 'email input error'], $form->getErrors());
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'test@test.com'
       ]));
       $this->assertFalse($form->isValid());
       $this->assertEquals(['name input error'], $form->getErrors());
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'name' => 'testName',
         'email' => 'test@test.com'
@@ -310,14 +310,14 @@
       $form->input('email');
       $form->input('age');
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         'email' => 'test@test.com',
         'name' => 'petro'
       ]));
       $this->assertEquals('test@test.com', $form->getElements()['email']->getValue());
       $this->assertEquals(['email' => 'test@test.com', 'name' => 'petro'], $form->getData());
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         'name' => 'stepan'
       ]));
       $this->assertEquals(null, $form->getElement('email')->getValue());
@@ -331,7 +331,7 @@
       $form->addElement((new TextArea())->setName('description'));
       $form->setMethod('post');
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'test@test.com',
         'description' => 'some description text'
@@ -340,7 +340,7 @@
       $this->assertEquals('test@test.com', $form->getElement('email')->getValue());
       $this->assertEquals('some description text', $form->getElement('description')->getValue());
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'test@test.com',
       ]));
@@ -348,7 +348,7 @@
       $this->assertEquals('test@test.com', $form->getElement('email')->getValue());
       $this->assertNull($form->getElement('description')->getValue());
 
-      $form->handleRequestContext(new RequestContext('post', []));
+      $form->handle(new FormData('post', []));
       $this->assertFalse($form->isSubmitted());
       $this->assertNull($form->getElement('email')->getValue());
       $this->assertNull($form->getElement('description')->getValue());

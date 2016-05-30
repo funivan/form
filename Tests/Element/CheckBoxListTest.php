@@ -5,7 +5,7 @@
 
 
   use Fiv\Form\Element\CheckboxList;
-  use Fiv\Form\RequestContext;
+  use Fiv\Form\FormData;
 
   class CheckBoxListTest extends \PHPUnit_Framework_TestCase {
 
@@ -28,7 +28,7 @@
       $element->setName('lang');
       $element->setOptions(['ru' => 'Russian', 'ua' => 'Ukrainian']);
 
-      $element->handleRequestContext(new RequestContext('post', ['lang' => ['ua']]));
+      $element->handle(new FormData('post', ['lang' => ['ua']]));
       
       $this->assertEquals(['ua'], $element->getValue());
       $this->assertTrue($element->isChecked('ua'));

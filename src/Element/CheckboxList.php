@@ -2,6 +2,8 @@
 
   namespace Fiv\Form\Element;
 
+  use Fiv\Form\FormData;
+
 
   /**
    * Class TextArea
@@ -16,6 +18,15 @@
    * @package Fiv\Form
    */
   class CheckboxList extends Multiple {
+
+    /**
+     * @inheritdoc
+     */
+    public function handle(FormData $data) {
+      $values = (array) $data->get($this->getName(), []);
+      $this->setValue($values);
+    }
+
 
     /**
      * @param array|string $data

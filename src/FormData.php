@@ -7,7 +7,7 @@
   /**
    *
    */
-  class RequestContext {
+  class FormData {
 
     CONST METHOD_GET = 'GET';
 
@@ -69,10 +69,14 @@
 
     /**
      * @param string $name
+     * @param mixed $defaultValue
      * @return mixed|null
      */
-    public function get($name) {
-      return isset($this->data[$name]) ? $this->data[$name] : null;
+    public function get($name, $defaultValue = null) {
+      if (!isset($this->data[$name])) {
+        return $defaultValue;
+      }
+      return $this->data[$name];
     }
 
 

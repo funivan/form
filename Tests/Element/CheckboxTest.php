@@ -4,7 +4,7 @@
 
   use Fiv\Form\Element\Checkbox;
   use Fiv\Form\Form;
-  use Fiv\Form\RequestContext;
+  use Fiv\Form\FormData;
 
   /**
    *
@@ -20,14 +20,14 @@
       $this->assertTrue($checkbox->isChecked());
 
       // use unchecked checkbox
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         'test_form' => 1,
       ]));
 
 
       $this->assertEmpty($checkbox->getValue());
 
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         'test_form' => 1,
         'send_emails' => 1,
       ]));
@@ -45,7 +45,7 @@
       $this->assertFalse($checkbox->isChecked());
 
       // submit checked value
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         'test_form' => 1,
         'send_emails' => 1,
       ]));
@@ -54,7 +54,7 @@
       $this->assertTrue($checkbox->isChecked());
 
       // submit unchecked value
-      $form->handleRequestContext(new RequestContext('post', [
+      $form->handle(new FormData('post', [
         'test_form' => 1,
         'send_emails' => 0,
       ]));
@@ -85,9 +85,9 @@
     public function testHandleRequest() {
       $checkbox = new Checkbox();
       $checkbox->setName('test');
-      $checkbox->handleRequestContext(new RequestContext('post', ['test' => 1]));
+      $checkbox->handle(new FormData('post', ['test' => 1]));
       $this->assertTrue($checkbox->isChecked());
-      $checkbox->handleRequestContext(new RequestContext('post', []));
+      $checkbox->handle(new FormData('post', []));
       $this->assertFalse($checkbox->isChecked());
     }
 

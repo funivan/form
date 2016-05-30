@@ -2,6 +2,8 @@
 
   namespace Fiv\Form\Element;
 
+  use Fiv\Form\FormData;
+
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 7/11/14
    */
@@ -49,5 +51,12 @@
       return $this;
     }
 
+
+    /**
+     * @inheritdoc
+     */
+    public function handle(FormData $data) {
+      $this->setValue($data->get($this->getName()));
+    }
 
   }

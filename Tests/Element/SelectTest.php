@@ -5,8 +5,8 @@
 
 
   use Fiv\Form\Element\Select;
-  use Fiv\Form\RequestContext;
-  
+  use Fiv\Form\FormData;
+
   /**
    *
    */
@@ -36,9 +36,11 @@
       $select->setName('lang');
       $select->setOptions(['ru' => 'Russian', 'ua' => 'Ukrainian']);
 
-      $select->handleRequestContext(new RequestContext('post', ['lang' => 'ru']));
+      $select->handle(new FormData('post', ['lang' => 'ru']));
       $this->assertEquals('ru', $select->getValue());
-      $select->handleRequestContext(new RequestContext('post', []));
-      $this->assertNull($select->getValue());
+      $select->handle(new FormData('post', []));
+      $this->assertEquals('ru', $select->getValue());
+      $select->handle(new FormData('post', ['lang' => 'pl']));
+      $this->assertEquals('ru', $select->getValue());
     }
   }

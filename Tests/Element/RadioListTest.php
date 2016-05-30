@@ -5,7 +5,7 @@
 
 
   use Fiv\Form\Element\RadioList;
-  use Fiv\Form\RequestContext;
+  use Fiv\Form\FormData;
 
   /**
    *
@@ -34,9 +34,11 @@
       $element->setName('lang');
       $element->setOptions(['ru' => 'Russian', 'ua' => 'Ukrainian']);
 
-      $element->handleRequestContext(new RequestContext('post', ['lang' => 'ru']));
+      $element->handle(new FormData('post', ['lang' => 'ru']));
       $this->assertEquals('ru', $element->getValue());
-      $element->handleRequestContext(new RequestContext('post', []));
-      $this->assertNull($element->getValue());
+      $element->handle(new FormData('post', []));
+      $this->assertEquals('ru', $element->getValue());
+      $element->handle(new FormData('post', ['lang' => 'pl']));
+      $this->assertEquals('ru', $element->getValue());
     }
   }

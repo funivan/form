@@ -26,9 +26,9 @@
 
     /**
      * @param string $method
-     * @param array $attributes
+     * @param array $data
      */
-    public function __construct($method, array $attributes = []) {
+    public function __construct($method, array $data = []) {
       if (!is_string($method)) {
         throw new \InvalidArgumentException('Parameter "method" should be a string,  ' . gettype($method) . ' given.');
       }
@@ -37,7 +37,7 @@
         throw new \InvalidArgumentException('Invalid http method name.');
       }
       $this->method = $method;
-      $this->data = $attributes;
+      $this->data = $data;
     }
 
 

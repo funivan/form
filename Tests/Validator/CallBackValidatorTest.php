@@ -16,6 +16,8 @@
         return strlen($value) > 3 and strlen($value) < 10;
       });
 
+      $lengthValidator->setErrorMessage('Invalid value');
+
       $form = new Form();
       $form->input('login')
         ->addValidator($lengthValidator);

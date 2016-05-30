@@ -187,10 +187,14 @@
       }
 
       $this->validationResult = true;
+
       foreach ($this->elements as $element) {
-        if (!$element->isValid()) {
-          $this->errorList = array_merge($this->errorList, $element->getValidatorsErrors());
-          $this->validationResult = false;
+        if ($element->isValid()) {
+          continue;
+        }
+
+        foreach ($element->getValidatorsErrors() as $errorMessage) {
+          $this->addError($errorMessage);
         }
       }
 

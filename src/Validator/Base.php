@@ -5,6 +5,8 @@
    */
   namespace Fiv\Form\Validator;
 
+  trigger_error('Deprecated', E_USER_DEPRECATED);
+
   /**
    * @deprecated
    * @see BaseValidator

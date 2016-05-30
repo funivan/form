@@ -2,6 +2,7 @@
 
 ##[Unreleased] 2016-05-25
 ### Added
+- Add method `Form::getErors`
 - #25 class `FormData`
 - #25 function `Form::handle($formData)`
 - #25 function `ElementInterface::handle($formData)`

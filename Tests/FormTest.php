@@ -157,8 +157,6 @@
      *
      */
     public function testHandleRequestContext() {
-      $exception = null;
-
       $form = new Form();
       $form->setName('test-form');
       $form->handle(new FormData('post', [
@@ -289,7 +287,7 @@
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
-        'email' => 'test@test.com'
+        'email' => 'test@test.com',
       ]));
       $this->assertFalse($form->isValid());
       $this->assertEquals(['name input error'], $form->getErrors());
@@ -297,7 +295,7 @@
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'name' => 'testName',
-        'email' => 'test@test.com'
+        'email' => 'test@test.com',
       ]));
       $this->assertTrue($form->isValid());
       $this->assertEquals([], $form->getErrors());
@@ -311,14 +309,16 @@
       $form->input('age');
 
       $form->handle(new FormData('post', [
+        $form->getUid() => '1',
         'email' => 'test@test.com',
-        'name' => 'petro'
+        'name' => 'petro',
       ]));
       $this->assertEquals('test@test.com', $form->getElements()['email']->getValue());
-      $this->assertEquals(['email' => 'test@test.com', 'name' => 'petro'], $form->getData());
+      $this->assertEquals(['email' => 'test@test.com', 'name' => 'petro', $form->getUid() => '1'], $form->getData());
 
       $form->handle(new FormData('post', [
-        'name' => 'stepan'
+        $form->getUid() => '1',
+        'name' => 'stepan',
       ]));
       $this->assertEquals(null, $form->getElement('email')->getValue());
       $this->assertEquals('stepan', $form->getElement('name')->getValue());
@@ -334,7 +334,7 @@
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'test@test.com',
-        'description' => 'some description text'
+        'description' => 'some description text',
       ]));
       $this->assertTrue($form->isSubmitted());
       $this->assertEquals('test@test.com', $form->getElement('email')->getValue());
@@ -348,11 +348,15 @@
       $this->assertEquals('test@test.com', $form->getElement('email')->getValue());
       $this->assertNull($form->getElement('description')->getValue());
 
-      $form->handle(new FormData('post', []));
-      $this->assertFalse($form->isSubmitted());
+      $form->handle(new FormData('post', [
+        $form->getUid() => '1',
+      ]));
+      $this->assertTrue($form->isSubmitted());
       $this->assertNull($form->getElement('email')->getValue());
       $this->assertNull($form->getElement('description')->getValue());
 
+      $form->handle(new FormData('post', []));
+      $this->assertFalse($form->isSubmitted());
     }
 
   }

@@ -71,14 +71,15 @@
      */
     public function handle(FormData $data) {
       $this->cleanValidationFlag();
-      foreach ($this->getElements() as $element) {
-        $element->handle($data);
-      }
 
-      $this->data = $data->getData();
       $this->isSubmitted = false;
       if ($data->isMethod($this->getMethod()) and $data->has($this->getUid())) {
         $this->isSubmitted = true;
+        $this->data = $data->getData();
+        foreach ($this->getElements() as $element) {
+          $element->handle($data);
+        }
+
       }
 
       return $this;

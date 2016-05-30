@@ -3,8 +3,8 @@
 ##[Unreleased] 2016-05-25
 ### Added
 - #25 class `FormData`
-- #25 function `Form::handle($request)`
-- #25 function `ElementInterface::handle($request)`
+- #25 function `Form::handle($formData)`
+- #25 function `ElementInterface::handle($formData)`
 - function `CheckBoxList::isChecked($value)` (to know is some value is checked)
 - `Form` do not set value to each element item anymore. It just provide `FormData` object to elements by `Form::handle`
 

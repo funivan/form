@@ -31,11 +31,6 @@
     protected $errorList = [];
 
     /**
-     * @var array|null
-     */
-    protected $data = null;
-
-    /**
      * @var bool
      */
     protected $isSubmitted = false;
@@ -76,7 +71,6 @@
       $this->isSubmitted = false;
       if ($data->isMethod($this->getMethod()) and $data->has($this->getUid())) {
         $this->isSubmitted = true;
-        $this->data = $data->getData();
         foreach ($this->getElements() as $element) {
           $element->handle($data);
         }
@@ -89,14 +83,13 @@
 
     /**
      * @return array
-     * @throws \Exception
      */
     public function getData() {
-      if ($this->data === null) {
-        throw new \Exception('Data does not exist!');
+      $data = [];
+      foreach ($this->getElements() as $element) {
+        $data[$element->getName()] = $element->getValue();
       }
-
-      return $this->data;
+      return $data;
     }
 
 
@@ -119,7 +112,6 @@
 
       $this->cleanValidationFlag();
 
-      $formData = [];
       foreach ($this->getElements() as $element) {
         $name = $element->getName();
 
@@ -131,13 +123,11 @@
 
         if (array_key_exists($name, $data)) {
           $element->setValue($data[$name]);
-          $formData[$name] = $element->getValue();
         }
 
       }
 
       $this->isSubmitted = isset($data[$this->getUid()]);
-      $this->data = $formData;
     }
 
 

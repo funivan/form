@@ -9,14 +9,28 @@
   interface ValidatorInterface {
 
     /**
+     * Should clear own errors before each validation
+     * @param array|string $value
+     */
+    public function isValid($value);
+
+
+    /**
      * @return array
      */
     public function getErrors();
 
 
     /**
-     * @param array|string $value
+     * @return bool
      */
-    public function isValid($value);
+    public function hasErrors();
+
+
+    /**
+     * @param string $message
+     * @return $this
+     */
+    public function addError($message);
 
   }

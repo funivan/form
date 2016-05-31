@@ -6,6 +6,7 @@
   use Fiv\Form\Element;
   use Fiv\Form\Element\Checkbox;
   use Fiv\Form\Element\CheckboxList;
+  use Fiv\Form\Element\ElementInterface;
   use Fiv\Form\Element\Submit;
   use Fiv\Form\Element\TextArea;
 
@@ -40,7 +41,7 @@
     protected $isSubmitted = false;
 
     /**
-     * @var Element\BaseElement[]
+     * @var ElementInterface[]
      */
     protected $elements = [];
 
@@ -119,7 +120,7 @@
       $this->cleanValidationFlag();
 
       $formData = [];
-      foreach ($this->elements as $element) {
+      foreach ($this->getElements() as $element) {
         $name = $element->getName();
 
         if ($element instanceof Checkbox) {
@@ -188,7 +189,7 @@
 
       $this->validationResult = true;
 
-      foreach ($this->elements as $element) {
+      foreach ($this->getElements() as $element) {
         if ($element->isValid()) {
           continue;
         }
@@ -249,7 +250,7 @@
 
 
     /**
-     * @return Element\BaseElement[]
+     * @return ElementInterface[]
      */
     public function getElements() {
       return $this->elements;
@@ -258,7 +259,7 @@
 
     /**
      * @param string $name
-     * @return Element\BaseElement
+     * @return ElementInterface
      * @throws \InvalidArgumentException
      */
     public function getElement($name) {
@@ -266,6 +267,35 @@
         throw new \InvalidArgumentException('Element with name "' . $name . '" not found');
       }
       return $this->elements[$name];
+    }
+
+
+    /**
+     * Attach element to this form. Overwrite element with same name
+     *
+     * @param ElementInterface $element
+     * @return $this
+     */
+    public function setElement(ElementInterface $element) {
+      $this->cleanValidationFlag();
+      $this->elements[$element->getName()] = $element;
+      return $this;
+    }
+
+
+    /**
+     * @param ElementInterface $element
+     * @return $this
+     * @throws \Exception
+     */
+    public function addElement(ElementInterface $element) {
+      if (isset($this->elements[$element->getName()])) {
+        throw new \Exception('Element with name ' . $element->getName() . ' is already added. Use setElement to overwrite it or change name');
+      }
+
+      $this->cleanValidationFlag();
+      $this->elements[$element->getName()] = $element;
+      return $this;
     }
 
 
@@ -406,35 +436,6 @@
 
 
     /**
-     * Attach element to this form. Overwrite element with same name
-     *
-     * @param Element\BaseElement $element
-     * @return $this
-     */
-    public function setElement(Element\BaseElement $element) {
-      $this->cleanValidationFlag();
-      $this->elements[$element->getName()] = $element;
-      return $this;
-    }
-
-
-    /**
-     * @param Element\BaseElement $element
-     * @return $this
-     * @throws \Exception
-     */
-    public function addElement(Element\BaseElement $element) {
-      if (isset($this->elements[$element->getName()])) {
-        throw new \Exception('Element with name ' . $element->getName() . ' is already added. Use setElement to overwrite it or change name');
-      }
-
-      $this->cleanValidationFlag();
-      $this->elements[$element->getName()] = $element;
-      return $this;
-    }
-
-
-    /**
      * Render full form
      *
      * @return string
@@ -452,7 +453,7 @@
     protected function renderElements() {
       $formHtml = '<dl>';
 
-      foreach ($this->elements as $element) {
+      foreach ($this->getElements() as $element) {
         # skip hidden element
         if ($element instanceof Element\Input and $element->getType() === 'hidden') {
           continue;
@@ -488,7 +489,7 @@
       $html .= $hidden->render();
 
       # render hidden element
-      foreach ($this->elements as $element) {
+      foreach ($this->getElements() as $element) {
         if ($element instanceof Element\Input and $element->getType() === 'hidden') {
           $html .= $element->render();
         }

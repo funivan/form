@@ -49,7 +49,7 @@
      * @return bool
      */
     public function isValid($value) {
-      $this->flushErrors();
+      $this->errors = [];
       
       if ($this->regexp === null) {
         return true;

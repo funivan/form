@@ -59,15 +59,6 @@
 
 
     /**
-     * @return $this
-     */
-    public function flushErrors() {
-      $this->errors = [];
-      return $this;
-    }
-
-
-    /**
      * @return null|string
      */
     public function getFirstError() {

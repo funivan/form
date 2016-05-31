@@ -95,7 +95,7 @@
      * @return bool
      */
     public function isValid($value) {
-      $this->flushErrors();
+      $this->errors = [];
 
       if ($this->exactLen !== null and mb_strlen($value, 'UTF-8') != $this->exactLen) {
         $this->addError(vsprintf($this->exactLenError, [$this->exactLen]));

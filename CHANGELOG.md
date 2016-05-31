@@ -11,6 +11,7 @@
 
 ### Removed
  - #29 Function `BaseElement::isValid()` do not execute `flushErrors()`. All validators must clear own errors before each validation.
+ - #29 Function `BaseValidator::flushErrors()`
 
 
 ##[Unreleased] 2016-05-25

@@ -31,7 +31,7 @@
      * @return bool
      */
     public function isValid($value) {
-      $this->flushErrors();
+      $this->errors = [];
 
       if (!empty($value)) {
         return true;

@@ -42,7 +42,7 @@
      * @return mixed
      */
     public function isValid($value) {
-      $this->flushErrors();
+      $this->errors = [];
       
       $result = call_user_func($this->callback, $value);
       if ($result) {

@@ -49,6 +49,8 @@
      * @return bool
      */
     public function isValid($value) {
+      $this->errors = [];
+      
       if ($this->regexp === null) {
         return true;
       }

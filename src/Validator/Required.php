@@ -31,6 +31,7 @@
      * @return bool
      */
     public function isValid($value) {
+      $this->errors = [];
 
       if (!empty($value)) {
         return true;

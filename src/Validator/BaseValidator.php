@@ -16,6 +16,7 @@
 
     /**
      * @param string $value
+     * @return bool
      */
     public abstract function isValid($value);
 
@@ -54,15 +55,6 @@
      */
     public function getErrors() {
       return $this->errors;
-    }
-
-
-    /**
-     * @return $this
-     */
-    public function flushErrors() {
-      $this->errors = [];
-      return $this;
     }
 
 

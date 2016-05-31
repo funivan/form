@@ -15,7 +15,7 @@
   abstract class BaseElement extends Html implements ElementInterface {
 
     /**
-     * @var \Fiv\Form\Validator\Base[]
+     * @var ValidatorInterface[]
      */
     protected $validators = [];
 
@@ -54,7 +54,7 @@
 
 
     /**
-     * @return \Fiv\Form\Validator\Base[]
+     * @return ValidatorInterface[]
      */
     public function getValidators() {
       return $this->validators;
@@ -127,7 +127,6 @@
     public function isValid() {
       $value = $this->getValue();
       foreach ($this->getValidators() as $validator) {
-        $validator->flushErrors();
         if (!$validator->isValid($value)) {
           return false;
         }

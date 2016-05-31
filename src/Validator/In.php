@@ -45,6 +45,7 @@
      * @return bool
      */
     public function isValid($value) {
+      $this->errors = [];
 
       if (in_array($value, $this->values)) {
         return true;

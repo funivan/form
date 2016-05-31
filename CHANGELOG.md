@@ -1,5 +1,19 @@
 # Changelog
 
+##[Unreleased] 2016-05-31
+### Added
+  - #29 Execute `BaseValidator::flushErrors()` in `BaseValidator::isValid()` function (validators)
+  - function `ElementInterface::getValue()`
+
+### Changed
+ - #29 `Form` always use `ElementInterface`, not `BaseElement`. Some functional may be inaccessible.
+ - #29 Move functions `addValidator()`, `getValidators()`, `addFilter()`, `getFilters()` from `BaseElement` to `ElementInterface`
+
+### Removed
+ - #29 Function `BaseElement::isValid()` do not execute `flushErrors()`. All validators must clear own errors before each validation.
+ - #29 Function `BaseValidator::flushErrors()`
+
+
 ##[Unreleased] 2016-05-25
 ### Added
 - Add method `Form::getErors`
@@ -14,6 +28,7 @@
 
 ### Fixed
 - function `CheckBoxList::getValue` always should return array of values
+
 
 ## [Unreleased] 0.1.0-alpha.4
 ### Added

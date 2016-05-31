@@ -1,9 +1,18 @@
 # Changelog
+## Unreleased 0.1.0-alpha.5
 
-##[Unreleased] 2016-05-31
+## 0.1.0-alpha.4 [2016-05-31]
 ### Added
   - #29 Execute `BaseValidator::flushErrors()` in `BaseValidator::isValid()` function (validators)
   - function `ElementInterface::getValue()`
+  - Add method `Form::getErors`
+  - #25 class `FormData`
+  - #25 function `Form::handle($formData)`
+  - #25 function `ElementInterface::handle($formData)`
+  - function `CheckBoxList::isChecked($value)` (to know is some value is checked)
+  - Move `setValue` from the `Form` to the element. Each element `handle` `FormData`
+  - #22 Store validation errors to the form
+  - #13 Add CallbackFilter
 
 ### Changed
  - #29 `Form` always use `ElementInterface`, not `BaseElement`. Some functional may be inaccessible.
@@ -13,29 +22,12 @@
  - #29 Function `BaseElement::isValid()` do not execute `flushErrors()`. All validators must clear own errors before each validation.
  - #29 Function `BaseValidator::flushErrors()`
 
-
-##[Unreleased] 2016-05-25
-### Added
-- Add method `Form::getErors`
-- #25 class `FormData`
-- #25 function `Form::handle($formData)`
-- #25 function `ElementInterface::handle($formData)`
-- function `CheckBoxList::isChecked($value)` (to know is some value is checked)
-- `Form` do not set value to each element item anymore. It just provide `FormData` object to elements by `Form::handle`
-
 ### Deprecated
-- #25 function `Form::setData` will be removed in next release. Please, use `Form::handle`.
+  - #25 function `Form::setData` will be removed in next release. Please, use `Form::handle`.
+  - #26 Deprecate `\Fiv\Form\Filter\Trim`
 
 ### Fixed
-- function `CheckBoxList::getValue` always should return array of values
-
-
-## [Unreleased] 0.1.0-alpha.4
-### Added
-- #22 Store validation errors to the form
-- #13 Add CallbackFilter
-### Deprecated
-- #26 Deprecate `\Fiv\Form\Filter\Trim`
+  - function `CheckBoxList::getValue` always return array of values
 
 ## 0.1.0-alpha3 [2016-03-25]
 

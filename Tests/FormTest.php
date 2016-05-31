@@ -59,8 +59,6 @@
       ]));
 
       $this->assertEquals([
-        $form->getUid() => 1,
-        'other_custom_data' => 123,
         'email' => 'test@test',
       ], $form->getData());
 
@@ -310,11 +308,18 @@
 
       $form->handle(new FormData('post', [
         $form->getUid() => '1',
-        'email' => 'test@test.com',
         'name' => 'petro',
+        'email' => 'test@test.com',
       ]));
       $this->assertEquals('test@test.com', $form->getElements()['email']->getValue());
-      $this->assertEquals(['email' => 'test@test.com', 'name' => 'petro', $form->getUid() => '1'], $form->getData());
+      $this->assertEquals(
+        [
+          'name' => 'petro',
+          'email' => 'test@test.com',
+          'age' => ''
+        ],
+        $form->getData()
+      );
 
       $form->handle(new FormData('post', [
         $form->getUid() => '1',

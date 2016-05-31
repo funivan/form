@@ -16,6 +16,7 @@
 
     /**
      * @param string $value
+     * @return bool
      */
     public abstract function isValid($value);
 

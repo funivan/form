@@ -9,8 +9,9 @@
   interface ValidatorInterface {
 
     /**
-     * Should clear own errors before each validation
+     * Must clear own errors before each validation
      * @param array|string $value
+     * @return bool
      */
     public function isValid($value);
 

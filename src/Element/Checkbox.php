@@ -36,7 +36,7 @@
      */
     public function handle(FormData $data) {
       $value = $data->get($this->getName());
-      $value = ($value !== null) ? $value : 0;
+      $value = ($value === null) ? 0 : (int) $value;
       $this->setValue($value);
     }
 

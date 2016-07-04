@@ -37,18 +37,67 @@
     }
 
 
-    public function testCheckedState() {
+    /**
+     * @return array
+     */
+    public function getTestCheckedStateDataProvider() {
+      return [
+        [
+          '1',
+          1,
+        ],
+        [
+          '0',
+          0,
+        ],
+        [
+          'ad',
+          0,
+        ],
+        [
+          1,
+          1,
+        ],
+
+
+      ];
+    }
+
+
+    /**
+     * @dataProvider getTestCheckedStateDataProvider
+     */
+    public function testTestCheckedState($input, $expect) {
       $form = new Form();
       $form->setName('test_form');
       $checkbox = $form->checkbox('send_emails')->unCheck();
+      $this->assertEquals(0, $checkbox->getValue());
+
+      // submit checked value
+      $form->handle(new FormData('post', [
+        'test_form' => 1,
+        'send_emails' => $input,
+      ]));
+
+      $this->assertEquals($expect, $checkbox->getValue());
+
+    }
+
+
+    public function testHandleStringData() {
+      $form = new Form();
+      $form->setName('test_form');
+      $checkbox = $form->checkbox('send_emails');
+
       $this->assertEquals(0, $checkbox->getValue());
       $this->assertFalse($checkbox->isChecked());
 
       // submit checked value
       $form->handle(new FormData('post', [
-        'test_form' => 1,
-        'send_emails' => 1,
+        'test_form' => '1',
+        'send_emails' => '1',
       ]));
+
 
       $this->assertEquals(1, $checkbox->getValue());
       $this->assertTrue($checkbox->isChecked());
@@ -60,6 +109,7 @@
       ]));
       $this->assertEquals(0, $checkbox->getValue());
       $this->assertFalse($checkbox->isChecked());
+
     }
 
 

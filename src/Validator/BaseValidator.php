@@ -22,17 +22,6 @@
 
 
     /**
-     * @deprecated  use new keyword instead
-     *
-     * @return Base
-     */
-    public static function i() {
-      trigger_error('Deprecated', E_USER_DEPRECATED);
-      return new static();
-    }
-
-
-    /**
      * @param string $message
      * @return $this
      */

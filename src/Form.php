@@ -7,6 +7,8 @@
   use Fiv\Form\Element\Checkbox;
   use Fiv\Form\Element\CheckboxList;
   use Fiv\Form\Element\ElementInterface;
+  use Fiv\Form\Element\RadioList;
+  use Fiv\Form\Element\Select;
   use Fiv\Form\Element\Submit;
   use Fiv\Form\Element\TextArea;
 
@@ -92,43 +94,6 @@
       return $data;
     }
 
-
-    /**
-     * @param array|\Iterator $data
-     * @throws \Exception
-     * @deprecated
-     */
-    public function setData($data) {
-      trigger_error('Deprecated', E_USER_DEPRECATED);
-
-      if ($data instanceof \Iterator) {
-        $data = iterator_to_array($data);
-      }
-
-      if (!is_array($data)) {
-        throw new \Exception('Data should be an array');
-      }
-
-
-      $this->cleanValidationFlag();
-
-      foreach ($this->getElements() as $element) {
-        $name = $element->getName();
-
-        if ($element instanceof Checkbox) {
-          $data[$name] = array_key_exists($name, $data) ? 1 : 0;
-        } elseif ($element instanceof CheckboxList) {
-          $data[$name] = isset($data[$name]) ? $data[$name] : [];
-        }
-
-        if (array_key_exists($name, $data)) {
-          $element->setValue($data[$name]);
-        }
-
-      }
-
-      $this->isSubmitted = isset($data[$this->getUid()]);
-    }
 
 
     /**
@@ -323,7 +288,7 @@
      * @return Select
      */
     public function select($name, $text = null) {
-      $select = new Element\Select();
+      $select = new Select();
       $select->setName($name);
       $select->setText($text);
       $this->addElement($select);
@@ -337,7 +302,7 @@
      * @return RadioList
      */
     public function radioList($name, $text = null) {
-      $radio = new Element\RadioList();
+      $radio = new RadioList();
       $radio->setName($name);
       $radio->setText($text);
       $this->addElement($radio);

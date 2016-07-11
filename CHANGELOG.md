@@ -1,6 +1,22 @@
 # Changelog
 ## Unreleased 0.1.0-alpha.5
 
+### Removed
+  - #33 Class Fiv\Form\Element\Base
+  - #33 Method Fiv\Form\Element\BaseElement::validate
+  - #33 Method Fiv\Form\Element\Html::__call
+  - #33 Class Fiv\Form\Filter\Base
+  - #33 Class Fiv\Form\Filter\Trim
+  - #33 Class Fiv\Form\Validator\Base
+  - #33 Class Fiv\Form\Validator\Len
+  - #33 Method Fiv\Form\Validator\BaseValidator::i
+  - #33 Class Fiv\Form\Checkbox
+  - #33 Class Fiv\Form\CheckboxList
+  - #33 Class Fiv\Form\RadioList
+  - #33 Class Fiv\Form\Select
+  - #33 Class Fiv\Form\TextArea
+  - #33 Method Fiv\Form\Form::setData
+
 ## 0.1.0-alpha.4 [2016-05-31]
 ### Added
   - #29 Execute `BaseValidator::flushErrors()` in `BaseValidator::isValid()` function (validators)

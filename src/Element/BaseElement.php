@@ -4,7 +4,6 @@
 
   use Fiv\Form\Filter\FilterInterface;
   use Fiv\Form\FormData;
-  use Fiv\Form\Validator;
   use Fiv\Form\Validator\ValidatorInterface;
 
   /**
@@ -136,13 +135,6 @@
     }
 
 
-    /**
-     * @return bool
-     */
-    public function validate() {
-      trigger_error('Deprecated. Use isValid', E_USER_DEPRECATED);
-      return $this->isValid();
-    }
 
 
     /**

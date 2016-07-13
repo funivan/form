@@ -3,8 +3,8 @@
   namespace Fiv\Form\Validator;
 
   /**
-   * @package Fiv\Form
-   * @author Ivan Shcherbak <dev@funivan.com> 2016
+   *
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   abstract class BaseValidator implements ValidatorInterface {
 

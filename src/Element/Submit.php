@@ -6,10 +6,9 @@
   namespace Fiv\Form\Element;
 
   /**
-   * Class Submit
    * Generate <input type="submit" /> element
    *
-   * @package Fiv\Form
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   class Submit extends \Fiv\Form\Element\Input {
 

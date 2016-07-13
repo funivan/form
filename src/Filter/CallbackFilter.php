@@ -3,7 +3,7 @@
   namespace Fiv\Form\Filter;
 
   /**
-   *
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   class CallbackFilter implements FilterInterface {
 

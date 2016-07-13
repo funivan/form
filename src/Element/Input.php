@@ -5,7 +5,8 @@
   use Fiv\Form\FormData;
 
   /**
-   * @author Ivan Shcherbak <dev@funivan.com> 7/11/14
+   *
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   class Input extends BaseElement {
 
@@ -57,6 +58,7 @@
      */
     public function handle(FormData $data) {
       $this->setValue($data->get($this->getName()));
+      return $this;
     }
 
   }

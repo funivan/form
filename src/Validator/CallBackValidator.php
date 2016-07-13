@@ -4,7 +4,7 @@
 
   /**
    *
-   * @package Fiv\Form\Validator
+   * @author Vitaly Sevastyanov
    */
   class CallBackValidator extends BaseValidator {
 
@@ -43,7 +43,7 @@
      */
     public function isValid($value) {
       $this->errors = [];
-      
+
       $result = call_user_func($this->callback, $value);
       if ($result) {
         return true;

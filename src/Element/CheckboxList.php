@@ -6,7 +6,6 @@
 
 
   /**
-   * Class TextArea
    * Generate
    * ```html
    * <input type="checkbox" name="languages[]" value="en">
@@ -14,8 +13,7 @@
    * ```
    * html tags
    *
-   * @author  Ivan Shcherbak <dev@funivan.com>
-   * @package Fiv\Form
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   class CheckboxList extends Multiple {
 
@@ -31,11 +29,12 @@
       }
 
       $this->setValue($values);
+      return $this;
     }
 
 
     /**
-     * @param array|string $data
+     * @param mixed $data
      * @return $this
      */
     public function setValue($data) {
@@ -75,7 +74,7 @@
     /**
      * Alias of setValue
      *
-     * @param string[] $values
+     * @param mixed $values
      * @return $this
      */
     public function setChecked($values) {

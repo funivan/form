@@ -3,7 +3,7 @@
   namespace Fiv\Form\Element;
 
   /**
-   * @author Ivan Shcherbak <dev@funivan.com> 7/11/14
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   class Password extends Input {
 
@@ -23,4 +23,4 @@
       return parent::render();
     }
 
-  } 
+  }

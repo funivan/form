@@ -3,8 +3,7 @@
 
 
   /**
-   *
-   * @package Fiv\Form\Validator
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   interface ValidatorInterface {
 

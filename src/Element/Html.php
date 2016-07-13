@@ -4,8 +4,7 @@
 
   /**
    *
-   * @author  Ivan Shcherbak <dev@funivan.com>
-   * @package Fiv\Form\Html
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   class Html {
 
@@ -67,10 +66,10 @@
      *
      * @param string $tag
      * @param array $attributes
-     * @param bool $content
+     * @param string|null $content
      * @return string
      */
-    public static function tag($tag, array $attributes, $content = null) {
+    public static function tag($tag, array $attributes = [], $content = null) {
       $html = '<' . $tag . ' ' . static::renderAttributes($attributes);
 
       if ($content !== null) {

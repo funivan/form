@@ -3,9 +3,8 @@
 
   namespace Fiv\Form;
 
-
   /**
-   *
+   * @author Vitaly Sevastyanov
    */
   class FormData {
 

@@ -6,7 +6,6 @@
    * Check if value not empty
    * Algorithm based on value length
    *
-   * @package Fiv\Form\Validator
    */
   class Required extends BaseValidator {
 

@@ -4,8 +4,7 @@
 
 
   /**
-   * @author  Ivan Shcherbak <dev@funivan.com>
-   * @package Fiv\Form\Validator
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   class In extends BaseValidator {
 

@@ -9,7 +9,6 @@
    * Generate <input type="submit" /> element
    *
    * @author Ivan Shcherbak <dev@funivan.com>
-   * @package Fiv\Form
    */
   class Checkbox extends Element\Input {
 
@@ -38,6 +37,7 @@
       $value = $data->get($this->getName());
       $value = ($value === null) ? 0 : (int) $value;
       $this->setValue($value);
+      return $this;
     }
 
 

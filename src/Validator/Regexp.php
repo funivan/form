@@ -3,7 +3,7 @@
   namespace Fiv\Form\Validator;
 
   /**
-   * @author Ivan Shcherbak <dev@funivan.com> 7/11/14
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   class Regexp extends BaseValidator {
 
@@ -50,7 +50,7 @@
      */
     public function isValid($value) {
       $this->errors = [];
-      
+
       if ($this->regexp === null) {
         return true;
       }

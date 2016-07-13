@@ -3,13 +3,10 @@
   namespace Fiv\Form\Element;
 
   use Fiv\Form\Filter\FilterInterface;
-  use Fiv\Form\FormData;
   use Fiv\Form\Validator\ValidatorInterface;
 
   /**
-   * @method addFilters
-   * @package Fiv\Form\Element
-   * @author Ivan Shcherbak <dev@funivan.com> 2016
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   abstract class BaseElement extends Html implements ElementInterface {
 
@@ -35,12 +32,6 @@
 
 
     /**
-     * @inheritdoc
-     */
-    public abstract function handle(FormData $data);
-
-
-    /**
      * Attach validator to current element
      *
      * @param ValidatorInterface $validator
@@ -63,7 +54,6 @@
     /**
      *
      * @param FilterInterface $filter
-     * @throws \Exception
      * @return $this
      */
     public function addFilter(FilterInterface $filter) {

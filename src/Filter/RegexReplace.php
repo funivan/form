@@ -7,7 +7,7 @@
 
   /**
    *
-   * @package Fiv\Form\Filter
+   *
    */
   class RegexReplace implements FilterInterface {
 
@@ -25,7 +25,6 @@
     /**
      * @param string $from
      * @param string $to
-     * @return \Fiv\Form\Filter\RegexReplace
      */
     public function __construct($from, $to = '') {
       $this->from = $from;

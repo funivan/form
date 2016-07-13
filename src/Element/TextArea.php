@@ -5,11 +5,9 @@
   use Fiv\Form\FormData;
 
   /**
-   * Class TextArea
    * Generate <textarea></textarea> html tag
    *
-   * @author  Ivan Shcherbak <dev@funivan.com>
-   * @package Fiv\Form
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   class TextArea extends BaseElement {
 
@@ -26,5 +24,6 @@
      */
     public function handle(FormData $data) {
       $this->setValue($data->get($this->getName()));
+      return $this;
     }
   }

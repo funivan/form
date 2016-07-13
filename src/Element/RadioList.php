@@ -5,8 +5,7 @@
   /**
    * Generate <input type="radio"> html tag
    *
-   * @author  Ivan Shcherbak <dev@funivan.com>
-   * @package Fiv\Form
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   class RadioList extends Multiple {
 

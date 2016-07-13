@@ -5,8 +5,7 @@
   /**
    * Generate <select></select> html tag
    *
-   * @author  Ivan Shcherbak <dev@funivan.com>
-   * @package Fiv\Form
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   class Select extends Multiple {
 

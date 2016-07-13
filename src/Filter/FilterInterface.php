@@ -7,8 +7,8 @@
    *
    * If user add some whitespaces you can apply trim filter
    *
-   * @author  Ivan Shcherbak <dev@funivan.com>
-   * @package Fiv\Form
+   * @author Ivan Shcherbak <dev@funivan.com>
+   *
    */
   interface FilterInterface {
 

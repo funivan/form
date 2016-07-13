@@ -7,7 +7,7 @@
   use Fiv\Form\Validator\ValidatorInterface;
 
   /**
-   *
+   * @author Ivan Shcherbak <dev@funivan.com>
    */
   interface ElementInterface {
 

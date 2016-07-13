@@ -135,8 +135,6 @@
     }
 
 
-
-
     /**
      * @return array
      */
@@ -159,17 +157,6 @@
       $value = $this->getValue();
       $this->attributes['value'] = htmlentities($value, ENT_QUOTES);
       return parent::render();
-    }
-
-
-    /**
-     * @deprecated
-     * @see addValidator
-     * @return $this
-     */
-    public function required() {
-      trigger_error('Deprecated', E_USER_DEPRECATED);
-      return $this->addValidator(new \Fiv\Form\Validator\Required());
     }
 
 

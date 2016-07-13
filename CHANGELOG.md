@@ -4,7 +4,9 @@
 ### Removed
   - #33 Class Fiv\Form\Element\Base
   - #33 Method Fiv\Form\Element\BaseElement::validate
+  - #33 Method Fiv\Form\BaseElement::required
   - #33 Method Fiv\Form\Element\Html::__call
+  - #33 Method Fiv\Form\Element\Html::getAttributesAsString
   - #33 Class Fiv\Form\Filter\Base
   - #33 Class Fiv\Form\Filter\Trim
   - #33 Class Fiv\Form\Validator\Base

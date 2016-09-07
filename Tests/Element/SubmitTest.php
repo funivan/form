@@ -28,4 +28,17 @@
 
       static::assertFalse($submitElement->isSubmitted());
     }
+
+
+    public function testGetValue() {
+      $form = new Form();
+      $submitElement = $form->submit('submit', 'label');
+
+      $form->handle(new FormData('post', [
+        $form->getUid() => 1,
+        'submit' => '',
+      ]));
+
+      static::assertEquals('label', $submitElement->getValue());
+    }
   }

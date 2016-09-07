@@ -10,7 +10,7 @@
   class SubmitTest extends \PHPUnit_Framework_TestCase {
 
 
-    public function testElementRendering() {
+    public function testIsSubmitted() {
       $form = new Form();
       $submitElement = $form->submit('submit', 'label');
 

@@ -31,7 +31,7 @@
      * @inheritdoc
      */
     public function handle(FormData $data) {
-      $this->isSubmitted = !empty($data->get($this->getName()));
+      $this->isSubmitted = $data->get($this->getName()) !== null;
     }
 
 

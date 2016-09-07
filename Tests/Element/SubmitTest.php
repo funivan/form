@@ -12,21 +12,17 @@
 
     public function testIsSubmitted() {
       $form = new Form();
-      $submitElement = $form->submit('submit', 'label');
+      $loginElement = $form->submit('login', 'label login');
+      $resendElement = $form->submit('resend', 'label resend');
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
-        'submit' => 'label',
+        'login' => null,
+        'resend' => 'label resend',
       ]));
 
-      static::assertTrue($submitElement->isSubmitted());
-
-      $form->handle(new FormData('post', [
-        $form->getUid() => 1,
-        'submit' => '',
-      ]));
-
-      static::assertFalse($submitElement->isSubmitted());
+      static::assertFalse($loginElement->isSubmitted());
+      static::assertTrue($resendElement->isSubmitted());
     }
 
 

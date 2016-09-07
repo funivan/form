@@ -5,6 +5,8 @@
    */
   namespace Fiv\Form\Element;
 
+  use Fiv\Form\FormData;
+
   /**
    * Generate <input type="submit" /> element
    *
@@ -19,5 +21,25 @@
       'type' => 'submit',
     ];
 
+    /**
+     * @var bool
+     */
+    private $isSubmitted = false;
+
+
+    /**
+     * @inheritdoc
+     */
+    public function handle(FormData $data) {
+      $this->isSubmitted = $data->get($this->getName()) !== null;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function isSubmitted() {
+      return $this->isSubmitted;
+    }
 
   }

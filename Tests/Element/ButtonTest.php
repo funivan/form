@@ -8,7 +8,7 @@
 
   class ButtonTest extends \PHPUnit_Framework_TestCase {
 
-    protected function createTestButton() : Button {
+    protected function createTestButton() {
       $button = new Button();
       $button->setName('testButton');
       $button->setType(Button::TYPE_SUBMIT);

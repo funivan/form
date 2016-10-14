@@ -66,7 +66,7 @@
      */
     public function render() {
       $html = '<button ' . Html::renderAttributes($this->getAttributes()) . ' >';
-      $html .= ($this->getText() ?? 'Submit');
+      $html .= ($this->getText() ?: 'Submit');
       $html .= '</button>';
 
       return $html;

@@ -32,6 +32,9 @@
     }
 
 
+    /**
+     * @return bool
+     */
     public function isSubmitted() {
       if ($this->getAttribute('type') != self::TYPE_SUBMIT) {
         return false;
@@ -40,7 +43,11 @@
     }
 
 
-    public function setType(string $type) {
+    /**
+     * @param string $type
+     * @return $this
+     */
+    public function setType($type) {
       if (!in_array($type, [
         self::TYPE_BUTTON,
         self::TYPE_RESET,
@@ -50,10 +57,14 @@
         throw new \InvalidArgumentException('Invalid button type: ' . $type);
       }
       $this->setAttribute('type', $type);
+      return $this;
     }
 
 
-    public function render() : string {
+    /**
+     * @return string
+     */
+    public function render() {
       $html = '<button ' . Html::renderAttributes($this->getAttributes()) . ' >';
       $html .= ($this->getText() ?? 'Submit');
       $html .= '</button>';

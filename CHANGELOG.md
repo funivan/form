@@ -1,6 +1,10 @@
 # Changelog
-## Unreleased 0.1.0-alpha.5
 
+## Unreleased 0.1.0-alpha.6
+### Added
+  - #43 `Button` element
+
+## 0.1.0-alpha.5 [2016-09-07]
 ### Removed
   - #33 Class Fiv\Form\Element\Base
   - #33 Method Fiv\Form\Element\BaseElement::validate

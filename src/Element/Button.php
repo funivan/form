@@ -6,13 +6,19 @@
 
   class Button extends BaseElement {
 
-    // just a button
+    /**
+     * just a button
+     */
     const TYPE_BUTTON = 'button';
 
-    // reset value from each element in form
+    /**
+     * reset value from each element in form
+     */
     const TYPE_RESET = 'reset';
 
-    // submit form
+    /**
+     * submit form
+     */
     const TYPE_SUBMIT = 'submit';
 
     protected $isSubmitted = false;
@@ -66,7 +72,7 @@
      */
     public function render() {
       $html = '<button ' . Html::renderAttributes($this->getAttributes()) . ' >';
-      $html .= ($this->getText() ?: 'Submit');
+      $html .= ($this->getText() ?: 'Button');
       $html .= '</button>';
 
       return $html;

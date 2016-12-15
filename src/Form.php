@@ -84,19 +84,6 @@
 
 
     /**
-     * @return array
-     */
-    public function getData() {
-      $data = [];
-      foreach ($this->getElements() as $element) {
-        $data[$element->getName()] = $element->getValue();
-      }
-      return $data;
-    }
-
-
-
-    /**
      * @return string
      */
     public function getMethod() {

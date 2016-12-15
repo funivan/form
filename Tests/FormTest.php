@@ -48,26 +48,6 @@
     /**
      *
      */
-    public function testData() {
-      $form = new Form();
-      $form->input('email');
-
-      $form->handle(new FormData('post', [
-        $form->getUid() => 1,
-        'other_custom_data' => 123,
-        'email' => 'test@test',
-      ]));
-
-      $this->assertEquals([
-        'email' => 'test@test',
-      ], $form->getData());
-
-    }
-
-
-    /**
-     *
-     */
     public function testGetElements() {
       $form = new Form();
       $this->assertEmpty($form->getElements());
@@ -302,9 +282,9 @@
 
     public function testReSetData() {
       $form = new Form();
-      $form->input('name');
-      $form->input('email');
-      $form->input('age');
+      $nameElement = $form->input('name');
+      $emailElement = $form->input('email');
+      $ageElement = $form->input('age');
 
       $form->handle(new FormData('post', [
         $form->getUid() => '1',
@@ -314,11 +294,15 @@
       $this->assertEquals('test@test.com', $form->getElements()['email']->getValue());
       $this->assertEquals(
         [
-          'name' => 'petro',
-          'email' => 'test@test.com',
-          'age' => ''
+          'petro',
+          'test@test.com',
+          '',
         ],
-        $form->getData()
+        [
+          $nameElement->getValue(),
+          $emailElement->getValue(),
+          $ageElement->getValue(),
+        ]
       );
 
       $form->handle(new FormData('post', [

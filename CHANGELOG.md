@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased 0.1.0-alpha.6
+## 0.1.0-alpha.7 [Unreleased]
+### Removed
+  - #45 Remove method `Form::getData`
+  
+## 0.1.0-alpha.6 [2016-10-17]
 ### Added
   - #43 `Button` element
 

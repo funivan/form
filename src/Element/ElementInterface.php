@@ -2,20 +2,14 @@
 
   namespace Fiv\Form\Element;
 
+  use Fiv\Form\Elements\ElementInterface as BaseElementInterface;
   use Fiv\Form\Filter\FilterInterface;
-  use Fiv\Form\FormData;
   use Fiv\Form\Validator\ValidatorInterface;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com>
    */
-  interface ElementInterface {
-
-    /**
-     * @param FormData $request
-     * @return $this
-     */
-    public function handle(FormData $request);
+  interface ElementInterface extends BaseElementInterface {
 
 
     /**
@@ -71,12 +65,6 @@
      * @return $this
      */
     public function setValue($value);
-
-
-    /**
-     * @return string
-     */
-    public function getName();
 
 
     /**

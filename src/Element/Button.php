@@ -23,10 +23,9 @@
 
     protected $isSubmitted = false;
 
-
-    public function __construct() {
-      $this->setAttribute('type', self::TYPE_BUTTON);
-    }
+    protected $attributes = [
+      'type' => self::TYPE_BUTTON,
+    ];
 
 
     /**

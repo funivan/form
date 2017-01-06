@@ -12,72 +12,28 @@
    */
   class Checkbox extends Element\Input {
 
-    /**
-     * @var int
-     */
-    protected $value = 0;
+    protected $attributes = [
+      'type' => 'checkbox',
+    ];
 
     /**
      * @var string
      */
     protected $label = '';
 
-    /**
-     * @var array
-     */
-    protected $attributes = [
-      'type' => 'checkbox',
-    ];
+    protected $isChecked = false;
+
+
+    public function isValid() {
+      return true;
+    }
 
 
     /**
      * @inheritdoc
      */
     public function handle(FormData $data) {
-      $value = $data->get($this->getName());
-      $value = ($value === null) ? 0 : (int) $value;
-      $this->setValue($value);
-      return $this;
-    }
-
-
-    /**
-     * Value in checkbox can be true or false
-     *
-     * @param int $value
-     * @return $this
-     */
-    public function setValue($value) {
-      if ($value !== 1 and $value !== 0) {
-        throw new \InvalidArgumentException('Expect int: 1 or 0');
-      }
-
-      if ($value === 1) {
-        return $this->check();
-      } else {
-        return $this->unCheck();
-      }
-
-    }
-
-
-    /**
-     * @return $this
-     */
-    public function check() {
-      $this->setAttribute('checked', 'checked');
-      parent::setValue(1);
-      return $this;
-    }
-
-
-    /**
-     * Set value to 0
-     * @return $this
-     */
-    public function unCheck() {
-      $this->removeAttribute('checked');
-      parent::setValue(0);
+      $this->setChecked($data->has($this->getName()));
       return $this;
     }
 
@@ -86,7 +42,44 @@
      * @return bool
      */
     public function isChecked() {
-      return $this->getValue() === 1;
+      return $this->isChecked;
+    }
+
+
+    /**
+     * @param bool $isChecked
+     * @return $this
+     */
+    public function setChecked($isChecked) {
+      $this->isChecked = ($isChecked === true);
+      if ($this->isChecked) {
+        $this->setAttribute('checked', 'checked');
+      } else {
+        $this->removeAttribute('checked');
+      }
+      return $this;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function setAttribute($name, $value) {
+      if ($name == 'checked') {
+        $this->isChecked = true;
+      }
+      return parent::setAttribute($name, $value);
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function removeAttribute($name) {
+      if ($name == 'checked') {
+        $this->isChecked = false;
+      }
+      return parent::removeAttribute($name);
     }
 
 
@@ -104,7 +97,47 @@
      * @return string
      */
     public function render() {
-      return '<label>' . parent::render() . $this->label . '</label>';
+      return '<label>' . static::tag($this->tag, $this->attributes) . $this->label . '</label>';
+    }
+
+
+    /**
+     * @return $this
+     * @deprecated
+     */
+    public function check() {
+      trigger_error('Deprecated', E_USER_DEPRECATED);
+      $this->setChecked(true);
+      return $this;
+    }
+
+
+    /**
+     * Set value to 0
+     * @return $this
+     * @deprecated
+     */
+    public function unCheck() {
+      trigger_error('Deprecated', E_USER_DEPRECATED);
+      $this->setChecked(false);
+      return $this;
+    }
+
+
+    /**
+     * @deprecated
+     */
+    public function getValue() {
+      return $this->isChecked() ? 1 : 0;
+    }
+
+
+    /**
+     * @deprecated
+     */
+    public function setValue($value) {
+      trigger_error('Deprecated', E_USER_DEPRECATED);
+      return parent::setValue($value);
     }
 
   }

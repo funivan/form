@@ -2,14 +2,14 @@
 
   namespace Fiv\Form\Element;
 
-  use Fiv\Form\Elements\ElementInterface as BaseElementInterface;
+  use Fiv\Form\Elements\DataElementInterface;
   use Fiv\Form\Filter\FilterInterface;
   use Fiv\Form\Validator\ValidatorInterface;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com>
    */
-  interface ElementInterface extends BaseElementInterface {
+  interface ElementInterface extends DataElementInterface {
 
 
     /**

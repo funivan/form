@@ -30,19 +30,19 @@
 ## 0.1.0-alpha.4 [2016-05-31]
 ### Added
   - #29 Execute `BaseValidator::flushErrors()` in `BaseValidator::isValid()` function (validators)
-  - function `ElementInterface::getValue()`
+  - function `DataElementInterface::getValue()`
   - Add method `Form::getErors`
   - #25 class `FormData`
   - #25 function `Form::handle($formData)`
-  - #25 function `ElementInterface::handle($formData)`
+  - #25 function `DataElementInterface::handle($formData)`
   - function `CheckBoxList::isChecked($value)` (to know is some value is checked)
   - Move `setValue` from the `Form` to the element. Each element `handle` `FormData`
   - #22 Store validation errors to the form
   - #13 Add CallbackFilter
 
 ### Changed
- - #29 `Form` always use `ElementInterface`, not `BaseElement`. Some functional may be inaccessible.
- - #29 Move functions `addValidator()`, `getValidators()`, `addFilter()`, `getFilters()` from `BaseElement` to `ElementInterface`
+ - #29 `Form` always use `DataElementInterface`, not `BaseElement`. Some functional may be inaccessible.
+ - #29 Move functions `addValidator()`, `getValidators()`, `addFilter()`, `getFilters()` from `BaseElement` to `DataElementInterface`
 
 ### Removed
  - #29 Function `BaseElement::isValid()` do not execute `flushErrors()`. All validators must clear own errors before each validation.

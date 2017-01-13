@@ -10,7 +10,7 @@
    *
    * @author Ivan Shcherbak <dev@funivan.com>
    */
-  interface ElementInterface {
+  interface DataElementInterface {
 
     /**
      * @param FormData $request

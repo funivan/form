@@ -38,19 +38,12 @@
     }
 
 
-    /**
-     * @return bool
-     */
-    public function isChecked() {
+    public function isChecked() : bool {
       return $this->isChecked;
     }
 
 
-    /**
-     * @param bool $isChecked
-     * @return $this
-     */
-    public function setChecked($isChecked) {
+    public function setChecked(bool $isChecked) : self {
       $this->isChecked = ($isChecked === true);
       if ($this->isChecked) {
         $this->setAttribute('checked', 'checked');
@@ -101,27 +94,7 @@
     }
 
 
-    /**
-     * @return $this
-     * @deprecated
-     */
-    public function check() {
-      trigger_error('Deprecated', E_USER_DEPRECATED);
-      $this->setChecked(true);
-      return $this;
-    }
 
-
-    /**
-     * Set value to 0
-     * @return $this
-     * @deprecated
-     */
-    public function unCheck() {
-      trigger_error('Deprecated', E_USER_DEPRECATED);
-      $this->setChecked(false);
-      return $this;
-    }
 
 
     /**

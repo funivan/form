@@ -17,7 +17,7 @@
     const TYPE_RESET = 'reset';
 
     /**
-     * submit form
+     * Submit form
      */
     const TYPE_SUBMIT = 'submit';
 
@@ -32,36 +32,25 @@
      * @return $this
      */
     public function handle(FormData $request) {
-      $this->isSubmitted = $request->get($this->getName()) !== null;
+      $this->isSubmitted = $request->has($this->getName());
       return $this;
     }
 
 
-    /**
-     * @return bool
-     */
-    public function isSubmitted() {
-      if ($this->getAttribute('type') != self::TYPE_SUBMIT) {
+    public function isSubmitted() : bool {
+      if ($this->getAttribute('type') !== self::TYPE_SUBMIT) {
         return false;
       }
       return $this->isSubmitted;
     }
 
 
-    /**
-     * @param string $type
-     * @return $this
-     */
-    public function setType($type) {
-      if (!in_array($type, [
-        self::TYPE_BUTTON,
-        self::TYPE_RESET,
-        self::TYPE_SUBMIT,
-      ])
-      ) {
+    public function setType(string $type) : self {
+      if (!in_array($type, [self::TYPE_BUTTON, self::TYPE_RESET, self::TYPE_SUBMIT])) {
         throw new \InvalidArgumentException('Invalid button type: ' . $type);
       }
       $this->setAttribute('type', $type);
+
       return $this;
     }
 

@@ -31,14 +31,11 @@
      * @inheritdoc
      */
     public function handle(FormData $data) {
-      $this->isSubmitted = $data->get($this->getName()) !== null;
+      $this->isSubmitted = $data->has($this->getName());
     }
 
 
-    /**
-     * @return bool
-     */
-    public function isSubmitted() {
+    public function isSubmitted() : bool {
       return $this->isSubmitted;
     }
 

@@ -13,27 +13,22 @@
 
 
     public function testUncheckedSubmit() {
+      $checkbox = new Checkbox();
+      $checkbox->setName('send_emails');
+      $this->assertFalse($checkbox->isChecked());
+
+      $checkbox->setChecked(true);
+      $this->assertTrue($checkbox->isChecked());
+
       $form = new Form();
       $form->setName('test_form');
-      $checkbox = $form->checkbox('send_emails')->check();
-      $this->assertEquals(1, $checkbox->getValue());
-      $this->assertTrue($checkbox->isChecked());
+      $form->addElement($checkbox);
 
       // use unchecked checkbox
       $form->handle(new FormData('post', [
         'test_form' => 1,
       ]));
-
-
-      $this->assertEmpty($checkbox->getValue());
-
-      $form->handle(new FormData('post', [
-        'test_form' => 1,
-        'send_emails' => 1,
-      ]));
-
-      $this->assertEquals(1, $checkbox->getValue());
-
+      $this->assertFalse($checkbox->isChecked());
     }
 
 
@@ -43,23 +38,20 @@
     public function getTestCheckedStateDataProvider() {
       return [
         [
-          '1',
-          1,
+          1
         ],
         [
-          '0',
-          0,
+          '1'
         ],
         [
-          'ad',
-          0,
+          'on'
         ],
         [
-          1,
-          1,
+          0
         ],
-
-
+        [
+          '0'
+        ],
       ];
     }
 
@@ -67,68 +59,30 @@
     /**
      * @dataProvider getTestCheckedStateDataProvider
      */
-    public function testTestCheckedState($input, $expect) {
+    public function testTestCheckedState($value) {
+      $checkbox = new Checkbox();
+      $checkbox->setName('send_emails');
+
       $form = new Form();
       $form->setName('test_form');
-      $checkbox = $form->checkbox('send_emails')->unCheck();
-      $this->assertEquals(0, $checkbox->getValue());
+      $form->addElement($checkbox);
 
-      // submit checked value
-      $form->handle(new FormData('post', [
-        'test_form' => 1,
-        'send_emails' => $input,
-      ]));
-
-      $this->assertEquals($expect, $checkbox->getValue());
-
-    }
-
-
-    public function testHandleStringData() {
-      $form = new Form();
-      $form->setName('test_form');
-      $checkbox = $form->checkbox('send_emails');
-
-      $this->assertEquals(0, $checkbox->getValue());
       $this->assertFalse($checkbox->isChecked());
 
       // submit checked value
       $form->handle(new FormData('post', [
-        'test_form' => '1',
-        'send_emails' => '1',
+        'test_form' => 1,
+        'send_emails' => $value,
       ]));
 
-
-      $this->assertEquals(1, $checkbox->getValue());
       $this->assertTrue($checkbox->isChecked());
-
-      // submit unchecked value
-      $form->handle(new FormData('post', [
-        'test_form' => 1,
-        'send_emails' => 0,
-      ]));
-      $this->assertEquals(0, $checkbox->getValue());
-      $this->assertFalse($checkbox->isChecked());
-
     }
 
 
     public function testRender() {
       $checkbox = new Checkbox();
       $checkbox->setName('send_emails');
-      $this->assertContains('<input type="checkbox" name="send_emails" value="0" ', $checkbox->render());
-    }
-
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidValue() {
-      $checkbox = new Checkbox();
-      $this->assertFalse($checkbox->isChecked());
-
-      $checkbox->setValue(4);
-
+      $this->assertContains('<input type="checkbox" name="send_emails" ', $checkbox->render());
     }
 
 
@@ -139,6 +93,24 @@
       $this->assertTrue($checkbox->isChecked());
       $checkbox->handle(new FormData('post', []));
       $this->assertFalse($checkbox->isChecked());
+    }
+    
+    
+    public function testIsValid(){
+      $checkbox = new Checkbox();
+      $checkbox->setName('send_emails');
+
+      $form = new Form();
+      $form->setName('test_form');
+      $form->addElement($checkbox);
+
+      // submit checked value
+      $form->handle(new FormData('post', [
+        'test_form' => 1,
+        'send_emails' => 'on',
+      ]));
+      
+      $this->assertTrue($form->isValid());
     }
 
   }

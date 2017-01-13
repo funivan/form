@@ -1,6 +1,9 @@
 # Changelog
 
 ## 0.1.0-alpha.7 [Unreleased]
+### Changed
+  - Drop support of the php 5.6 Minimum version is php 7.0
+  
 ### Removed
   - #45 Remove method `Form::getData`
   

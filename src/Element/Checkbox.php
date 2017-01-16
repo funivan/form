@@ -2,7 +2,7 @@
 
   namespace Fiv\Form\Element;
 
-  use Fiv\Form\Element;
+  use Fiv\Form\Elements\DataElementInterface;
   use Fiv\Form\FormData;
 
   /**
@@ -10,7 +10,7 @@
    *
    * @author Ivan Shcherbak <dev@funivan.com>
    */
-  class Checkbox extends Element\Input {
+  class Checkbox extends Html implements DataElementInterface {
 
     protected $attributes = [
       'type' => 'checkbox',
@@ -22,6 +22,16 @@
     protected $label = '';
 
     protected $isChecked = false;
+
+
+    public function __construct(string $name, string $label = null) {
+      $this->tag = 'input';
+
+      $this->setAttribute('name', $name);
+      if ($label !== null) {
+        $this->setLabel($label);
+      }
+    }
 
 
     public function isValid() {
@@ -80,7 +90,7 @@
      * @param string $text
      * @return $this
      */
-    public function setLabel($text) {
+    public function setLabel(string $text) : self {
       $this->label = $text;
       return $this;
     }
@@ -94,23 +104,12 @@
     }
 
 
-
-
-
     /**
-     * @deprecated
+     * @return string
      */
-    public function getValue() {
-      return $this->isChecked() ? 1 : 0;
+    public function getName() {
+      return $this->getAttribute('name');
     }
 
-
-    /**
-     * @deprecated
-     */
-    public function setValue($value) {
-      trigger_error('Deprecated', E_USER_DEPRECATED);
-      return parent::setValue($value);
-    }
 
   }

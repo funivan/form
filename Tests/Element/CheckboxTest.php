@@ -10,8 +10,7 @@
 
 
     public function testUncheckedSubmit() {
-      $checkbox = new Checkbox();
-      $checkbox->setName('send_emails');
+      $checkbox = new Checkbox('send_emails');
       self::assertFalse($checkbox->isChecked());
 
       $checkbox->setChecked(true);
@@ -57,8 +56,7 @@
      * @dataProvider getTestCheckedStateDataProvider
      */
     public function testTestCheckedState($value) {
-      $checkbox = new Checkbox();
-      $checkbox->setName('send_emails');
+      $checkbox = new Checkbox('send_emails');
 
       $form = new Form();
       $form->setName('test_form');
@@ -77,15 +75,13 @@
 
 
     public function testRender() {
-      $checkbox = new Checkbox();
-      $checkbox->setName('send_emails');
+      $checkbox = new Checkbox('send_emails');
       self::assertContains('<input type="checkbox" name="send_emails" ', $checkbox->render());
     }
 
 
     public function testHandleRequest() {
-      $checkbox = new Checkbox();
-      $checkbox->setName('test');
+      $checkbox = new Checkbox('test');
       $checkbox->handle(new FormData('post', ['test' => 1]));
       self::assertTrue($checkbox->isChecked());
       $checkbox->handle(new FormData('post', []));
@@ -94,8 +90,7 @@
 
 
     public function testIsValid(){
-      $checkbox = new Checkbox();
-      $checkbox->setName('send_emails');
+      $checkbox = new Checkbox('send_emails');
 
       $form = new Form();
       $form->setName('test_form');

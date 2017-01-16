@@ -1,6 +1,5 @@
 <?php
 
-
   namespace Fiv\Form;
 
   use Fiv\Form\Element;
@@ -11,6 +10,7 @@
   use Fiv\Form\Element\Select;
   use Fiv\Form\Element\Submit;
   use Fiv\Form\Element\TextArea;
+  use Fiv\Form\Elements\DataElementInterface;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com>
@@ -38,7 +38,7 @@
     protected $isSubmitted = false;
 
     /**
-     * @var ElementInterface[]
+     * @var DataElementInterface[]
      */
     protected $elements = [];
 
@@ -132,6 +132,10 @@
       $this->validationResult = true;
 
       foreach ($this->getElements() as $element) {
+        if (!$element instanceof ElementInterface) {
+          continue;
+        }
+
         if ($element->isValid()) {
           continue;
         }
@@ -192,7 +196,7 @@
 
 
     /**
-     * @return ElementInterface[]
+     * @return DataElementInterface[]
      */
     public function getElements() {
       return $this->elements;
@@ -201,7 +205,7 @@
 
     /**
      * @param string $name
-     * @return ElementInterface
+     * @return DataElementInterface
      * @throws \InvalidArgumentException
      */
     public function getElement($name) {
@@ -215,10 +219,10 @@
     /**
      * Attach element to this form. Overwrite element with same name
      *
-     * @param ElementInterface $element
+     * @param DataElementInterface $element
      * @return $this
      */
-    public function setElement(ElementInterface $element) {
+    public function setElement(DataElementInterface $element) {
       $this->cleanValidationFlag();
       $this->elements[$element->getName()] = $element;
       return $this;
@@ -226,11 +230,11 @@
 
 
     /**
-     * @param ElementInterface $element
+     * @param DataElementInterface $element
      * @return $this
      * @throws \Exception
      */
-    public function addElement(ElementInterface $element) {
+    public function addElement(DataElementInterface $element) {
       if (isset($this->elements[$element->getName()])) {
         throw new \Exception('Element with name ' . $element->getName() . ' is already added. Use setElement to overwrite it or change name');
       }
@@ -355,9 +359,8 @@
      * @return Checkbox
      */
     public function checkbox($name, $label = null) {
-      $checkbox = new Checkbox();
-      $checkbox->setName($name);
-      $checkbox->setLabel($label);
+      trigger_error('Deprecated', E_USER_DEPRECATED);
+      $checkbox = new Checkbox($name, $label);
       $this->addElement($checkbox);
       return $checkbox;
     }

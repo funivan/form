@@ -5,7 +5,7 @@
   - Drop support of the php 5.6 Minimum version is php 7.0
 
 ### Removed
-  - #40 Remove old methods: Fiv\Form\Element\Checkbox::unCheck, Fiv\Form\Element\Checkbox::check
+  - #40 Remove old methods: Fiv\Form\Element\Checkbox::unCheck, Fiv\Form\Element\Checkbox::check, Fiv\Form\Element\Checkbox::setValue, Fiv\Form\Element\Checkbox::getValue
   - #45 Remove method `Form::getData`
   
 ## 0.1.0-alpha.6 [2016-10-17]

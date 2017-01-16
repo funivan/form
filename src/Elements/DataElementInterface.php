@@ -24,4 +24,10 @@
      */
     public function getName();
 
+
+    /**
+     * @return string
+     */
+    public function render();
+
   }

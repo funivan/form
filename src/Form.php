@@ -404,8 +404,14 @@
           continue;
         }
 
+        $elementText = '';
+
+        if ($element instanceof Element\BaseElement) {
+          $elementText = $element->getText();
+        }
+
         $formHtml .=
-          '<dt>' . $element->getText() . '</dt>' .
+          '<dt>' . $elementText . '</dt>' .
           '<dd>' . $element->render() . '</dd>';
       }
 

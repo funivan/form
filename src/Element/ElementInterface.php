@@ -73,9 +73,5 @@
     public function getText();
 
 
-    /**
-     * @return string
-     */
-    public function render();
 
   }

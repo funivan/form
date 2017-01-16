@@ -21,7 +21,7 @@
 
     public function testRender() {
       $button = $this->createTestButton();
-      $this->assertEquals(
+      self::assertEquals(
         '<button type="submit" name="testButton" class="testClass"  ><i></i>Submit</button>',
         $button->render()
       );
@@ -34,7 +34,7 @@
       $form->addElement($button);
 
       $form->handle(new FormData(FormData::METHOD_POST, [$form->getUid() => '1', 'testButton' => 1]));
-      $this->assertTrue($button->isSubmitted());
+      self::assertTrue($button->isSubmitted());
     }
 
 
@@ -44,7 +44,7 @@
       $form->addElement($button);
 
       $form->handle(new FormData(FormData::METHOD_POST, [$form->getUid() => '1']));
-      $this->assertFalse($button->isSubmitted());
+      self::assertFalse($button->isSubmitted());
     }
 
 

@@ -8,10 +8,6 @@
   use Fiv\Form\Form;
   use Fiv\Form\FormData;
 
-  /**
-   * @package Tests\Form\Filters
-   * @author Ivan Shcherbak <dev@funivan.com> 2016
-   */
   class RegexReplaceTest extends \PHPUnit_Framework_TestCase {
 
 
@@ -19,7 +15,7 @@
 
       $filter = new RegexReplace('!\s{2,}!', ' ');
       $value = $filter->apply('hello    world');
-      $this->assertEquals('hello world', $value);
+      self::assertEquals('hello world', $value);
     }
 
 
@@ -35,10 +31,10 @@
         'text' => 'hello    world         ',
       ]));
 
-      $this->assertTrue($form->isValid());
+      self::assertTrue($form->isValid());
 
 
-      $this->assertEquals('hello world', $form->getElements()['text']->getValue());
+      self::assertEquals('hello world', $form->getElements()['text']->getValue());
     }
 
 

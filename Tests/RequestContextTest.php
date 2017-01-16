@@ -23,17 +23,17 @@
       ];
       $data = new FormData(FormData::METHOD_POST, $testData);
 
-      $this->assertEquals(FormData::METHOD_POST, $data->getMethod());
-      $this->assertFalse($data->isMethod(FormData::METHOD_GET));
-      $this->assertTrue($data->isMethod(FormData::METHOD_POST));
+      self::assertEquals(FormData::METHOD_POST, $data->getMethod());
+      self::assertFalse($data->isMethod(FormData::METHOD_GET));
+      self::assertTrue($data->isMethod(FormData::METHOD_POST));
 
-      $this->assertEquals(['name' => 'petro', 'email' => 'petro@gmail.com'], $data->getData());
+      self::assertEquals(['name' => 'petro', 'email' => 'petro@gmail.com'], $data->getData());
 
-      $this->assertEquals('petro', $data->get('name'));
-      $this->assertNull($data->get('age'));
+      self::assertEquals('petro', $data->get('name'));
+      self::assertNull($data->get('age'));
 
-      $this->assertTrue($data->has('email'));
-      $this->assertFalse($data->has('age'));
+      self::assertTrue($data->has('email'));
+      self::assertFalse($data->has('age'));
     }
 
   }

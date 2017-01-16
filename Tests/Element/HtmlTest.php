@@ -14,19 +14,19 @@
 
       $currentClassName = $htmlElement->getAttribute('class');
 
-      $this->assertEmpty($currentClassName);
+      self::assertEmpty($currentClassName);
 
       $htmlElement->addClass('test');
-      $this->assertEquals('test', $htmlElement->getAttribute('class'));
+      self::assertEquals('test', $htmlElement->getAttribute('class'));
 
       $htmlElement->setAttribute('class', '');
-      $this->assertEmpty($htmlElement->getAttribute('class'));
+      self::assertEmpty($htmlElement->getAttribute('class'));
 
       $htmlElement->setAttribute('class', 'custom_class');
-      $this->assertEquals("custom_class", $htmlElement->getAttribute('class'));
+      self::assertEquals("custom_class", $htmlElement->getAttribute('class'));
 
       $htmlElement->addClass('other_class');
-      $this->assertEquals('custom_class other_class', $htmlElement->getAttribute('class'));
+      self::assertEquals('custom_class other_class', $htmlElement->getAttribute('class'));
     }
 
 
@@ -37,9 +37,9 @@
         'title' => "logo",
       ]);
 
-      $this->assertTrue((boolean) preg_match("!/>!", $imgHtml));
-      $this->assertTrue((boolean) preg_match("!title=!", $imgHtml));
-      $this->assertTrue((boolean) preg_match("!src=!", $imgHtml));
+      self::assertTrue((boolean) preg_match("!/>!", $imgHtml));
+      self::assertTrue((boolean) preg_match("!title=!", $imgHtml));
+      self::assertTrue((boolean) preg_match("!src=!", $imgHtml));
     }
 
 
@@ -53,9 +53,8 @@
       $tag->addClass('test');
       $tag->addClass('other');
 
-      $this->assertEquals(['value' => 123, 'class' => 'test other'], $tag->getAttributes());
+      self::assertEquals(['value' => 123, 'class' => 'test other'], $tag->getAttributes());
 
     }
 
   }
- 

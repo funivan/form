@@ -23,13 +23,13 @@
         'email' => 'test@test',
       ]));
 
-      $this->assertTrue($form->isValid());
+      self::assertTrue($form->isValid());
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'test',
       ]));
 
-      $this->assertFalse($form->isValid());
+      self::assertFalse($form->isValid());
     }
   }

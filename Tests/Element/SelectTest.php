@@ -21,10 +21,10 @@
       $select->setOptions(['ru' => 'Russian', 'ua' => 'Ukrainian']);
 
       $selectHtml = $select->render();
-      $this->assertContains('<select name="lang" ', $selectHtml);
-      $this->assertContains('<option value="ru">Russian</option>', $selectHtml);
-      $this->assertContains('<option value="ua">Ukrainian</option>', $selectHtml);
-      $this->assertContains('</select>', $selectHtml);
+      self::assertContains('<select name="lang" ', $selectHtml);
+      self::assertContains('<option value="ru">Russian</option>', $selectHtml);
+      self::assertContains('<option value="ua">Ukrainian</option>', $selectHtml);
+      self::assertContains('</select>', $selectHtml);
     }
 
 
@@ -37,10 +37,10 @@
       $select->setOptions(['ru' => 'Russian', 'ua' => 'Ukrainian']);
 
       $select->handle(new FormData('post', ['lang' => 'ru']));
-      $this->assertEquals('ru', $select->getValue());
+      self::assertEquals('ru', $select->getValue());
       $select->handle(new FormData('post', []));
-      $this->assertEquals('ru', $select->getValue());
+      self::assertEquals('ru', $select->getValue());
       $select->handle(new FormData('post', ['lang' => 'pl']));
-      $this->assertEquals('ru', $select->getValue());
+      self::assertEquals('ru', $select->getValue());
     }
   }

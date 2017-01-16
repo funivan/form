@@ -26,22 +26,22 @@
         'login' => 'testLogin',
       ]));
 
-      $this->assertTrue($form->isValid());
-      $this->assertEmpty($validator->getErrors());
+      self::assertTrue($form->isValid());
+      self::assertEmpty($validator->getErrors());
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'login' => '',
       ]));
 
-      $this->assertFalse($form->isValid());
-      $this->assertEquals('Test error message', $validator->getFirstError());
+      self::assertFalse($form->isValid());
+      self::assertEquals('Test error message', $validator->getFirstError());
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'login' => '0',
       ]));
-      $this->assertTrue($form->isValid());
+      self::assertTrue($form->isValid());
     }
 
   }

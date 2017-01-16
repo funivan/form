@@ -21,8 +21,8 @@
       $element->setOptions(['ru' => 'Russian', 'ua' => 'Ukrainian']);
 
       $elementHtml = $element->render();
-      $this->assertContains('<input name="lang" type="radio" value="ru" ', $elementHtml);
-      $this->assertContains('<input name="lang" type="radio" value="ua" ', $elementHtml);
+      self::assertContains('<input name="lang" type="radio" value="ru" ', $elementHtml);
+      self::assertContains('<input name="lang" type="radio" value="ua" ', $elementHtml);
     }
 
 
@@ -35,10 +35,10 @@
       $element->setOptions(['ru' => 'Russian', 'ua' => 'Ukrainian']);
 
       $element->handle(new FormData('post', ['lang' => 'ru']));
-      $this->assertEquals('ru', $element->getValue());
+      self::assertEquals('ru', $element->getValue());
       $element->handle(new FormData('post', []));
-      $this->assertEquals('ru', $element->getValue());
+      self::assertEquals('ru', $element->getValue());
       $element->handle(new FormData('post', ['lang' => 'pl']));
-      $this->assertEquals('ru', $element->getValue());
+      self::assertEquals('ru', $element->getValue());
     }
   }

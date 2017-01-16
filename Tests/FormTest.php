@@ -9,9 +9,6 @@
   use Fiv\Form\Validator\CallBackValidator;
   use Fiv\Form\Validator\Required;
 
-  /**
-   * @package Tests\Form\Form
-   */
   class FormTest extends \PHPUnit_Framework_TestCase {
 
     /**
@@ -25,10 +22,10 @@
         $form->getUid() => 1,
         'email' => 'test@test',
       ]));
-      $this->assertTrue($form->isValid());
+      self::assertTrue($form->isValid());
 
       $form->handle(new FormData('post', []));
-      $this->assertFalse($form->isValid());
+      self::assertFalse($form->isValid());
     }
 
 
@@ -38,10 +35,10 @@
     public function testUid() {
       $form = new Form();
 
-      $this->assertEquals(32, strlen($form->getUid()));
+      self::assertEquals(32, strlen($form->getUid()));
 
       $form->setName('test');
-      $this->assertEquals('test', $form->getUid());
+      self::assertEquals('test', $form->getUid());
     }
 
 
@@ -50,7 +47,7 @@
      */
     public function testGetElements() {
       $form = new Form();
-      $this->assertEmpty($form->getElements());
+      self::assertEmpty($form->getElements());
     }
 
 
@@ -59,22 +56,22 @@
      */
     public function testFormMethods() {
       $form = new Form();
-      $this->assertEquals('post', $form->getMethod());
+      self::assertEquals('post', $form->getMethod());
 
       $form->setMethod('POST');
-      $this->assertEquals('post', $form->getMethod());
+      self::assertEquals('post', $form->getMethod());
 
       $form->setMethod('get');
-      $this->assertEquals('get', $form->getMethod());
+      self::assertEquals('get', $form->getMethod());
 
       $form->setMethod('put');
-      $this->assertEquals('put', $form->getMethod());
+      self::assertEquals('put', $form->getMethod());
 
       $form->setMethod(false);
-      $this->assertEquals(null, $form->getMethod());
+      self::assertEquals(null, $form->getMethod());
 
       $form->setAttribute('method', 'test');
-      $this->assertEquals('test', $form->getMethod());
+      self::assertEquals('test', $form->getMethod());
 
     }
 
@@ -84,11 +81,11 @@
      */
     public function testFormRender() {
       $form = new Form();
-      $this->assertContains('method="post"', $form->render());
+      self::assertContains('method="post"', $form->render());
 
       $form = new Form();
       $form->setMethod('get');
-      $this->assertContains('method="get"', $form->render());
+      self::assertContains('method="get"', $form->render());
     }
 
 
@@ -98,7 +95,7 @@
     public function testIsSubmittedFalse() {
       $form = new Form();
       $form->handle(new FormData('post', []));
-      $this->assertEquals(false, $form->isSubmitted());
+      self::assertEquals(false, $form->isSubmitted());
     }
 
 
@@ -111,12 +108,12 @@
       $form->handle(new FormData('post', [
         'test-form' => 1,
       ]));
-      $this->assertEquals(true, $form->isSubmitted());
+      self::assertEquals(true, $form->isSubmitted());
 
       $form = new Form();
       $form->submit('test-submit', 'test-value');
       $form->handle(new FormData('post', [$form->getUid() => 1]));
-      $this->assertEquals(true, $form->isSubmitted());
+      self::assertEquals(true, $form->isSubmitted());
     }
 
 
@@ -126,8 +123,8 @@
     public function testValidateWithoutSubmit() {
       $form = new Form();
       $form->setName('test-form');
-      $this->assertFalse($form->isValid());
-      $this->assertFalse($form->isSubmitted());
+      self::assertFalse($form->isValid());
+      self::assertFalse($form->isSubmitted());
     }
 
 
@@ -143,11 +140,11 @@
         'email' => 'test@test',
       ]));
 
-      $this->assertTrue($form->isSubmitted());
-      $this->assertTrue($form->isValid());
+      self::assertTrue($form->isSubmitted());
+      self::assertTrue($form->isValid());
 
       $form->handle(new FormData('post', []));
-      $this->assertFalse($form->isSubmitted());
+      self::assertFalse($form->isSubmitted());
     }
 
 
@@ -159,7 +156,7 @@
       $form->addElement((new Input())->setName('test'));
 
 
-      $this->assertCount(1, $form->getElements());
+      self::assertCount(1, $form->getElements());
 
       $form->addElement((new Input())->setName('test'));
     }
@@ -174,14 +171,14 @@
 
 
       $elements = $form->getElements();
-      $this->assertCount(1, $elements);
-      $this->assertEquals('first', $elements['test']->getValue());
+      self::assertCount(1, $elements);
+      self::assertEquals('first', $elements['test']->getValue());
 
       $form->setElement((new Input())->setName('test')->setValue('second'));
 
       $elements = $form->getElements();
-      $this->assertCount(1, $elements);
-      $this->assertEquals('second', $elements['test']->getValue());
+      self::assertCount(1, $elements);
+      self::assertEquals('second', $elements['test']->getValue());
 
     }
 
@@ -208,12 +205,12 @@
         'test' => '123',
       ]));
 
-      $this->assertTrue($form->isValid());
-      $this->assertEquals(1, $checkedItemsNum);
-      $this->assertTrue($form->isValid());
-      $this->assertTrue($form->isValid());
+      self::assertTrue($form->isValid());
+      self::assertEquals(1, $checkedItemsNum);
+      self::assertTrue($form->isValid());
+      self::assertTrue($form->isValid());
 
-      $this->assertEquals(1, $checkedItemsNum);
+      self::assertEquals(1, $checkedItemsNum);
 
     }
 
@@ -222,16 +219,16 @@
       $form = new Form();
       $form->hidden('test', '123');
       $start = $form->renderStart();
-      $this->assertContains('<input type="hidden" name="test" value="123"', $start);
+      self::assertContains('<input type="hidden" name="test" value="123"', $start);
 
-      $this->assertEquals('</form>', $form->renderEnd());
+      self::assertEquals('</form>', $form->renderEnd());
     }
 
 
     public function testRenderElements() {
       $form = new Form();
       $form->textarea('text', '123');
-      $this->assertContains('<dl><dt>123</dt><dd><textarea name="text" ></textarea></dd></dl>', $form->render());
+      self::assertContains('<dl><dt>123</dt><dd><textarea name="text" ></textarea></dd></dl>', $form->render());
     }
 
 
@@ -249,8 +246,8 @@
       $form->input('email');
       $form->textarea('desc');
 
-      $this->assertInstanceOf(Input::class, $form->getElement('email'));
-      $this->assertInstanceOf(TextArea::class, $form->getElement('desc'));
+      self::assertInstanceOf(Input::class, $form->getElement('email'));
+      self::assertInstanceOf(TextArea::class, $form->getElement('desc'));
     }
 
 
@@ -260,23 +257,23 @@
       $form->input('email')->addValidator((new Required())->setError('email input error'));
 
       $form->handle(new FormData('post', [$form->getUid() => 1]));
-      $this->assertFalse($form->isValid());
-      $this->assertEquals(['name input error', 'email input error'], $form->getErrors());
+      self::assertFalse($form->isValid());
+      self::assertEquals(['name input error', 'email input error'], $form->getErrors());
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'test@test.com',
       ]));
-      $this->assertFalse($form->isValid());
-      $this->assertEquals(['name input error'], $form->getErrors());
+      self::assertFalse($form->isValid());
+      self::assertEquals(['name input error'], $form->getErrors());
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'name' => 'testName',
         'email' => 'test@test.com',
       ]));
-      $this->assertTrue($form->isValid());
-      $this->assertEquals([], $form->getErrors());
+      self::assertTrue($form->isValid());
+      self::assertEquals([], $form->getErrors());
     }
 
 
@@ -291,8 +288,8 @@
         'name' => 'petro',
         'email' => 'test@test.com',
       ]));
-      $this->assertEquals('test@test.com', $form->getElements()['email']->getValue());
-      $this->assertEquals(
+      self::assertEquals('test@test.com', $form->getElements()['email']->getValue());
+      self::assertEquals(
         [
           'petro',
           'test@test.com',
@@ -309,8 +306,8 @@
         $form->getUid() => '1',
         'name' => 'stepan',
       ]));
-      $this->assertEquals(null, $form->getElement('email')->getValue());
-      $this->assertEquals('stepan', $form->getElement('name')->getValue());
+      self::assertEquals(null, $form->getElement('email')->getValue());
+      self::assertEquals('stepan', $form->getElement('name')->getValue());
     }
 
 
@@ -325,27 +322,27 @@
         'email' => 'test@test.com',
         'description' => 'some description text',
       ]));
-      $this->assertTrue($form->isSubmitted());
-      $this->assertEquals('test@test.com', $form->getElement('email')->getValue());
-      $this->assertEquals('some description text', $form->getElement('description')->getValue());
+      self::assertTrue($form->isSubmitted());
+      self::assertEquals('test@test.com', $form->getElement('email')->getValue());
+      self::assertEquals('some description text', $form->getElement('description')->getValue());
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'test@test.com',
       ]));
-      $this->assertTrue($form->isSubmitted());
-      $this->assertEquals('test@test.com', $form->getElement('email')->getValue());
-      $this->assertNull($form->getElement('description')->getValue());
+      self::assertTrue($form->isSubmitted());
+      self::assertEquals('test@test.com', $form->getElement('email')->getValue());
+      self::assertNull($form->getElement('description')->getValue());
 
       $form->handle(new FormData('post', [
         $form->getUid() => '1',
       ]));
-      $this->assertTrue($form->isSubmitted());
-      $this->assertNull($form->getElement('email')->getValue());
-      $this->assertNull($form->getElement('description')->getValue());
+      self::assertTrue($form->isSubmitted());
+      self::assertNull($form->getElement('email')->getValue());
+      self::assertNull($form->getElement('description')->getValue());
 
       $form->handle(new FormData('post', []));
-      $this->assertFalse($form->isSubmitted());
+      self::assertFalse($form->isSubmitted());
     }
 
   }

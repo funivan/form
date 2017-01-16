@@ -27,8 +27,8 @@
         'emailTo' => 'to@test.com',
         'message' => 'new message text',
       ]));
-      $this->assertTrue($form->isValid());
-      $this->assertEquals([], $form->getErrors());
+      self::assertTrue($form->isValid());
+      self::assertEquals([], $form->getErrors());
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
@@ -36,8 +36,8 @@
         'emailTo' => 'to@test.com',
         'message' => 'copy message text',
       ]));
-      $this->assertFalse($form->isValid());
-      $this->assertEquals(['message duplicate error'], $form->getErrors());
+      self::assertFalse($form->isValid());
+      self::assertEquals(['message duplicate error'], $form->getErrors());
     }
 
   }

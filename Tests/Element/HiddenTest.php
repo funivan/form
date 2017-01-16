@@ -6,9 +6,6 @@
   use Fiv\Form\Filter\CallbackFilter;
   use Fiv\Form\Form;
 
-  /**
-   * @package Tests\Form\Form
-   */
   class HiddenTest extends \PHPUnit_Framework_TestCase {
 
     /**
@@ -23,7 +20,7 @@
     public function testRender() {
       $element = $this->getElement();
 
-      $this->assertContains('hidden', (string) $element);
+      self::assertContains('hidden', (string) $element);
     }
 
 
@@ -31,17 +28,17 @@
 
       $element = $this->getElement();
 
-      $this->assertEquals('test', $element->getName());
-      $this->assertEmpty($element->getClass());
+      self::assertEquals('test', $element->getName());
+      self::assertEmpty($element->getClass());
 
       $element->setClass('hidden_class');
-      $this->assertEquals('hidden_class', $element->getClass());
+      self::assertEquals('hidden_class', $element->getClass());
 
       $element->setAttribute('data-id', 'custom-id');
-      $this->assertEquals('custom-id', $element->getAttribute('data-id'));
+      self::assertEquals('custom-id', $element->getAttribute('data-id'));
 
       $element->removeAttribute('data-id');
-      $this->assertEquals(null, $element->getAttribute('data-id'));
+      self::assertEquals(null, $element->getAttribute('data-id'));
 
     }
 
@@ -57,7 +54,7 @@
 
       $input->setValue($value);
 
-      $this->assertContains('<input type="hidden" name="test" value="123&quot;234 &#039; 44"', $input->render());
+      self::assertContains('<input type="hidden" name="test" value="123&quot;234 &#039; 44"', $input->render());
 
     }
 

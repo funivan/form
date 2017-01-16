@@ -14,7 +14,7 @@
       $input = new Input();
       $input->setType('text');
       $input->setValue('value');
-      $this->assertContains('<input type="text" value="value" ', $input->render());
+      self::assertContains('<input type="text" value="value" ', $input->render());
     }
 
 
@@ -23,8 +23,8 @@
       $input->setName('email');
 
       $input->handle(new FormData(FormData::METHOD_POST, ['email' => 'test@test.com']));
-      $this->assertEquals('test@test.com', $input->getValue());
+      self::assertEquals('test@test.com', $input->getValue());
       $input->handle(new FormData(FormData::METHOD_POST, []));
-      $this->assertNull($input->getValue());
+      self::assertNull($input->getValue());
     }
   }

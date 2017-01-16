@@ -7,9 +7,6 @@
   use Fiv\Form\Form;
   use Fiv\Form\FormData;
 
-  /**
-   * @package Tests\Form\Form
-   */
   class TextAreaTest extends \PHPUnit_Framework_TestCase {
 
     /**
@@ -23,18 +20,18 @@
 
     public function testRender() {
       $element = $this->getElement();
-      $this->assertContains('<textarea', (string) $element);
-      $this->assertContains('</textarea', (string) $element);
+      self::assertContains('<textarea', (string) $element);
+      self::assertContains('</textarea', (string) $element);
 
       $element->setValue('custom data');
-      $this->assertContains('>custom data<', $element->render());
+      self::assertContains('>custom data<', $element->render());
     }
 
 
     public function testAttributes() {
       $element = $this->getElement();
       $element->setAttributes([]);
-      $this->assertEquals('', $element->renderAttributes());
+      self::assertEquals('', $element->renderAttributes());
     }
 
 
@@ -42,13 +39,13 @@
       $element = $this->getElement();
       $element->addFilter(new CallbackFilter('trim'));
 
-      $this->assertEmpty($element->getValue());
+      self::assertEmpty($element->getValue());
 
       $element->setValue('test_value');
-      $this->assertEquals('test_value', $element->getValue());
+      self::assertEquals('test_value', $element->getValue());
 
       $element->setValue('  other value');
-      $this->assertEquals('other value', $element->getValue());
+      self::assertEquals('other value', $element->getValue());
     }
 
 
@@ -56,9 +53,9 @@
       $element = new TextArea();
       $element->setName('test');
       $element->handle(new FormData('post', ['test' => 'test text']));
-      $this->assertEquals('test text', $element->getValue());
+      self::assertEquals('test text', $element->getValue());
       $element->handle(new FormData('post', []));
-      $this->assertNull($element->getValue());
+      self::assertNull($element->getValue());
     }
 
   }

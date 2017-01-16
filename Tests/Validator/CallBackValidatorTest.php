@@ -27,23 +27,23 @@
         'login' => 'testLogin',
       ]));
 
-      $this->assertTrue($form->isValid());
-      $this->assertFalse($lengthValidator->hasErrors());
+      self::assertTrue($form->isValid());
+      self::assertFalse($lengthValidator->hasErrors());
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'login' => 'tes',
       ]));
 
-      $this->assertFalse($form->isValid());
-      $this->assertTrue($lengthValidator->hasErrors());
+      self::assertFalse($form->isValid());
+      self::assertTrue($lengthValidator->hasErrors());
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'login' => 'testtesttesttesttesttesttesttest',
       ]));
 
-      $this->assertFalse($form->isValid());
+      self::assertFalse($form->isValid());
     }
 
 
@@ -73,14 +73,14 @@
         'email' => 'test1@gmail.com',
       ]));
 
-      $this->assertFalse($form->isValid());
-      $this->assertEquals('Email already exist!', $callBackValidator->getFirstError());
+      self::assertFalse($form->isValid());
+      self::assertEquals('Email already exist!', $callBackValidator->getFirstError());
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'new-email@gmail.com',
       ]));
 
-      $this->assertTrue($form->isValid());
+      self::assertTrue($form->isValid());
     }
   }

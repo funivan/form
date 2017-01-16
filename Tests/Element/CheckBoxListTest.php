@@ -16,7 +16,7 @@
       $element->setOptions(['ru', 'ua']);
 
       $element->render();
-      $this->assertContains(
+      self::assertContains(
         '<label><input name="lang[]" type="checkbox" value="0"  />ru</label><label><input name="lang[]" type="checkbox" value="1"  />ua</label>',
         $element->render()
       );
@@ -29,9 +29,9 @@
       $element->setOptions(['ru' => 'Russian', 'ua' => 'Ukrainian']);
 
       $element->handle(new FormData('post', ['lang' => ['ua']]));
-      
-      $this->assertEquals(['ua'], $element->getValue());
-      $this->assertTrue($element->isChecked('ua'));
-      $this->assertFalse($element->isChecked('ru'));
+
+      self::assertEquals(['ua'], $element->getValue());
+      self::assertTrue($element->isChecked('ua'));
+      self::assertFalse($element->isChecked('ru'));
     }
   }

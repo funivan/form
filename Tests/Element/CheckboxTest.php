@@ -6,19 +6,16 @@
   use Fiv\Form\Form;
   use Fiv\Form\FormData;
 
-  /**
-   *
-   */
   class CheckboxTest extends \PHPUnit_Framework_TestCase {
 
 
     public function testUncheckedSubmit() {
       $checkbox = new Checkbox();
       $checkbox->setName('send_emails');
-      $this->assertFalse($checkbox->isChecked());
+      self::assertFalse($checkbox->isChecked());
 
       $checkbox->setChecked(true);
-      $this->assertTrue($checkbox->isChecked());
+      self::assertTrue($checkbox->isChecked());
 
       $form = new Form();
       $form->setName('test_form');
@@ -28,7 +25,7 @@
       $form->handle(new FormData('post', [
         'test_form' => 1,
       ]));
-      $this->assertFalse($checkbox->isChecked());
+      self::assertFalse($checkbox->isChecked());
     }
 
 
@@ -67,7 +64,7 @@
       $form->setName('test_form');
       $form->addElement($checkbox);
 
-      $this->assertFalse($checkbox->isChecked());
+      self::assertFalse($checkbox->isChecked());
 
       // submit checked value
       $form->handle(new FormData('post', [
@@ -75,14 +72,14 @@
         'send_emails' => $value,
       ]));
 
-      $this->assertTrue($checkbox->isChecked());
+      self::assertTrue($checkbox->isChecked());
     }
 
 
     public function testRender() {
       $checkbox = new Checkbox();
       $checkbox->setName('send_emails');
-      $this->assertContains('<input type="checkbox" name="send_emails" ', $checkbox->render());
+      self::assertContains('<input type="checkbox" name="send_emails" ', $checkbox->render());
     }
 
 
@@ -90,12 +87,12 @@
       $checkbox = new Checkbox();
       $checkbox->setName('test');
       $checkbox->handle(new FormData('post', ['test' => 1]));
-      $this->assertTrue($checkbox->isChecked());
+      self::assertTrue($checkbox->isChecked());
       $checkbox->handle(new FormData('post', []));
-      $this->assertFalse($checkbox->isChecked());
+      self::assertFalse($checkbox->isChecked());
     }
-    
-    
+
+
     public function testIsValid(){
       $checkbox = new Checkbox();
       $checkbox->setName('send_emails');
@@ -109,8 +106,8 @@
         'test_form' => 1,
         'send_emails' => 'on',
       ]));
-      
-      $this->assertTrue($form->isValid());
+
+      self::assertTrue($form->isValid());
     }
 
   }

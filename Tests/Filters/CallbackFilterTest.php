@@ -19,10 +19,10 @@
         return $value;
       });
       $value = $filter->apply('hello world');
-      $this->assertEquals('hello-world', $value);
+      self::assertEquals('hello-world', $value);
 
       $value = $filter->apply('hello world  ');
-      $this->assertEquals('hello-world', $value);
+      self::assertEquals('hello-world', $value);
     }
 
 
@@ -37,10 +37,10 @@
         'text' => ' world         ',
       ]));
 
-      $this->assertTrue($form->isValid());
+      self::assertTrue($form->isValid());
 
 
-      $this->assertEquals('world', $form->getElements()['text']->getValue());
+      self::assertEquals('world', $form->getElements()['text']->getValue());
     }
 
 

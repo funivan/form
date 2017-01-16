@@ -23,13 +23,13 @@
         $form->getUid() => 1,
         'inputName' => 'a',
       ]));
-      $this->assertTrue($form->isValid());
+      self::assertTrue($form->isValid());
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'inputName' => 'd',
       ]));
-      $this->assertFalse($form->isValid());
+      self::assertFalse($form->isValid());
     }
 
   }

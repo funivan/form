@@ -2,6 +2,8 @@
 
   namespace Tests\Fiv\Form;
 
+  use Fiv\Form\Element\BaseElement;
+  use Fiv\Form\Element\Hidden;
   use Fiv\Form\Element\Input;
   use Fiv\Form\Element\TextArea;
   use Fiv\Form\Form;
@@ -11,9 +13,6 @@
 
   class FormTest extends \PHPUnit_Framework_TestCase {
 
-    /**
-     *
-     */
     public function testIsValidFlush() {
       $form = new Form();
       $form->input('email');
@@ -29,9 +28,6 @@
     }
 
 
-    /**
-     *
-     */
     public function testUid() {
       $form = new Form();
 
@@ -42,18 +38,12 @@
     }
 
 
-    /**
-     *
-     */
     public function testGetElements() {
       $form = new Form();
       self::assertEmpty($form->getElements());
     }
 
 
-    /**
-     *
-     */
     public function testFormMethods() {
       $form = new Form();
       self::assertEquals('post', $form->getMethod());
@@ -170,6 +160,7 @@
       $form->setElement((new Input())->setName('test')->setValue('first'));
 
 
+      /** @var BaseElement[] $elements */
       $elements = $form->getElements();
       self::assertCount(1, $elements);
       self::assertEquals('first', $elements['test']->getValue());
@@ -217,7 +208,7 @@
 
     public function testRenderStartEnd() {
       $form = new Form();
-      $form->hidden('test', '123');
+      $form->addElement(new Hidden('test', '123'));
       $start = $form->renderStart();
       self::assertContains('<input type="hidden" name="test" value="123"', $start);
 
@@ -288,7 +279,10 @@
         'name' => 'petro',
         'email' => 'test@test.com',
       ]));
-      self::assertEquals('test@test.com', $form->getElements()['email']->getValue());
+
+      /** @var BaseElement[] $elements */
+      $elements = $form->getElements();
+      self::assertEquals('test@test.com', $elements['email']->getValue());
       self::assertEquals(
         [
           'petro',
@@ -306,15 +300,18 @@
         $form->getUid() => '1',
         'name' => 'stepan',
       ]));
-      self::assertEquals(null, $form->getElement('email')->getValue());
-      self::assertEquals('stepan', $form->getElement('name')->getValue());
+      self::assertEquals(null, $emailElement->getValue());
+      self::assertEquals('stepan', $nameElement->getValue());
     }
 
 
     public function testHandleRequest() {
+      $emailElement = (new Input())->setName('email');
+      $descriptionElement = (new TextArea())->setName('description');
+
       $form = new Form();
-      $form->addElement((new Input())->setName('email'));
-      $form->addElement((new TextArea())->setName('description'));
+      $form->addElement($emailElement);
+      $form->addElement($descriptionElement);
       $form->setMethod('post');
 
       $form->handle(new FormData('post', [
@@ -323,23 +320,23 @@
         'description' => 'some description text',
       ]));
       self::assertTrue($form->isSubmitted());
-      self::assertEquals('test@test.com', $form->getElement('email')->getValue());
-      self::assertEquals('some description text', $form->getElement('description')->getValue());
+      self::assertEquals('test@test.com', $emailElement->getValue());
+      self::assertEquals('some description text', $descriptionElement->getValue());
 
       $form->handle(new FormData('post', [
         $form->getUid() => 1,
         'email' => 'test@test.com',
       ]));
       self::assertTrue($form->isSubmitted());
-      self::assertEquals('test@test.com', $form->getElement('email')->getValue());
-      self::assertNull($form->getElement('description')->getValue());
+      self::assertEquals('test@test.com', $emailElement->getValue());
+      self::assertNull($descriptionElement->getValue());
 
       $form->handle(new FormData('post', [
         $form->getUid() => '1',
       ]));
       self::assertTrue($form->isSubmitted());
-      self::assertNull($form->getElement('email')->getValue());
-      self::assertNull($form->getElement('description')->getValue());
+      self::assertNull($emailElement->getValue());
+      self::assertNull($descriptionElement->getValue());
 
       $form->handle(new FormData('post', []));
       self::assertFalse($form->isSubmitted());

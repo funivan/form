@@ -316,9 +316,9 @@
 
 
     /**
-     * ```
-     * $form->hidden('key', md5($this-user->id . HASH_A);
-     * ```
+     * @deprecated
+     * @see Element\Hidden
+     *
      * @param string $name
      * @param null $value
      * @return \Fiv\Form\Element\Input
@@ -400,6 +400,10 @@
 
       foreach ($this->getElements() as $element) {
         # skip hidden element
+        if ($element instanceof Element\Hidden) {
+          continue;
+        }
+
         if ($element instanceof Element\Input and $element->getType() === 'hidden') {
           continue;
         }
@@ -444,6 +448,11 @@
         if ($element instanceof Element\Input and $element->getType() === 'hidden') {
           $html .= $element->render();
         }
+
+        if ($element instanceof Element\Hidden) {
+          $html .= $element->render();
+        }
+
       }
 
 

@@ -11,6 +11,7 @@
   use Fiv\Form\Element\Submit;
   use Fiv\Form\Element\TextArea;
   use Fiv\Form\Elements\DataElementInterface;
+  use Fiv\Form\Elements\ValidatableElementInterface;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com>
@@ -132,6 +133,13 @@
       $this->validationResult = true;
 
       foreach ($this->getElements() as $element) {
+        if ($element instanceof ValidatableElementInterface) {
+          $validationResult = $element->validate();
+          foreach ($validationResult->getErrors() as $errorMessage) {
+            $this->addError($errorMessage);
+          }
+        }
+
         if (!$element instanceof ElementInterface) {
           continue;
         }

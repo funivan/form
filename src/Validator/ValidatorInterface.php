@@ -1,8 +1,11 @@
 <?php
+
   namespace Fiv\Form\Validator;
 
 
   /**
+   * @deprecated Use new Elements and new Validators
+   *
    * @author Ivan Shcherbak <dev@funivan.com>
    */
   interface ValidatorInterface {

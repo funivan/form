@@ -3,16 +3,32 @@
   namespace Tests\Fiv\Form\Element;
 
   use Fiv\Form\Element\Hidden;
-  use Fiv\Form\Form;
+  use Fiv\Form\FormData;
 
   class HiddenTest extends \PHPUnit_Framework_TestCase {
 
+
     /**
-     * @return \Fiv\Form\Element\Input
+     * @return array
      */
-    protected function getElement() {
-      $form = new Form();
-      return $form->hidden('test');
+    public function getHandleDataProvider() {
+      return [
+        [123, null, ''],
+        ['', 'abc', 'abc'],
+        ['', null, ''],
+        ['a', 'd', 'd'],
+        [123, 123, '123'],
+      ];
+    }
+
+
+    /**
+     * @dataProvider getHandleDataProvider
+     */
+    public function testHandle($input, $post, $expect) {
+      $element = new Hidden('test', $input);
+      $element->handle(new FormData('POST', ['test' => $post]));
+      self::assertSame($expect, $element->getValue());
     }
 
 

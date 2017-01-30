@@ -42,7 +42,8 @@
      * @return $this
      */
     public function handle(FormData $request) {
-      # Hidden element can not be  changed via user data
+      $value = $request->get($this->getName());
+      $this->setValue((string) $value);
       return $this;
     }
 

@@ -12,7 +12,7 @@
     private $errors = [];
 
 
-    public function merge(ValidationResult $validationResult) : self {
+    public function merge(ValidationResultInterface $validationResult) : self {
       foreach ($validationResult->getErrors() as $error) {
         $this->addError($error);
       }

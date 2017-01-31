@@ -4,14 +4,14 @@
 
   namespace Fiv\Form\Element;
 
-  use Fiv\Form\Element\Hidden\HiddenValidatorInterface;
-  use Fiv\Form\Elements\DataElementInterface;
+  use Fiv\Form\Elements\StringDataElementInterface;
   use Fiv\Form\Elements\ValidatableElementInterface;
   use Fiv\Form\FormData;
-  use Fiv\Form\Validator\ValidationResult;
-  use Fiv\Form\Validator\ValidationResultInterface;
+  use Fiv\Form\Validation\StringValidation\StringValidationTrait;
 
-  class Hidden implements DataElementInterface, ValidatableElementInterface {
+  class Hidden implements ValidatableElementInterface, StringDataElementInterface {
+
+    use StringValidationTrait;
 
     /**
      * @var string
@@ -22,11 +22,6 @@
      * @var string
      */
     private $value;
-
-    /**
-     * @var HiddenValidatorInterface[]
-     */
-    private $validators = [];
 
 
     public function __construct(string $name, string $value = null) {
@@ -76,22 +71,5 @@
       ]);
     }
 
-
-    public function addValidator(HiddenValidatorInterface $validator) : self {
-      $this->validators[] = $validator;
-      return $this;
-    }
-
-
-    public function validate() : ValidationResultInterface {
-
-      $validationResult = new ValidationResult();
-      foreach ($this->validators as $validator) {
-        $result = $validator->validate($this);
-        $validationResult->merge($result);
-      }
-
-      return $validationResult;
-    }
 
   }

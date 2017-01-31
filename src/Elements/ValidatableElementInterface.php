@@ -4,7 +4,7 @@
 
   namespace Fiv\Form\Elements;
 
-  use Fiv\Form\Validator\ValidationResultInterface;
+  use Fiv\Form\Validation\ValidationResultInterface;
 
   interface ValidatableElementInterface {
 

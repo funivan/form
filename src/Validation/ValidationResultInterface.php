@@ -2,7 +2,7 @@
 
   declare(strict_types=1);
 
-  namespace Fiv\Form\Validator;
+  namespace Fiv\Form\Validation;
 
   interface ValidationResultInterface {
 

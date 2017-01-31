@@ -5,12 +5,12 @@
   namespace Tests\Fiv\Form\Element\Hidden;
 
   use Fiv\Form\Element\Hidden;
-  use Fiv\Form\Validator\ValidationResult;
+  use Fiv\Form\Validation\ValidationResult;
 
   class CallableHiddenValidatorTest extends \PHPUnit_Framework_TestCase {
 
     public function testCustomCallableValidator() {
-      $validator = new Hidden\CallableHiddenValidator(function (Hidden $element) {
+      $validator = new \Fiv\Form\Validation\StringValidation\CallableStringValidator(function (Hidden $element) {
         $result = new ValidationResult();
         if ($element->getValue() !== '123') {
           $result->addError('Error: ' . $element->getName());
@@ -36,7 +36,7 @@
 
     public function testValidationCallNum() {
       $validationIterationsNum = 0;
-      $validator = new Hidden\CallableHiddenValidator(function () use(&$validationIterationsNum) {
+      $validator = new \Fiv\Form\Validation\StringValidation\CallableStringValidator(function () use(&$validationIterationsNum) {
         $validationIterationsNum++;
         return new ValidationResult();
       });

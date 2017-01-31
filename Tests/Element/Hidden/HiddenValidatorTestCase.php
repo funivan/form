@@ -14,7 +14,7 @@
       $form = new Form();
       $form->setName('t');
       $element = new Hidden('test', '123');
-      $element->addValidator(new HiddenDummyValidator('123'));
+      $element->addValidator(new SameValueValidator('123'));
       $form->addElement($element);
 
       $form->handle(new FormData('POST', ['t' => 1, 'test' => 123]));

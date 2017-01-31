@@ -28,11 +28,6 @@
      */
     private $validators = [];
 
-    /**
-     * @var ValidationResult|null
-     */
-    private $validationResult;
-
 
     public function __construct(string $name, string $value = null) {
       $this->name = $name;
@@ -42,7 +37,6 @@
 
     public function setValue(string $value) : self {
       $this->value = $value;
-      $this->validationResult = null; //Flash validation result
       return $this;
     }
 
@@ -91,17 +85,13 @@
 
     public function validate() : ValidationResultInterface {
 
-      if ($this->validationResult !== null) {
-        return $this->validationResult;
-      }
-
-      $this->validationResult = new ValidationResult();
+      $validationResult = new ValidationResult();
       foreach ($this->validators as $validator) {
         $result = $validator->validate($this);
-        $this->validationResult->merge($result);
+        $validationResult->merge($result);
       }
 
-      return $this->validationResult;
+      return $validationResult;
     }
 
   }

@@ -34,7 +34,7 @@
       self::assertSame(['Error: other'], $secondHidden->validate()->getErrors());
     }
 
-    public function testValidationCacheResult() {
+    public function testValidationCallNum() {
       $validationIterationsNum = 0;
       $validator = new Hidden\CallableHiddenValidator(function () use(&$validationIterationsNum) {
         $validationIterationsNum++;
@@ -49,7 +49,7 @@
 
       $element->validate();
       $element->validate();
-      self::assertSame(1, $validationIterationsNum);
+      self::assertSame(3, $validationIterationsNum);
 
     }
 

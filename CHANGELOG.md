@@ -1,6 +1,7 @@
 # Changelog
+## 0.1.0-alpha.8 [Unreleased]
 
-## 0.1.0-alpha.7 [Unreleased]
+## 0.1.0-alpha.7 [2017-02-01]
 ### Added
   - Add new element class `\Fiv\Form\Element\Hidden`
   - Add new element validation interface `\Fiv\Form\Validation\StringValidation\StringValidatorInterface`

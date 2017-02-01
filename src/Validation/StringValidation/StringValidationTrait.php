@@ -4,6 +4,7 @@
 
   namespace Fiv\Form\Validation\StringValidation;
 
+  use Fiv\Form\Elements\StringDataElementInterface;
   use Fiv\Form\Validation\ValidationResult;
   use Fiv\Form\Validation\ValidationResultInterface;
 
@@ -26,6 +27,7 @@
 
       $validationResult = new ValidationResult();
       foreach ($this->validators as $validator) {
+        /** @var StringDataElementInterface $this */
         $result = $validator->validate($this);
         $validationResult->merge($result);
       }

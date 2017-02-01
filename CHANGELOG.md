@@ -3,13 +3,16 @@
 ## 0.1.0-alpha.7 [Unreleased]
 ### Added
   - Add new element class `\Fiv\Form\Element\Hidden`
+  - Add new element validation interface `\Fiv\Form\Validation\StringValidation\StringValidatorInterface`
+  - Add new interface `\Fiv\Form\Elements\ValidatableElementInterface`
    
 ### Changed
   - Drop support of the php 5.6 Minimum version is php 7.0
 
 ### Removed
   - #40 Remove old methods: Fiv\Form\Element\Checkbox::unCheck, Fiv\Form\Element\Checkbox::check, Fiv\Form\Element\Checkbox::setValue, Fiv\Form\Element\Checkbox::getValue
-  - #45 Remove method `Form::getData`
+  - #45 Remove method `\Fiv\Form::getData`
+  - Deprecate method  `\Fiv\Form::hidden`
 
 ### Deprecated
   - Deprecate method `\Fiv\Form\Form::hidden()` See `\Fiv\Form\Element\Hidden`

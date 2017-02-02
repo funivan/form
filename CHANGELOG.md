@@ -1,5 +1,7 @@
 # Changelog
-## 0.1.0-alpha.8 [Unreleased]
+## 0.1.0-alpha.9 [Unreleased]
+
+## 0.1.0-alpha.8 [2017-02-02]
 ### Added
   - #49 Add new filter interface `Fiv\Form\Filter\StringFilter\StringFilterInterface`
 

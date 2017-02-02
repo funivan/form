@@ -315,9 +315,10 @@
      * @return TextArea
      */
     public function textarea($name, $text = null) {
-      $input = new TextArea();
-      $input->setName($name);
-      $input->setText($text);
+      $input = new TextArea($name);
+      if (!empty($text)) {
+        $input->setText((string) $text);
+      }
       $this->addElement($input);
       return $input;
     }

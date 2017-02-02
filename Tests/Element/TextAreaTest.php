@@ -3,7 +3,7 @@
   namespace Tests\Fiv\Form\Element;
 
   use Fiv\Form\Element\TextArea;
-  use Fiv\Form\Filter\CallbackFilter;
+  use Fiv\Form\Filter\StringFilter\TrimFilter;
   use Fiv\Form\Form;
   use Fiv\Form\FormData;
 
@@ -20,24 +20,17 @@
 
     public function testRender() {
       $element = $this->getElement();
-      self::assertContains('<textarea', (string) $element);
-      self::assertContains('</textarea', (string) $element);
+      self::assertContains('<textarea', (string) $element->render());
+      self::assertContains('</textarea', (string) $element->render());
 
       $element->setValue('custom data');
       self::assertContains('>custom data<', $element->render());
     }
 
 
-    public function testAttributes() {
-      $element = $this->getElement();
-      $element->setAttributes([]);
-      self::assertEquals('', $element->renderAttributes());
-    }
-
-
     public function testFilter() {
       $element = $this->getElement();
-      $element->addFilter(new CallbackFilter('trim'));
+      $element->addFilter(new TrimFilter());
 
       self::assertEmpty($element->getValue());
 
@@ -50,12 +43,11 @@
 
 
     public function testHandleRequest() {
-      $element = new TextArea();
-      $element->setName('test');
+      $element = new TextArea('test');
       $element->handle(new FormData('post', ['test' => 'test text']));
       self::assertEquals('test text', $element->getValue());
       $element->handle(new FormData('post', []));
-      self::assertNull($element->getValue());
+      self::assertSame('', $element->getValue());
     }
 
   }

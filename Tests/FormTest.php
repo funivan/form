@@ -219,7 +219,7 @@
     public function testRenderElements() {
       $form = new Form();
       $form->textarea('text', '123');
-      self::assertContains('<dl><dt>123</dt><dd><textarea name="text" ></textarea></dd></dl>', $form->render());
+      self::assertContains('<textarea name="text" ></textarea>', $form->render());
     }
 
 
@@ -307,7 +307,7 @@
 
     public function testHandleRequest() {
       $emailElement = (new Input())->setName('email');
-      $descriptionElement = (new TextArea())->setName('description');
+      $descriptionElement = (new TextArea('description'));
 
       $form = new Form();
       $form->addElement($emailElement);
@@ -329,14 +329,14 @@
       ]));
       self::assertTrue($form->isSubmitted());
       self::assertEquals('test@test.com', $emailElement->getValue());
-      self::assertNull($descriptionElement->getValue());
+      self::assertSame('', $descriptionElement->getValue());
 
       $form->handle(new FormData('post', [
         $form->getUid() => '1',
       ]));
       self::assertTrue($form->isSubmitted());
       self::assertNull($emailElement->getValue());
-      self::assertNull($descriptionElement->getValue());
+      self::assertSame('', $descriptionElement->getValue());
 
       $form->handle(new FormData('post', []));
       self::assertFalse($form->isSubmitted());

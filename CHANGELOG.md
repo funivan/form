@@ -2,9 +2,13 @@
 ## 0.1.0-alpha.8 [Unreleased]
 ### Added
   - #49 Add new filter interface `Fiv\Form\Filter\StringFilter\StringFilterInterface`
+
 ### Removed  
   - #48 TextArea now implements `StringDataElementInterface`. Find usages and rewrite
     
+### Deprecated
+  - #51 Deprecate method  `\Fiv\Form::textarea`
+
 ## 0.1.0-alpha.7 [2017-02-01]
 ### Added
   - Add new element class `\Fiv\Form\Element\Hidden`

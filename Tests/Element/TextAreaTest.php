@@ -48,4 +48,12 @@
       self::assertSame('', $element->getValue());
     }
 
+
+    public function testText() {
+      $element = new TextArea('name');
+      self::assertNull($element->getText());
+      
+      $element->setText('User Name');
+      self::assertSame('User Name', $element->getText());
+    }
   }

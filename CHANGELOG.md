@@ -5,7 +5,8 @@
 
 ### Removed  
   - #48 TextArea now implements `StringDataElementInterface`. Find usages and rewrite
-    
+  - #50 Remove method  `\Fiv\Form::hidden`
+  
 ### Deprecated
   - #51 Deprecate method  `\Fiv\Form::textarea`
 

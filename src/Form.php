@@ -326,26 +326,7 @@
       $this->addElement($input);
       return $input;
     }
-
-
-    /**
-     * @deprecated
-     * @see Element\Hidden
-     *
-     * @param string $name
-     * @param null $value
-     * @return \Fiv\Form\Element\Input
-     */
-    public function hidden($name, $value = null) {
-      trigger_error('Deprecated. use ' . Element\Hidden::class . ' class', E_USER_WARNING);
-      $hidden = new  \Fiv\Form\Element\Input();
-      $hidden->setType('hidden');
-      $hidden->setName($name);
-      $hidden->setValue($value);
-      $this->addElement($hidden);
-      return $hidden;
-    }
-
+    
 
     /**
      * ```

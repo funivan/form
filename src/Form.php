@@ -310,11 +310,15 @@
 
 
     /**
+     * @deprecated
+     * @see TextArea
+     *
      * @param string $name
      * @param null $text
      * @return TextArea
      */
     public function textarea($name, $text = null) {
+      trigger_error('Deprecated. Create new element and add it to the form manually', E_USER_DEPRECATED);
       $input = new TextArea($name);
       if (!empty($text)) {
         $input->setText((string) $text);

@@ -218,8 +218,8 @@
 
     public function testRenderElements() {
       $form = new Form();
-      $form->textarea('text', '123');
-      self::assertContains('<textarea name="text" ></textarea>', $form->render());
+      $form->addElement(new TextArea('text', '123'));
+      self::assertContains('<textarea name="text" >123</textarea>', $form->render());
     }
 
 
@@ -235,7 +235,7 @@
     public function testGetElementByName() {
       $form = new Form();
       $form->input('email');
-      $form->textarea('desc');
+      $form->addElement(new TextArea('desc'));
 
       self::assertInstanceOf(Input::class, $form->getElement('email'));
       self::assertInstanceOf(TextArea::class, $form->getElement('desc'));

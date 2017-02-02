@@ -4,7 +4,6 @@
 
   use Fiv\Form\Element\TextArea;
   use Fiv\Form\Filter\StringFilter\TrimFilter;
-  use Fiv\Form\Form;
   use Fiv\Form\FormData;
 
   class TextAreaTest extends \PHPUnit_Framework_TestCase {
@@ -13,8 +12,7 @@
      * @return \Fiv\Form\Element\TextArea
      */
     protected function getElement() {
-      $form = new Form();
-      return $form->textarea('test');
+      return new TextArea('text');
     }
 
 

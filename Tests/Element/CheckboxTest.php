@@ -54,6 +54,7 @@
 
     /**
      * @dataProvider getTestCheckedStateDataProvider
+     * @param $value
      */
     public function testTestCheckedState($value) {
       $checkbox = new Checkbox('send_emails');
@@ -103,6 +104,12 @@
       ]));
 
       self::assertTrue($form->isValid());
+    }
+
+
+    public function testRenderWithLabel() {
+      $checkbox = (new Checkbox('send_emails'))->setLabel('test');
+      self::assertContains('<span class="label-text" >test</span>', $checkbox->render());
     }
 
   }

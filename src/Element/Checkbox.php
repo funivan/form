@@ -100,7 +100,8 @@
      * @return string
      */
     public function render() {
-      return '<label>' . static::tag($this->tag, $this->attributes) . $this->label . '</label>';
+      $label = static::tag('span', ['class' => 'label-text'], $this->label);
+      return '<label>' . static::tag($this->tag, $this->attributes) . $label . '</label>';
     }
 
 

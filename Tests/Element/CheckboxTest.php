@@ -54,6 +54,7 @@
 
     /**
      * @dataProvider getTestCheckedStateDataProvider
+     * @param $value
      */
     public function testTestCheckedState($value) {
       $checkbox = new Checkbox('send_emails');
